@@ -13,11 +13,14 @@ namespace AspMVC.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public string Index()
         {
-            return View();
+            return "Hola mundo";
         }
-
+        public string Alvaro()
+        {
+            return "OleLoCaracole";
+        }
         public IActionResult Privacy()
         {
             return View();
