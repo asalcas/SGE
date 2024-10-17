@@ -17,9 +17,9 @@ namespace AspMVC.Controllers
         {
             return "Hola mundo";
         }
-        public string Alvaro()
+        public IActionResult Alvaro()
         {
-            return "OleLoCaracole";
+            return View();
         }
         public IActionResult Privacy()
         {
