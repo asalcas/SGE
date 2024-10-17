@@ -5,7 +5,9 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspMVC", "AspMVC\AspMVC.csproj", "{604299F3-6EDD-46E7-80EC-A554AEF58E03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejercicio3", "Ejercicio3\Ejercicio3.csproj", "{B79EEC73-15E7-4B03-9773-920171D73943}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ejercicio3", "Ejercicio3\Ejercicio3.csproj", "{B79EEC73-15E7-4B03-9773-920171D73943}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejercicio4", "Ejercicio4\Ejercicio4.csproj", "{0B1B337A-A635-46DF-BF06-44F90D492837}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B79EEC73-15E7-4B03-9773-920171D73943}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B79EEC73-15E7-4B03-9773-920171D73943}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B79EEC73-15E7-4B03-9773-920171D73943}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B1B337A-A635-46DF-BF06-44F90D492837}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B1B337A-A635-46DF-BF06-44F90D492837}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B1B337A-A635-46DF-BF06-44F90D492837}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B1B337A-A635-46DF-BF06-44F90D492837}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

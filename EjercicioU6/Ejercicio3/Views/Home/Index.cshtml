@@ -7,23 +7,21 @@
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 <html>
+@{
 
-    <head>
+    var HoraActual = DateTime.Now.Hour;
+    var minutosActuales = DateTime.Now.Minute;
 
-
-    </head>
-    <body>
-
-        @(
-            var fechaActual = DateTime.Now
-        )
-
-
-
-    </body>
+    if (HoraActual >= 12)
+    {
+        Write($"Son las {HoraActual}:{minutosActuales} de la tarde.");
+    }else
+    {
+        Write($"Son las :{HoraActual}:{minutosActuales} de la mañana.");
+    }
 
 
-
-
+    }
+     
 
 </html>
