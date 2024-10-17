@@ -1,8 +1,8 @@
-using AspMVC.Models;
+using Ejercicio3.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace AspMVC.Controllers
+namespace Ejercicio3.Controllers
 {
     public class HomeController : Controller
     {
@@ -13,16 +13,11 @@ namespace AspMVC.Controllers
             _logger = logger;
         }
 
-        public string Index()
-        {
-            return "Hola mundo";
-        }
-        public IActionResult Alvaro()
+        public IActionResult Index()
         {
             return View();
         }
 
-        
         public IActionResult Privacy()
         {
             return View();
