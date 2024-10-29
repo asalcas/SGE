@@ -1,0 +1,62 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\alvaro.salvador\\Desktop\\GitHub\\SGE\\Unidad08SGE\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DEC944C4-7721-4720-9C01-4940F3FFC80F}|ENT\\ENT.csproj|c:\\users\\alvaro.salvador\\desktop\\github\\sge\\unidad08sge\\ent\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DEC944C4-7721-4720-9C01-4940F3FFC80F}|ENT\\ENT.csproj|solutionrelative:ent\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40F95E96-68E2-45F3-8DA1-08C64B914970}|DAL\\DAL.csproj|c:\\users\\alvaro.salvador\\desktop\\github\\sge\\unidad08sge\\dal\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40F95E96-68E2-45F3-8DA1-08C64B914970}|DAL\\DAL.csproj|solutionrelative:dal\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "C:\\Users\\alvaro.salvador\\Desktop\\GitHub\\SGE\\Unidad08SGE\\ENT\\Class1.cs",
+              "RelativeDocumentMoniker": "ENT\\Class1.cs",
+              "ToolTip": "C:\\Users\\alvaro.salvador\\Desktop\\GitHub\\SGE\\Unidad08SGE\\ENT\\Class1.cs",
+              "RelativeToolTip": "ENT\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-29T13:08:40.302Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "C:\\Users\\alvaro.salvador\\Desktop\\GitHub\\SGE\\Unidad08SGE\\DAL\\Class1.cs",
+              "RelativeDocumentMoniker": "DAL\\Class1.cs",
+              "ToolTip": "C:\\Users\\alvaro.salvador\\Desktop\\GitHub\\SGE\\Unidad08SGE\\DAL\\Class1.cs",
+              "RelativeToolTip": "DAL\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-29T13:08:26.878Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
