@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "C:\\Users\\alvaro.salvador\\Desktop\\GitHub\\SGE\\Unidad08SGE\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{89BD36A8-419D-46B3-BD50-48E70D98E4FF}|Unidad08\\Unidad08.csproj|c:\\users\\alvaro.salvador\\desktop\\github\\sge\\unidad08sge\\unidad08\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{89BD36A8-419D-46B3-BD50-48E70D98E4FF}|Unidad08\\Unidad08.csproj|solutionrelative:unidad08\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89BD36A8-419D-46B3-BD50-48E70D98E4FF}|Unidad08\\Unidad08.csproj|c:\\users\\alvaro.salvador\\desktop\\github\\sge\\unidad08sge\\unidad08\\views\\home\\saludo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{89BD36A8-419D-46B3-BD50-48E70D98E4FF}|Unidad08\\Unidad08.csproj|solutionrelative:unidad08\\views\\home\\saludo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89BD36A8-419D-46B3-BD50-48E70D98E4FF}|Unidad08\\Unidad08.csproj|c:\\users\\alvaro.salvador\\desktop\\github\\sge\\unidad08sge\\unidad08\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89BD36A8-419D-46B3-BD50-48E70D98E4FF}|Unidad08\\Unidad08.csproj|solutionrelative:unidad08\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DEC944C4-7721-4720-9C01-4940F3FFC80F}|ENT\\ENT.csproj|c:\\users\\alvaro.salvador\\desktop\\github\\sge\\unidad08sge\\ent\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DEC944C4-7721-4720-9C01-4940F3FFC80F}|ENT\\ENT.csproj|solutionrelative:ent\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -18,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,7 +38,44 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Saludo.cshtml",
+              "DocumentMoniker": "C:\\Users\\alvaro.salvador\\Desktop\\GitHub\\SGE\\Unidad08SGE\\Unidad08\\Views\\Home\\Saludo.cshtml",
+              "RelativeDocumentMoniker": "Unidad08\\Views\\Home\\Saludo.cshtml",
+              "ToolTip": "C:\\Users\\alvaro.salvador\\Desktop\\GitHub\\SGE\\Unidad08SGE\\Unidad08\\Views\\Home\\Saludo.cshtml",
+              "RelativeToolTip": "Unidad08\\Views\\Home\\Saludo.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-29T13:28:11.18Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\alvaro.salvador\\Desktop\\GitHub\\SGE\\Unidad08SGE\\Unidad08\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Unidad08\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\alvaro.salvador\\Desktop\\GitHub\\SGE\\Unidad08SGE\\Unidad08\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Unidad08\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-29T13:27:50.425Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\alvaro.salvador\\Desktop\\GitHub\\SGE\\Unidad08SGE\\Unidad08\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Unidad08\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\alvaro.salvador\\Desktop\\GitHub\\SGE\\Unidad08SGE\\Unidad08\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Unidad08\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-29T13:22:43.642Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Class1.cs",
               "DocumentMoniker": "C:\\Users\\alvaro.salvador\\Desktop\\GitHub\\SGE\\Unidad08SGE\\ENT\\Class1.cs",
               "RelativeDocumentMoniker": "ENT\\Class1.cs",
@@ -34,12 +83,11 @@
               "RelativeToolTip": "ENT\\Class1.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T13:08:40.302Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-29T13:08:40.302Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Class1.cs",
               "DocumentMoniker": "C:\\Users\\alvaro.salvador\\Desktop\\GitHub\\SGE\\Unidad08SGE\\DAL\\Class1.cs",
               "RelativeDocumentMoniker": "DAL\\Class1.cs",
@@ -47,12 +95,7 @@
               "RelativeToolTip": "DAL\\Class1.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T13:08:26.878Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "WhenOpened": "2024-10-29T13:08:26.878Z"
             }
           ]
         }
