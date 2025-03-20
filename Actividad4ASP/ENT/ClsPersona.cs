@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ENT
 {
-    class ClsPersona
+    public class ClsPersona
     {
 
         private int idPersona { get; }
@@ -23,7 +23,7 @@ namespace ENT
         }
 
         public ClsPersona(string nombre, string apellido,
-            int idDepartamento, DateTime fechaNac, 
+            int idDepartamento, DateTime fechaNac,
             string direccion, string telefono)
         {
             this.nombre = nombre;
