@@ -8,30 +8,25 @@ namespace ENT
 {
     public class ClsPersona
     {
-
-        private int idPersona { get; }
-        private String nombre { get; set; }
-        private String apellido { get; set; }
-        private int idDepartamento { get; set; }
-        private DateTime fechaNac { get; set; }
-        private String direccion { get; set; }
-        private String telefono { get; set; }
-
-        public ClsPersona()
-        {
-
-        }
+        // DUDA A FERNANDO es private o public auida
+        public int IdPersona { get; }
+        public String Nombre { get; set; }
+        public String Apellido { get; set; }
+        public int IdDepartamento { get; set; }
+        public DateTime FechaNac { get; set; }
+        public String Direccion { get; set; }
+        public long Telefono { get; set; }
 
         public ClsPersona(string nombre, string apellido,
             int idDepartamento, DateTime fechaNac,
-            string direccion, string telefono)
+            string direccion, long telefono)
         {
-            this.nombre = nombre;
-            this.apellido = apellido;
-            this.idDepartamento = idDepartamento;
-            this.fechaNac = fechaNac;
-            this.direccion = direccion;
-            this.telefono = telefono;
+            this.Nombre = nombre;
+            this.Apellido = apellido;
+            this.IdDepartamento = idDepartamento;
+            this.FechaNac = fechaNac;
+            this.Direccion = direccion;
+            this.Telefono = telefono;
         }
     }
 

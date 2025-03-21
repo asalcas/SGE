@@ -1,0 +1,43 @@
+﻿@{
+
+    var personaRandom = ViewData["DatoAPasar"] as Actividad4ASP.Views.VM.PersonaDepartamentosVM;
+
+}
+
+<body>
+
+    <form action="/index" method="post">
+        <label for="nombre">Nombre: </label>
+        <input type="text" name= "nombre" placeholder="@personaRandom.Nombre"/>
+        <br>
+        <label for="apellido">Apellido: </label>
+        <input type="text" name="apellido" placeholder="@personaRandom.Apellido" />
+        <br>
+        <label for="fechaNac">Fecha de nacimiento: </label>
+        <input type="datetime" name="fechaNac" placeholder="@personaRandom.FechaNac" />
+        <br>
+        <label for="direccion">Dirección: </label>
+        <input type="text" name="direccion" placeholder="@personaRandom.Direccion" />
+        <br>
+        <label for="tlf">Teléfono: </label>
+        <input type="text" name="tlf" placeholder="@personaRandom.Telefono" />
+        <br>
+        <label for="nombreDept">Departamento: </label>
+        <select>
+            <option value="1">Recursos Humanos</option>
+            <option value="2">Contabilidad</option>
+            <option value="3">Marketing</option>
+            <option value="4">Ventas</option>
+            <option value="5">Producción</option>
+            <option value="6">Investigación y Desarrollo</option>
+            <option value="7">Logística</option>
+            <option value="8">Atención al Cliente</option>
+            <option value="9">Tecnología de la Información</option>
+            <option value="10">Dirección General</option>
+
+        </select>
+     
+        <button> Guardar </button>
+    </form>
+
+</body>

@@ -1,8 +1,37 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿<link rel="stylesheet" type="text/css" href="~/css/CssPatontitos.css" />
+
+@{
+    var personaRandom = ViewData["DatoAPasar"] as Actividad4ASP.Views.VM.PersonaDepartamentosVM;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Nombre Departamento</th>
+                <th>Fecha Nacimiento</th>
+                <th>Dirección</th>
+                <th>Telf</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td> @personaRandom.Nombre</td>
+                <td> @personaRandom.Apellido</td>
+                <td> @personaRandom.NombreDept</td>
+                <td> @personaRandom.FechaNac</td>
+                <td> @personaRandom.Direccion</td>
+                <td> @personaRandom.Telefono</td>
+
+            </tr>
+        
+        </tbody>
+
+    </table>
+
+    <button>@Html.ActionLink("Editar", "EditarPersona")</button>
+
 </div>

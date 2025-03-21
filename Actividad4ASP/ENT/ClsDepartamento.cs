@@ -7,19 +7,16 @@ using System.Threading.Tasks;
 
 namespace ENT
 {
-    class ClsDepartamento
+    public class ClsDepartamento
     {
-        private int idDepartamento { get; }
-        private String nombreDept { get; set; }
+        public int IdDepartamento { get; }
+        public String NombreDept { get; set; }
 
-        public ClsDepartamento()
+
+        public ClsDepartamento(int idDepartamento, String nombreDept)
         {
-
-        }
-
-        public ClsDepartamento(String nombreDept)
-        {
-            this.nombreDept = nombreDept;
+            this.IdDepartamento = idDepartamento;
+            this.NombreDept = nombreDept;
 
         }
     }
