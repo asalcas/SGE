@@ -19,6 +19,12 @@ namespace Unidad7.Controllers
 
         public IActionResult Index()
         {
+
+            return View(); 
+
+        }
+        public IActionResult EditarPersona()
+        {
             Random random = new Random();
 
 
@@ -44,21 +50,15 @@ namespace Unidad7.Controllers
             PersonaDepartamentosVM personaRandomSelected = new PersonaDepartamentosVM(personaRandom.Nombre, personaRandom.Apellido,
                 personaRandom.FechaNac, personaRandom.Direccion, personaRandom.Telefono, departamentoSeleccionado);
 
-            ViewData["DatoAPasar"] = personaRandomSelected;
+            
 
-           
+
 
             // se la damos al controllador pa que se la de a la vista
-            return View(personaRandomSelected); // Pasar persona con nombre dept 
+                                                // Preguntar como pasar el mismo objeto que tengo en el INDEX para así usarlo en el CSHTML "EditarPersona"
 
-        }
-        public IActionResult EditarPersona()
-        {
-             
-           // Preguntar como pasar el mismo objeto que tengo en el INDEX para así usarlo en el CSHTML "EditarPersona"
 
-            
-            return View(); 
+            return View(personaRandomSelected); 
             
             
         }

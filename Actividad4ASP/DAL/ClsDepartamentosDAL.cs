@@ -23,7 +23,7 @@ namespace DAL
             new ClsDepartamento(7, "Logística"),
             new ClsDepartamento(8, "Atención al Cliente"),
             new ClsDepartamento(9, "Tecnología de la Información"),
-            new ClsDepartamento(10, "Dirección General")
+            new ClsDepartamento(10,"Dirección General")
 
 
         };
