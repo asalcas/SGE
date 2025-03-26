@@ -11,7 +11,6 @@ namespace BL
     public class ListaDepartamentosBL
     {
         
-        public static List<ClsDepartamento> ListadoCompletoDepartamentosBL = ClsDepartamentosDAL.ObtenerListadoCompletoClsDepartamentos();
         /// <summary>
         /// Función que retorna un listado completo de Personas desde la BL
         /// Pre: None
@@ -20,7 +19,7 @@ namespace BL
         /// <returns></returns>
         public static List<ClsDepartamento> ObtenerListadoDepartamentosCompletoBL()
         {
-            return ListadoCompletoDepartamentosBL;
+            return DAL.ClsDepartamentosDAL.ObtenerListadoCompletoClsDepartamentos();
         }
 
 

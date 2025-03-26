@@ -11,17 +11,35 @@ namespace BL
     public class ListaPersonasBL
     {
 
-        private static List<ClsPersona> ListadoCompletoPersonasBL = ClsPersonaDAL.ObtenerListadoCompletoClsPersonaDAL();
         /// <summary>
-        /// Función que retorna un listado completo de Personas desde la BL
+        /// Función que retorna un listado completo de Personas desde la DAL
         /// Pre: None
         /// Post: None
         /// </summary>
         /// <returns>ListadoCompletoPersonasBL</returns>
         public static List<ClsPersona> ObtenerListadoCompletoPersonasBL()
         {
-            return ListadoCompletoPersonasBL;
+            return ClsPersonaDAL.ObtenerListadoCompletoClsPersonaDAL();
         }
 
+        // Lo ideal es que busquemos una PERSONA ALEATORIA 
+        /// <summary>
+        /// Funcion que devuelve una ClsPersona Aleatoria de la DAL
+        /// Pre: 
+        /// Post:
+        /// </summary>
+        /// <returns></returns>
+        public static ClsPersona ObtenerPersonaAleatoria()
+        {
+            int idPersona;
+            int numeroRandom = 0;
+            // Obtener un Random de 0, al tamaño del listado
+            Random rnd = new Random();
+            numeroRandom = rnd.Next(0, DAL.ClsPersonaDAL.ObtenerListadoCount());
+
+            idPersona = DAL.ClsPersonaDAL.ObtenerIdPersonaPorPosicion(numeroRandom);
+            return DAL.ClsPersonaDAL.ObtenerPersonaPorID(idPersona);
+
+        }
     }
 }
