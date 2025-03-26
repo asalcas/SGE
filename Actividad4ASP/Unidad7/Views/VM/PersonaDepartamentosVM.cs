@@ -6,7 +6,7 @@ namespace Actividad4ASP.Views.VM
     public class PersonaDepartamentosVM
     {
 
-        public int IdPersona { get; }
+        public int IdPersona { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public DateTime FechaNac { get; set; }
@@ -14,9 +14,10 @@ namespace Actividad4ASP.Views.VM
         public long Telefono { get; set; }
         public string NombreDept { get; set; }
 
-
-        public PersonaDepartamentosVM(string nombre, string apellido, DateTime fechaNac, string direccion, long telefono, string nombreDept)
+        // el int idPersona no deberia de setearse si no quiero hacer lo del paso de datos de un action a otro, preguntar a fernando
+        public PersonaDepartamentosVM(int idPersona, string nombre, string apellido, DateTime fechaNac, string direccion, long telefono, string nombreDept)
         {
+            IdPersona = idPersona; // no se si este deberia tenerlo!
             Nombre = nombre;
             Apellido = apellido;
             FechaNac = fechaNac;

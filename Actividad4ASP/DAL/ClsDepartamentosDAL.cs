@@ -27,7 +27,12 @@ namespace DAL
 
 
         };
-
+        /// <summary>
+        /// Función que devuelve la propiedad privada 'ListaCompletaDepartamentosDAL' que simula una base de datos
+        /// Pre: None
+        /// Post: None
+        /// </summary>
+        /// <returns>ListaCompletaDepartamentosDAL</returns>
         public static List<ClsDepartamento> ObtenerListadoCompletoClsDepartamentos()
         {
             return ListaCompletaDepartamentosDAL;

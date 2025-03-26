@@ -12,7 +12,12 @@ namespace BL
     {
 
         private static List<ClsPersona> ListadoCompletoPersonasBL = ClsPersonaDAL.ObtenerListadoCompletoClsPersonaDAL();
-
+        /// <summary>
+        /// Función que retorna un listado completo de Personas desde la BL
+        /// Pre: None
+        /// Post: None
+        /// </summary>
+        /// <returns>ListadoCompletoPersonasBL</returns>
         public static List<ClsPersona> ObtenerListadoCompletoPersonasBL()
         {
             return ListadoCompletoPersonasBL;

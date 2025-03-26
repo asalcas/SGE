@@ -10,9 +10,14 @@ namespace BL
 {
     public class ListaDepartamentosBL
     {
-        // Aqui irian las reglas de negocio creo
+        
         public static List<ClsDepartamento> ListadoCompletoDepartamentosBL = ClsDepartamentosDAL.ObtenerListadoCompletoClsDepartamentos();
-
+        /// <summary>
+        /// Función que retorna un listado completo de Personas desde la BL
+        /// Pre: None
+        /// Post: None
+        /// </summary>
+        /// <returns></returns>
         public static List<ClsDepartamento> ObtenerListadoDepartamentosCompletoBL()
         {
             return ListadoCompletoDepartamentosBL;

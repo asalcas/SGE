@@ -17,6 +17,11 @@ namespace ENT
         public String Direccion { get; set; }
         public long Telefono { get; set; }
 
+
+        public ClsPersona()
+        {
+
+        }
         public ClsPersona(string nombre, string apellido,
             int idDepartamento, DateTime fechaNac,
             string direccion, long telefono)

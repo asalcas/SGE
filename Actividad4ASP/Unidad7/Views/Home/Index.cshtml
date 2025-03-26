@@ -1,13 +1,14 @@
 ﻿<link rel="stylesheet" type="text/css" href="~/css/CssPatontitos.css" />
 
 @{
-    var personaRandom = ViewData["DatoAPasar"] as Actividad4ASP.Views.VM.PersonaDepartamentosVM;
+    @model Actividad4ASP.Views.VM.PersonaDepartamentosVM   
 }
 
 <div>
     <table>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Nombre Departamento</th>
@@ -19,12 +20,13 @@
         </thead>
         <tbody>
             <tr>
-                <td> @personaRandom.Nombre</td>
-                <td> @personaRandom.Apellido</td>
-                <td> @personaRandom.NombreDept</td>
-                <td> @personaRandom.FechaNac</td>
-                <td> @personaRandom.Direccion</td>
-                <td> @personaRandom.Telefono</td>
+                <td> @Model.IdPersona</td>
+                <td> @Model.Nombre</td>
+                <td> @Model.Apellido</td>
+                <td> @Model.NombreDept</td>
+                <td> @Model.FechaNac</td>
+                <td> @Model.Direccion</td>
+                <td> @Model.Telefono</td>
 
             </tr>
         
@@ -32,6 +34,6 @@
 
     </table>
 
-    <button>@Html.ActionLink("Editar", "EditarPersona")</button>
+    @Html.ActionLink("Editar", "EditarPersona", new{ id = Model.IdPersona})
 
 </div>

@@ -4,7 +4,7 @@ namespace DAL
 {
     public class ClsPersonaDAL
     {
-
+        
         private static List<ClsPersona> listadoPersonasCompletoDAL = new List<ClsPersona>()
         {
             new ClsPersona("Alvaro", "Salvador", 0, new DateTime(2000, 4, 27), "Avenida La avenida n9", 95555555),
@@ -18,7 +18,12 @@ namespace DAL
             new ClsPersona("Sergio", "Torres", 8, new DateTime(1990, 5, 12), "Avenida Central n45", 91111111),
             new ClsPersona("Elena", "Ruiz", 9, new DateTime(1993, 2, 18), "Callejón del Viento n8", 90000000)
         };
-
+        /// <summary>
+        /// Funcion que devuelve la propiedad privada 'listadoPersonasCompletoDAL' que simula una base de datos
+        /// Pre: None
+        /// Post: None
+        /// </summary>
+        /// <returns>listadoPersonasCompletoDAL</returns>
         public static List<ClsPersona> ObtenerListadoCompletoClsPersonaDAL()
         {
             return listadoPersonasCompletoDAL;
