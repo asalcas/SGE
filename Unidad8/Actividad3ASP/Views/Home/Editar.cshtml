@@ -1,0 +1,29 @@
+﻿<link rel="stylesheet" type="text/css" href="~/css/CssPatontitos.css" />
+@{
+    @model ENT.ClsPersona;
+
+}
+
+<div>
+    <form action="PersonaModificada" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="Nombre" placeholder="@Model.Nombre" />
+
+        <label for="apellido">Apellido:</label>
+        @Html.TextBox("Apellido", Model.Apellido)
+
+        <label for="edad">Edad: </label>
+        @Html.TextBoxFor(m => Model.Edad)
+        <br />
+        <label for="direccion">Dirección:</label>
+        @* <input type="text" name="Dirección" placeholder="@Model.Direccion" /> *@
+        @Html.TextBoxFor(m => Model.Direccion)
+        <label for="email">Email:</label>
+        @* <input type="text" name="Email" placeholder="@Model.Email" /> *@
+        @Html.TextBoxFor(m => Model.Email)
+
+        <button type="submit">Guardar</button>
+    </form>
+    
+
+</div>
