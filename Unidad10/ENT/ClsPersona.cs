@@ -1,12 +1,19 @@
-﻿namespace ENT
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ENT
 {
     public class ClsPersona
     {
         #region Propiedades autoimplementadas
-        public String DNI { get;}
+
+        [Display(Name ="Id Personal")]
+        public int ID { get; }
         public String Nombre { get; set; }
-        public String Apellido { get; set; }
+        public String Apellidos { get; set; }
         public String Sexo { get; set; }
+        public String Foto { get; set; }
+
+        [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy",ApplyFormatInEditMode = true)]
         public DateTime FechaNacimiento { get; set; }
         #endregion
 
@@ -16,17 +23,18 @@
         {
 
         }
-        public ClsPersona(string Dni, String nombre, String apellido, String sexo, DateTime fechaNacimiento)
+        public ClsPersona(int id, String nombre, String apellidos, String sexo, String foto, DateTime fechaNacimiento)
         {
-            this.DNI = Dni;
+            this.ID = id;
             this.Nombre = nombre;
-            this.Apellido = apellido;
+            this.Apellidos = apellidos;
             this.Sexo = sexo;
+            this.Foto = foto;
             this.FechaNacimiento = fechaNacimiento;
         }
-        public ClsPersona(string Dni)
+        public ClsPersona(int id)
         {
-            this.DNI = Dni;
+            this.ID = id;
         }
         #endregion
     }

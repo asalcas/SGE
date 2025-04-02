@@ -30,17 +30,18 @@ namespace DAL
 
                     while (miLector.Read())
                     {
-                        // Como nuestro DNI no tiene set, hemos creado un Constructor de ClsPersona con ID por parametros para poder asignarselo :)
+                        // Como nuestro ID no tiene set, hemos creado un Constructor de ClsPersona con ID por parametros para poder asignarselo :)
 
-                        ClsPersona personaNueva = new ClsPersona((String)miLector["DNI"]);
+                        ClsPersona personaNueva = new ClsPersona();
 
+                       
                         if(miLector["Nombre"] != DBNull.Value)
                         {
                             personaNueva.Nombre = (String)miLector["Nombre"];
                         }
-                        if (miLector["Apellido"] != DBNull.Value)
+                        if (miLector["Apellidos"] != DBNull.Value)
                         {
-                            personaNueva.Apellido = (String)miLector["Apellido"];
+                            personaNueva.Apellidos = (String)miLector["Apellidos"];
                         }
                         if (miLector["Sexo"] != DBNull.Value)
                         {
