@@ -11,10 +11,12 @@ namespace Actividad2ASP.Models.VM
         {
 
         }
-        public PersonaConNombreDepartamentoVM(ClsPersona persona, List<ClsDepartamentos> listadoDepartamentos) : base(persona.ID, persona.Nombre, persona.Apellidos, persona.Sexo, persona.Foto, persona.FechaNacimiento)
+        
+        public PersonaConNombreDepartamentoVM(ClsPersona persona, List<ClsDepartamentos> listadoDepartamentos) : base(persona.ID, persona.Nombre, 
+            persona.Telefono, persona.Apellidos, persona.Direccion, persona.Foto, persona.FechaNacimiento, persona.IdDept)
         {
-            // TODO: Buscar en el parametro que me llega como listado, el nombre de la raza que necesito
-            this.NombreDept = ;
+            ClsDepartamentos departamentoSeleccionado = listadoDepartamentos.Find(departamento => departamento.IdDepartamento == persona.IdDept);
+            this.NombreDept = departamentoSeleccionado.NombreDepartamento;
         }
 
     }

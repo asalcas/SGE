@@ -10,11 +10,11 @@ namespace ENT
         public int ID { get; }
         public String Nombre { get; set; }
         public String Apellidos { get; set; }
-        public String Sexo { get; set; }
+        public String Telefono { get; set; }
+        public String Direccion { get; set; }
         public String Foto { get; set; }
-
-        [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy",ApplyFormatInEditMode = true)]
         public DateTime FechaNacimiento { get; set; }
+        public int IdDept { get; set; } 
         #endregion
 
 
@@ -23,14 +23,16 @@ namespace ENT
         {
 
         }
-        public ClsPersona(int id, String nombre, String apellidos, String sexo, String foto, DateTime fechaNacimiento)
+        public ClsPersona(int id, String nombre, String apellidos, String telefono, String direccion, String foto, DateTime fechaNacimiento, int idDepartamento)
         {
             this.ID = id;
             this.Nombre = nombre;
             this.Apellidos = apellidos;
-            this.Sexo = sexo;
+            this.Telefono = telefono;
+            this.Direccion = direccion;
             this.Foto = foto;
             this.FechaNacimiento = fechaNacimiento;
+            this.IdDept = idDepartamento;
         }
         public ClsPersona(int id)
         {

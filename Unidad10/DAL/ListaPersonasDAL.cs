@@ -12,17 +12,15 @@ namespace DAL
         public static List<ClsPersona> ObtenerListadoCompletoPersonasDAL()
         {
             List<ClsPersona> ListadoCompletoPersonas = new List<ClsPersona>();
-            SqlConnection miConexion = new SqlConnection();
+            SqlConnection conexion;
             SqlDataReader miLector;
             SqlCommand miComando = new SqlCommand();
 
             try
             {
-                miConexion.ConnectionString = "server=alvaro-salvador.database.windows.net;database=alvaroDB;uid=usuario;pwd=LaCampana123;trustServerCertificate=true;";
-                
-                    miConexion.Open();
+                    conexion = ClsConexion.abrirConexion();
                     miComando.CommandText = "SELECT * FROM Personas";
-                    miComando.Connection = miConexion;
+                    miComando.Connection = conexion;
                     miLector = miComando.ExecuteReader();
                 if (miLector.HasRows)
                 {
@@ -32,10 +30,9 @@ namespace DAL
                     {
                         // Como nuestro ID no tiene set, hemos creado un Constructor de ClsPersona con ID por parametros para poder asignarselo :)
 
-                        ClsPersona personaNueva = new ClsPersona();
+                        ClsPersona personaNueva = new ClsPersona((int)miLector["ID"]);
 
-                       
-                        if(miLector["Nombre"] != DBNull.Value)
+                        if (miLector["Nombre"] != DBNull.Value)
                         {
                             personaNueva.Nombre = (String)miLector["Nombre"];
                         }
@@ -43,13 +40,25 @@ namespace DAL
                         {
                             personaNueva.Apellidos = (String)miLector["Apellidos"];
                         }
-                        if (miLector["Sexo"] != DBNull.Value)
+                        if (miLector["Telefono"] != DBNull.Value)
                         {
-                            personaNueva.Sexo = (String)miLector["Sexo"];
+                            personaNueva.Telefono = (String)miLector["Telefono"];
+                        }
+                        if (miLector["Direccion"] != DBNull.Value)
+                        {
+                            personaNueva.Direccion = (String)miLector["Direccion"];
+                        }
+                        if (miLector["Foto"] != DBNull.Value)
+                        {
+                            personaNueva.Foto = (String)miLector["Foto"];
                         }
                         if (miLector["FechaNacimiento"] != DBNull.Value)
                         {
                             personaNueva.FechaNacimiento = (DateTime)miLector["FechaNacimiento"];
+                        }
+                        if (miLector["IDDepartamento"] != DBNull.Value)
+                        {
+                            personaNueva.IdDept = (int)miLector["IDDepartamento"];
                         }
 
                         ListadoCompletoPersonas.Add(personaNueva);
@@ -57,7 +66,7 @@ namespace DAL
                     }
                 }
                     miLector.Close();
-                    miConexion.Close();
+                    ClsConexion.cerrarConexion(ref conexion);
             }
             catch (SqlException excSQL)
             {

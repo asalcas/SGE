@@ -20,6 +20,10 @@ namespace ENT
         {
 
         }
+        public ClsDepartamentos(int IdDept)
+        {
+            this.IdDepartamento = IdDept;
+        }
         public ClsDepartamentos(int IdDept, string nombreDept)
         {
             this.IdDepartamento = IdDept;
