@@ -41,7 +41,7 @@ namespace DAL
                         listadoDepartamentos.Add(departamentoNuevo);
                     }
                 }
-                miLector.Close();
+                miLector.Close(); 
                 ClsConexion.cerrarConexion(ref conexion); // Cerramos la conexion que se abrió anteriormente
 
             }
