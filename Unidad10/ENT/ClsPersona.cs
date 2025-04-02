@@ -3,7 +3,7 @@
     public class ClsPersona
     {
         #region Propiedades autoimplementadas
-        public String DNI { get; set; }
+        public String DNI { get;}
         public String Nombre { get; set; }
         public String Apellido { get; set; }
         public String Sexo { get; set; }
@@ -23,6 +23,10 @@
             this.Apellido = apellido;
             this.Sexo = sexo;
             this.FechaNacimiento = fechaNacimiento;
+        }
+        public ClsPersona(string Dni)
+        {
+            this.DNI = Dni;
         }
         #endregion
     }

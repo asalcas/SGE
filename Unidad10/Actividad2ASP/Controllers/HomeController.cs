@@ -15,6 +15,11 @@ namespace Actividad2ASP.Controllers
             return View(ListaDePersonas);
         }
 
+        public IActionResult EditarPersona()
+        {
+            return View();
+        }
+
        
     }
 }

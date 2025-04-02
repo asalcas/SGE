@@ -5,6 +5,10 @@ namespace DAL
 {
     public class ListaPersonasDAL
     {
+        /// <summary>
+        /// Función que retorna un Listado de personas cogiendolo de la BD
+        /// </summary>
+        /// <returns></returns>
         public static List<ClsPersona> ObtenerListadoCompletoPersonasDAL()
         {
             List<ClsPersona> ListadoCompletoPersonas = new List<ClsPersona>();
@@ -20,18 +24,37 @@ namespace DAL
                     miComando.CommandText = "SELECT * FROM Personas";
                     miComando.Connection = miConexion;
                     miLector = miComando.ExecuteReader();
+                if (miLector.HasRows)
+                {
+
 
                     while (miLector.Read())
                     {
-                        ClsPersona personaNueva = new ClsPersona();
-                        personaNueva.DNI = (String)miLector["DNI"];
-                        personaNueva.Nombre = (String)miLector["Nombre"];
-                        personaNueva.Apellido = (String)miLector["Apellido"];
-                        personaNueva.Sexo = (String)miLector["Sexo"];
-                        personaNueva.FechaNacimiento = (DateTime)miLector["FechaNacimiento"];
+                        // Como nuestro DNI no tiene set, hemos creado un Constructor de ClsPersona con ID por parametros para poder asignarselo :)
+
+                        ClsPersona personaNueva = new ClsPersona((String)miLector["DNI"]);
+
+                        if(miLector["Nombre"] != DBNull.Value)
+                        {
+                            personaNueva.Nombre = (String)miLector["Nombre"];
+                        }
+                        if (miLector["Apellido"] != DBNull.Value)
+                        {
+                            personaNueva.Apellido = (String)miLector["Apellido"];
+                        }
+                        if (miLector["Sexo"] != DBNull.Value)
+                        {
+                            personaNueva.Sexo = (String)miLector["Sexo"];
+                        }
+                        if (miLector["FechaNacimiento"] != DBNull.Value)
+                        {
+                            personaNueva.FechaNacimiento = (DateTime)miLector["FechaNacimiento"];
+                        }
+
                         ListadoCompletoPersonas.Add(personaNueva);
 
                     }
+                }
                     miLector.Close();
                     miConexion.Close();
             }
