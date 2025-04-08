@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public class ListaDepartamentosBL
+    public class ManejadoraDepartamentosBL
     {
 
         public static List<ClsDepartamentos> obtenerListadoDepartamentosBL()
         {
             // Como no tenemos regla de negocio...
-            return DAL.ListaDepartamentosDAL.ObtenerListadoDepartamentosCompleto();
+            return DAL.ManejadoraDepartamentosDAL.ObtenerListadoDepartamentosCompleto();
 
         }
 

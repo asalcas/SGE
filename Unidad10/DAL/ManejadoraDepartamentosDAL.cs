@@ -11,7 +11,7 @@ namespace DAL
     /// <summary>
     /// Función que hará una llamada a la BD y traerá un listado del tipo ClsDepartamento 
     /// </summary>
-    public class ListaDepartamentosDAL
+    public class ManejadoraDepartamentosDAL
     {
 
         public static List<ClsDepartamentos> ObtenerListadoDepartamentosCompleto()

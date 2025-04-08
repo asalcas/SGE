@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<Actividad2ASP.Models.VM.PersonaConNombreDepartamentoVM>
+﻿@model IEnumerable<ENT.ClsPersona>
 
 @{
     ViewData["Title"] = "Index";
@@ -8,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="CrearNuevaPersona">Añadir Nueva</a>
+    <a asp-action="Create">Crear Nuevo</a>
 </p>
 <table class="table">
     <thead>
@@ -29,13 +28,13 @@
                 @Html.DisplayNameFor(model => model.Direccion)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaNacimiento)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Foto)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NombreDept)
+                @Html.DisplayNameFor(model => model.FechaNacimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdDept)
             </th>
             <th></th>
         </tr>
@@ -59,18 +58,18 @@
                 @Html.DisplayFor(modelItem => item.Direccion)
             </td>
             <td>
+                <img width="100" height="100" style="border-radius:50%" src="@item.Foto" alt="Imagen de la persona" />
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.FechaNacimiento)
             </td>
             <td>
-                <img width="100" height="100" src="@item.Foto" alt="Imagen de un trabajador" />
+                @Html.DisplayFor(modelItem => item.IdDept)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NombreDept)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "EditarPersona", new { idPersona = item.ID }) |
-                @Html.ActionLink("Details", "DetallesPersona", new { idPersona = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new { idPersona = item.ID }) |
+                @Html.ActionLink("Vista Detalles", "DetallesPersona", new { idPersona = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { idPersona = item.ID })
             </td>
         </tr>
 }

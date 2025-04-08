@@ -17,8 +17,8 @@ namespace Actividad2ASP.Models.VM
 
             try
             {
-                List<ClsPersona> listadoPersonasBL = BL.ListaPersonasBL.ObtenerListaPersonasCompletaBL();
-                List<ClsDepartamentos> listadoDepartamentosBL = BL.ListaDepartamentosBL.obtenerListadoDepartamentosBL();
+                List<ClsPersona> listadoPersonasBL = BL.ManejadoraPersonasBL.ObtenerListaPersonasCompletaBL();
+                List<ClsDepartamentos> listadoDepartamentosBL = BL.ManejadoraDepartamentosBL.obtenerListadoDepartamentosBL();
 
                 ListadoDePersonasConNombreDept = new ObservableCollection<PersonaConNombreDepartamentoVM>();
 

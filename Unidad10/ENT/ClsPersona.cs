@@ -6,7 +6,7 @@ namespace ENT
     {
         #region Propiedades autoimplementadas
 
-        [Display(Name ="Id Personal")]
+        [Display(Name ="Identificador")]
         public int ID { get; }
         public String Nombre { get; set; }
         public String Apellidos { get; set; }

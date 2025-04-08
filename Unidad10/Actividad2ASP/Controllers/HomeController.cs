@@ -1,4 +1,6 @@
+using Actividad2ASP.Models.Utils;
 using Actividad2ASP.Models.VM;
+using BL;
 using ENT;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Diagnostics.Metrics;
@@ -9,19 +11,28 @@ namespace Actividad2ASP.Controllers
 {
     public class HomeController : Controller
     {
-        
+
+
         public IActionResult Index()
         {
             ListadoPersonasConNombreDeptVM listadoASubir = new();
 
-            return View(listadoASubir.ListadoDePersonasConNombreDept); 
+            return View(listadoASubir.ListadoDePersonasConNombreDept);
         }
 
-        public IActionResult EditarPersona()
+        public IActionResult EditarPersona(int idPersona)
         {
-            return View();
+            PersonaConNombreDepartamentoVM personaEditar = PresetPersonaConNombreDepartamento.mostrarPersonaSeleccionada(idPersona);
+            return View(personaEditar);
         }
 
-       
+        public IActionResult DetallesPersona(int idPersona)
+        {
+            PersonaConNombreDepartamentoVM personaDetalles = PresetPersonaConNombreDepartamento.mostrarPersonaSeleccionada(idPersona);
+            return View(personaDetalles);
+        }
+        
+
+         
     }
 }
