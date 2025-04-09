@@ -12,7 +12,14 @@ namespace Actividad2ASP.Controllers
         // GET: PersonasController
         public ActionResult Index()
         {
-            List<ClsPersona> listadoPersonas = ManejadoraPersonasBL.ObtenerListaPersonasCompletaBL();
+            List<ClsPersona> listadoPersonas;
+            try
+            {
+                 listadoPersonas = ManejadoraPersonasBL.ObtenerListaPersonasCompletaBL();
+            }catch (Exception e)
+            {
+                return View("Error");
+            }
 
             return View(listadoPersonas);
         }
@@ -46,10 +53,8 @@ namespace Actividad2ASP.Controllers
         {
             try
             {
-                
                 try
                 {
-
                     ManejadoraPersonasBL.insertarPersonaBL(personaInsertar);
 
                 }catch(SqlException e)

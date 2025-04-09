@@ -22,13 +22,13 @@ namespace Actividad2ASP.Controllers
 
         public IActionResult EditarPersona(int idPersona)
         {
-            PersonaConNombreDepartamentoVM personaEditar = PresetPersonaConNombreDepartamento.mostrarPersonaSeleccionada(idPersona);
+            PersonaConListaDepartamentoVM personaEditar = PresetPersonaConNombreDepartamento.mostrarPersonaSeleccionada(idPersona);
             return View(personaEditar);
         }
 
         public IActionResult DetallesPersona(int idPersona)
         {
-            PersonaConNombreDepartamentoVM personaDetalles = PresetPersonaConNombreDepartamento.mostrarPersonaSeleccionada(idPersona);
+            PersonaConListaDepartamentoVM personaDetalles = PresetPersonaConNombreDepartamento.mostrarPersonaSeleccionada(idPersona);
             return View(personaDetalles);
         }
         

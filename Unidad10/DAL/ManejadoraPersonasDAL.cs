@@ -162,6 +162,7 @@ namespace DAL
         public static Boolean editarPersonaBD(ClsPersona personaParaEditar)
         {
             Boolean actualizado = false;
+            int numeroFilasAfectadas = 0;
             SqlConnection miConexion;
             SqlCommand miComando = new SqlCommand();
 
@@ -190,9 +191,12 @@ namespace DAL
                     "WHERE " +
                     "ID = @ID;";
 
-                miComando.ExecuteNonQuery();
+                numeroFilasAfectadas = miComando.ExecuteNonQuery();
 
-                actualizado = true;
+                if (numeroFilasAfectadas > 0)
+                {
+                    actualizado = true;
+                }
                 ClsConexion.cerrarConexion(ref miConexion);
 
             }

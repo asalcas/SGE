@@ -5,7 +5,7 @@ namespace Actividad2ASP.Models.VM
 {
     public class ListadoPersonasConNombreDeptVM
     {
-        public ObservableCollection<PersonaConNombreDepartamentoVM> ListadoDePersonasConNombreDept { get; }
+        public ObservableCollection<PersonaConListaDepartamentoVM> ListadoDePersonasConNombreDept { get; }
 
 
         /// <summary>
@@ -20,14 +20,14 @@ namespace Actividad2ASP.Models.VM
                 List<ClsPersona> listadoPersonasBL = BL.ManejadoraPersonasBL.ObtenerListaPersonasCompletaBL();
                 List<ClsDepartamentos> listadoDepartamentosBL = BL.ManejadoraDepartamentosBL.obtenerListadoDepartamentosBL();
 
-                ListadoDePersonasConNombreDept = new ObservableCollection<PersonaConNombreDepartamentoVM>();
+                ListadoDePersonasConNombreDept = new ObservableCollection<PersonaConListaDepartamentoVM>();
 
 
                 // Recorro el listado de personas, y voy rellenando el VM
 
                 foreach (ClsPersona persona in listadoPersonasBL)
                 {
-                    PersonaConNombreDepartamentoVM personaNueva = new(persona, listadoDepartamentosBL);
+                    PersonaConListaDepartamentoVM personaNueva = new(persona, listadoDepartamentosBL);
                     ListadoDePersonasConNombreDept.Add(personaNueva);
 
                 }

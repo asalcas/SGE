@@ -7,14 +7,14 @@ namespace Actividad2ASP.Models.Utils
 {
     public class PresetPersonaConNombreDepartamento
     {
-        public static PersonaConNombreDepartamentoVM mostrarPersonaSeleccionada(int idPersona)
+        public static PersonaConListaDepartamentoVM mostrarPersonaSeleccionada(int idPersona)
         {
-            PersonaConNombreDepartamentoVM personaEditar = null;
+            PersonaConListaDepartamentoVM personaEditar = null;
             try
             {
                 ClsPersona personaNormal = ManejadoraPersonasBL.ObtenerPersonaPorID(idPersona);
                 List<ClsDepartamentos> listadoDepartamentos = ManejadoraDepartamentosBL.obtenerListadoDepartamentosBL();
-                personaEditar = new PersonaConNombreDepartamentoVM(personaNormal, listadoDepartamentos);
+                personaEditar = new PersonaConListaDepartamentoVM(personaNormal, listadoDepartamentos);
 
             }
             catch (SqlException e)
