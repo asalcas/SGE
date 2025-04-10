@@ -10,10 +10,10 @@ namespace DAL
         /// Pre: Conexion a la BD
         /// Post: Ofrece una lista COMPLETA
         /// </summary>
-        /// <returns> Listado Completo de las personas de la BD </returns>
+        /// <returns> List<ClsPersona> listadoCompletoPersonas </returns>
         public static List<ClsPersona> ObtenerListadoCompletoPersonasDAL()
         {
-            List<ClsPersona> ListadoCompletoPersonas = new List<ClsPersona>();
+            List<ClsPersona> listadoCompletoPersonas = new List<ClsPersona>();
             SqlConnection conexion;
             SqlDataReader miLector;
             SqlCommand miComando = new SqlCommand();
@@ -63,7 +63,7 @@ namespace DAL
                             personaNueva.IdDept = (int)miLector["IDDepartamento"];
                         }
 
-                        ListadoCompletoPersonas.Add(personaNueva);
+                        listadoCompletoPersonas.Add(personaNueva);
 
                     }
                 }
@@ -75,7 +75,7 @@ namespace DAL
                 throw excSQL;
             }
 
-            return ListadoCompletoPersonas;
+            return listadoCompletoPersonas;
         }
 
         /// <summary>

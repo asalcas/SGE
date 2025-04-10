@@ -7,11 +7,11 @@ namespace BL
     public class ManejadoraPersonasBL
     {
         /// <summary>
-        /// Función de la BL que obtiene la lista de PersonasCompleta de la DAL con sus reglas de negocio
+        /// Función de la BL que obtiene la lista de <ClsPersona> de la DAL con sus reglas de negocio, y será completa: "TODOS LOS REGISTROS DE LA BASE DE DATOS"
         /// Pre: None
         /// Post: None
         /// </summary>
-        /// <returns> La lista completa </returns>
+        /// <returns> La lista completa del tipo 'ClsPersona' </returns>
         public static List<ClsPersona> ObtenerListaPersonasCompletaBL()
         {
             return ManejadoraPersonasDAL.ObtenerListadoCompletoPersonasDAL();

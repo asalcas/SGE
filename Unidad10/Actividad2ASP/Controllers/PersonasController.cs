@@ -55,6 +55,7 @@ namespace Actividad2ASP.Controllers
             {
                 try
                 {
+
                     ManejadoraPersonasBL.insertarPersonaBL(personaInsertar);
 
                 }catch(SqlException e)
