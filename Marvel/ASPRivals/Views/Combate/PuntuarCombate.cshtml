@@ -1,48 +1,54 @@
 ﻿@model IEnumerable<ENT.ClsHeroeVillano>
-
+@using ENT;
 @{
 	ViewData["Title"] = "PuntuarCombate";
 }
-
+<head>
+	<link href="~/css/estilitos.css" rel="stylesheet" />
+</head>
 <h1>PuntuarCombate</h1>
 
-<p>
-	<a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-	<thead>
-		<tr>
-			<th>
-				@Html.DisplayNameFor(model => model.IdPersonaje)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Nombre)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Foto)
-			</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var item in Model)
-		{
-			<tr>
-				<td>
-					@Html.DisplayFor(modelItem => item.IdPersonaje)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Nombre)
-				</td>
-				<td>
-					<img width="100" height="100" src="@item.Foto" alt="Imagen de un heroe" />
-				</td>
-				<td>
-					@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-					@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-					@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-				</td>
-			</tr>
-		}
-	</tbody>
-</table>
+@if (TempData["Error"] != null)
+{
+	<div class="mensaje-error">@TempData["Error"]</div>
+}
+<form method="post" asp-action="PuntuarCombate">
+	<div class="contenedorSelect">
+		<select class="select" name="personaje1">
+			<option value="" disabled selected hidden> SELECCIONA UN PERSONAJE</option> <!-- Sirve para hacer un placeholder con Selecciona un personaje-->
+			@foreach (ClsHeroeVillano personaje in Model)
+			{
+				<option value="@personaje.IdPersonaje">@personaje.Nombre</option>
+			}
+		</select>
+		<select class="select" name="personaje2">
+			<option value="" disabled selected hidden> SELECCIONA UN PERSONAJE</option> <!-- Sirve para hacer un placeholder con Selecciona un personaje-->
+			@foreach (ClsHeroeVillano personaje in Model)
+			{
+				<option value="@personaje.IdPersonaje">@personaje.Nombre</option>
+			}
+		</select>
+
+	</div>
+	<div class="inputsPuntuaciones">
+		<select class="input" name="puntuacion1">
+			@for (int i = 1; i <= 5; i++)
+			{
+
+				<option value="@i" name="puntosPJ1">@i</option>
+			}
+		</select>
+
+		<select class="input" name="puntuacion2">
+			@for (int i = 1; i <= 5; i++)
+			{
+				<option value="@i" name="puntosPJ2">@i</option>
+			}
+		</select>
+	</div>
+	<div class="divBotonSubmit">
+		<input type="submit" value="Guardar" class="botonSubmit" />
+
+	</div>
+</form>
+

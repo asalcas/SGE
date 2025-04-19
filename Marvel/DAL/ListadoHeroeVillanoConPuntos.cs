@@ -26,22 +26,22 @@ namespace DAL
                 miComando.CommandText = "SELECT " + 
                                             "personaje.IdPersonaje, " +
                                             "personaje.Nombre, " +
-                                            "personaje.Foto " +
-                                            "COALESCE(SUM(" + // COALESCE funciona como: Si tengo un resultado lo uso, si no lo tengo en vez de null pondre un 0
-                                                "CASE" + // Y dentro haremos un switch en el caso de que sea igual al id del combatiente 1 o el 2, sino se sumara 0
-                                                    "WHEN c.IdCombatiente1 = personaje.IdPersonaje THEN c.ResultadoCombatiente1" +
-                                                    "WHEN c.IdCombatiente2 = personaje.IdPersonaje THEN c.ResultadoCombatiente2" +
-                                                    "ELSE 0" +
-                                                "END" +
-                                                "), 0) AS Puntitos" +                                                 
-                                        "FROM" +
-                                            "HeroeVillano AS personaje" +
-                                        "LEFT JOIN" + // Hacemos la conexion con los id, como puede ser uno U otro, sera con un OR
-                                            "Combate c ON personaje.IdPersonaje = c.IdCombatiente1 OR personaje.IdPersonaje = c.IdCombatiente2" +
-                                        "GROUP BY" +
-                                            "personaje.IdPersonaje, personaje.Nombre, personaje.Foto" +
-                                        "ORDER BY" +
-                                            "Puntitos DESC";
+                                            "personaje.Foto, " +
+                                            "COALESCE(SUM( " + // COALESCE funciona como: Si tengo un resultado lo uso, si no lo tengo en vez de null pondre un 0
+                                                "CASE " + // Y dentro haremos un switch en el caso de que sea igual al id del combatiente 1 o el 2, sino se sumara 0
+                                                    "WHEN c.IdCombatiente1 = personaje.IdPersonaje THEN c.ResultadoCombatiente1 " +
+                                                    "WHEN c.IdCombatiente2 = personaje.IdPersonaje THEN c.ResultadoCombatiente2 " +
+                                                    "ELSE 0 " +
+                                                "END " +
+                                                "), 0) AS Puntitos " +                                                 
+                                        "FROM " +
+                                            "HeroeVillano AS personaje " +
+                                        "LEFT JOIN " + // Hacemos la conexion con los id, como puede ser uno U otro, sera con un OR
+                                            "Combate c ON personaje.IdPersonaje = c.IdCombatiente1 OR personaje.IdPersonaje = c.IdCombatiente2 " +
+                                        "GROUP BY " +
+                                            "personaje.IdPersonaje, personaje.Nombre, personaje.Foto " +
+                                        "ORDER BY " +
+                                            "Puntitos DESC ";
                 miComando.Connection = miConexion;
                 miLector = miComando.ExecuteReader();
 

@@ -28,7 +28,7 @@ namespace DAL
             try
             {
                 miConexion = ClsConexionBD.abrirConexion();
-                miComando.CommandText = "SELECT * FROM Combates";
+                miComando.CommandText = "SELECT * FROM Combate";
                 miComando.Connection = miConexion;
                 miLector = miComando.ExecuteReader();
 

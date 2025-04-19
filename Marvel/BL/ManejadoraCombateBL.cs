@@ -11,21 +11,59 @@ namespace BL
     public class ManejadoraCombateBL
     {
 
-        public static Boolean guardarCombate(ClsCombate peleita)
+        public static Boolean guardarCombateBL(ClsCombate combateMarvel)
         {
-            Boolean exito = false;
+            Boolean existe = false;
+            Boolean guardado = false;
 
-            if (peleita.FechaCombate != DateTime.Today)
+            try
             {
-                exito = ManejadoraCombatesDAL.crearCombate(peleita);
+                existe = comprobarExistenciaCombateBL(combateMarvel);
+                if (existe && combateMarvel.FechaCombate == DateTime.Today)
+                {
+
+                    guardado = actualizarCombateBL(combateMarvel);
+
+                }
+                else
+                {
+                    guardado = crearCombateBL(combateMarvel);
+                }
+
+                
+
             }
-            else
+            catch (Exception ex)
             {
-                exito = ManejadoraCombatesDAL.actualizarCombate(peleita);
+                throw new Exception("No se pudo GUARDAR el combate", ex);
             }
 
-            return exito;
+
+            return guardado;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="combateMarvel"></param>
+        /// <returns></returns>
+        private static Boolean actualizarCombateBL(ClsCombate combateMarvel)
+        {
+            return DAL.ManejadoraCombatesDAL.actualizarCombate(combateMarvel);
+        } 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="combateMarvel"></param>
+        /// <returns></returns>
+        private static Boolean crearCombateBL(ClsCombate combateMarvel)
+        {
+            return DAL.ManejadoraCombatesDAL.crearCombate(combateMarvel);
+        }
+        private static Boolean comprobarExistenciaCombateBL (ClsCombate combateMarvel)
+        {
+            return DAL.ManejadoraCombatesDAL.comprobarExistenciaCombate(combateMarvel);
+        }
     }
 }

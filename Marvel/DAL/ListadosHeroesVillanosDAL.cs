@@ -65,7 +65,7 @@ namespace DAL
             ClsHeroeVillano seleccionPredeterminada = new ClsHeroeVillano(0, "Seleccione un Heroe");
 
             // Añadimos ese objeto predeterminado en el indice 0
-            listadoCompletoHeroesVillanos.Insert(0, seleccionPredeterminada);
+            //listadoCompletoHeroesVillanos.Insert(0, seleccionPredeterminada);
 
             return listadoCompletoHeroesVillanos;
         }

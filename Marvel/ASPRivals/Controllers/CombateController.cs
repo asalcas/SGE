@@ -13,15 +13,45 @@ namespace ASPRivals.Controllers
             return View();
         }
 
-        public ActionResult PuntuarCombate(List<ClsHeroeVillano> listado)
+        public ActionResult PuntuarCombate()
         {
-            listado = BL.ListadoHeroesVillanosBL.ObtenerlistadoHeroesVillanoBL();
+            List<ClsHeroeVillano> listado = BL.ListadoHeroesVillanosBL.ObtenerlistadoHeroesVillanoBL();
             return View(listado);
         }
 
-        public ActionResult TablaClasificacion(List<ClsHeroeVillanoConPuntos> listadoHeroesVillanosConPuntos)
+        [HttpPost]
+        public ActionResult PuntuarCombate(int personaje1, int personaje2, int puntuacion1, int puntuacion2)
         {
-            return View(listadoHeroesVillanosConPuntos);
+            Boolean guardado = false;
+            ClsCombate nuevoCombate = new ClsCombate(personaje1,personaje2,DateTime.Today,puntuacion1,puntuacion2);
+            
+
+            if(nuevoCombate.IdCombatiente1 != nuevoCombate.IdCombatiente2 && nuevoCombate.ResultadoCombatiente1 != nuevoCombate.ResultadoCombatiente2)
+            {
+                guardado = BL.ManejadoraCombateBL.guardarCombateBL(nuevoCombate);
+                TempData["Exito"] = "Has puntuado correctamente el combate. SHIELD te da las gracias.";
+                return RedirectToAction(nameof(TablaClasificacion)); // Esto puede ser peruanada
+
+            }
+            else
+            {
+                TempData["Error"] = "Deben de ser personajes diferentes y/o tener distintas puntuaciones";
+
+            }
+            return RedirectToAction(nameof(PuntuarCombate));
+
+
+
+        }
+
+
+        public ActionResult TablaClasificacion()
+        {
+
+            List<ClsHeroeVillanoConPuntos> ranking = new List<ClsHeroeVillanoConPuntos>();
+            ranking = BL.ListadoHeroesVillanosConPuntos.obtenerListadoCompletoConPuntos();
+
+            return View(ranking);
         }
 
         // GET: CombateController/Details/5
