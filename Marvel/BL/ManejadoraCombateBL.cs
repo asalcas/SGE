@@ -10,7 +10,12 @@ namespace BL
 {
     public class ManejadoraCombateBL
     {
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="combateMarvel"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static Boolean guardarCombateBL(ClsCombate combateMarvel)
         {
             Boolean existe = false;
@@ -19,18 +24,24 @@ namespace BL
             try
             {
                 existe = comprobarExistenciaCombateBL(combateMarvel);
-                if (existe && combateMarvel.FechaCombate == DateTime.Today)
-                {
 
-                    guardado = actualizarCombateBL(combateMarvel);
+                if (existe)
+                {
+                    if(combateMarvel.FechaCombate != DateTime.Today)
+                    {
+                        guardado = crearCombateBL(combateMarvel);
+                    }
+                    else
+                    {
+                        guardado = actualizarCombateBL(combateMarvel);
+                    }
+                    
 
                 }
                 else
                 {
                     guardado = crearCombateBL(combateMarvel);
                 }
-
-                
 
             }
             catch (Exception ex)

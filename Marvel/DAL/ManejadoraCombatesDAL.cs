@@ -26,22 +26,30 @@ namespace DAL
                 using (SqlCommand miComando = new SqlCommand())
                 {
                     miComando.Connection = miConexion;
-                    miComando.CommandText = "UPDATE Combate " +
-                                            "SET " +
-                                                "FechaCombate = @fechaCombate," +
-                                                "ResultadoCombatiente1 = ResultadoCombatiente1 + @puntosCombatiente1 ," +
-                                                "ResultadoCombatiente2 = ResultadoCombatiente2 + @puntosCombatiente2 " +
-                                            "WHERE " +
-                                            "IdCombatiente1 = @idCombatiente1 AND " +
-                                            "IdCombatiente2 = @idCombatiente2;";
 
-                    miComando.Parameters.Add("@IdCombatiente1", System.Data.SqlDbType.Int).Value = peleita.IdCombatiente1;
-                    miComando.Parameters.Add("@IdCombatiente2", System.Data.SqlDbType.Int).Value = peleita.IdCombatiente2;
+                    // Me daba un problema dependiendo del orden de los ID, por lo que solución peruana, si hago la consulta de las dos formas y solo coje una
+                    miComando.CommandText = @"
+                        UPDATE Combate 
+                        SET 
+                            FechaCombate = @fechaCombate,
+                            ResultadoCombatiente1 = ResultadoCombatiente1 + @puntosCombatiente1,
+                            ResultadoCombatiente2 = ResultadoCombatiente2 + @puntosCombatiente2
+                        WHERE IdCombatiente1 = @idCombatiente1 AND IdCombatiente2 = @idCombatiente2;
+
+                        UPDATE Combate 
+                        SET 
+                            FechaCombate = @fechaCombate,
+                            ResultadoCombatiente1 = ResultadoCombatiente1 + @puntosCombatiente2,
+                            ResultadoCombatiente2 = ResultadoCombatiente2 + @puntosCombatiente1
+                        WHERE IdCombatiente1 = @idCombatiente2 AND IdCombatiente2 = @idCombatiente1;";
+
+                    miComando.Parameters.Add("@idCombatiente1", System.Data.SqlDbType.Int).Value = peleita.IdCombatiente1;
+                    miComando.Parameters.Add("@idCombatiente2", System.Data.SqlDbType.Int).Value = peleita.IdCombatiente2;
                     miComando.Parameters.Add("@fechaCombate", System.Data.SqlDbType.Date).Value = DateTime.Today;
                     miComando.Parameters.Add("@puntosCombatiente1", System.Data.SqlDbType.Int).Value = peleita.ResultadoCombatiente1;
                     miComando.Parameters.Add("@puntosCombatiente2", System.Data.SqlDbType.Int).Value = peleita.ResultadoCombatiente2;
 
-                    miComando.ExecuteNonQuery();
+                    int numeroFilasAfectadas = miComando.ExecuteNonQuery();
                     actualizado = true;
                 }
             }
