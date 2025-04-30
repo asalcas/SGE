@@ -1,0 +1,111 @@
+﻿
+body {
+    background-color: dimgrey;
+    color: white; 
+    font-family: 'Arial', sans-serif; 
+
+}
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-radius: 25px;
+    margin: 20px 0;
+    font-family: 'Arial', sans-serif;
+    font-weight:bold;
+    background-color: #1b1b1b;
+    color: white;
+    overflow: hidden;
+    box-shadow: 5px 5px 100px #1b1b1b
+}
+
+    .table th, .table td {
+        padding: 12px;
+        text-align: center;
+        border: 1px solid #444;
+        vertical-align: middle;
+
+    }
+
+    .table thead {
+        border-radius: 1000px;
+        background-color: #2c2f36;
+        font-size: 1.2em;
+        border-top-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+    }
+
+    .table th {
+        color:#dd5562;
+
+    }
+   
+    .table tbody {
+        color: #f17d7d;
+
+    }
+    .table tbody tr:nth-child(even) {
+        background-color: #333;
+        box-shadow: rgba(0,0,0,0,4) 10px,10px,10px, inset;
+        padding:10px;  
+        
+    }
+
+    .table tbody tr:nth-child(odd) {
+        background-color: #333;
+        box-shadow: rgba(0,0,0,0,4) 10px,10px,10px, inset
+    }
+    .table tbody tr:nth-child(1) {
+        background-color: #d3ca6580;
+        color: gold;
+    }
+
+    .table tbody tr:nth-child(2) {
+        background-color: #444;
+        color: silver;
+    }
+
+    .table tbody tr:nth-child(3) {
+        background-color: #ffbf8233;
+        color: #ff851e;
+    }
+
+    /* Hover sobre las filas */
+    .table tbody tr:hover {
+        background-color: #555;
+        cursor: pointer;
+    }
+
+    .table img {
+        border-radius: 10px;
+        transition: transform 0.3s ease-in-out;
+    }
+
+        .table img:hover {
+            transform: scale(1.1);
+        }
+
+        .table td a:hover {
+            background-color: #2980b9;
+        }
+
+        .table td a:active {
+            background-color: #1c5981;
+        }
+
+h1 {
+    color: #dd5562;
+    font-family: "Bebas Neue", sans-serif;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    font-size: 5em;
+    margin-bottom: 20px;
+}
+.botonsin {
+    color: white;
+    text-decoration-line: none;
+    background-color: #2c2f36;
+    padding: 1em;
+    border-radius: 10px;
+    font-weight: bold;
+    font-family: 'Cascadia Code';
+}

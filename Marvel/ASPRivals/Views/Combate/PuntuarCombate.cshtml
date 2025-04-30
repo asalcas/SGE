@@ -1,0 +1,95 @@
+﻿@using ASPRivals.Models.VM;
+@using ENT;
+
+
+@model ListadoHeroeVillanoConCombate;
+@{
+	ViewData["Title"] = "PuntuarCombate";
+}
+<head>
+	<link href="~/css/estilitos.css" rel="stylesheet" />
+</head>
+<h1>PuntuarCombate</h1>
+
+@if (ViewBag.mensaje != null)
+{
+
+	var clase = ViewBag.exito == "true" ? "mensaje-exito" : "mensaje-error";
+	<div class="@clase">@ViewBag.mensaje</div>
+}
+
+<form method="post" asp-action="PuntuarCombate">
+	<div class="contenedorSelect">
+
+		<select class="select" name="idCombatiente1">
+			<option value="" disabled selected hidden> SELECCIONA UN PERSONAJE</option> <!-- Sirve para hacer un placeholder con Selecciona un personaje-->
+			@foreach (ClsHeroeVillano personaje in Model.ListadoPeleas)
+			{
+				<!-- TENGO QUE METERLE EL SELECTED-->
+				@if (Model.IdCombatiente1 == personaje.IdPersonaje)
+				{
+					<option value="@personaje.IdPersonaje" selected>@personaje.Nombre</option>
+
+				}
+				else
+				{
+					<option value="@personaje.IdPersonaje" >@personaje.Nombre</option>
+				}
+			}
+		</select>
+		<select class="select" name="idCombatiente2">
+			<option value="" disabled selected hidden> SELECCIONA UN PERSONAJE</option> <!-- Sirve para hacer un placeholder con Selecciona un personaje-->
+			@foreach (ClsHeroeVillano personaje in Model.ListadoPeleas)
+			{
+				@if (Model.IdCombatiente2 == personaje.IdPersonaje)
+				{
+					<option value="@personaje.IdPersonaje" selected>@personaje.Nombre</option>
+
+				}
+				else
+				{
+					<option value="@personaje.IdPersonaje" >@personaje.Nombre</option>
+				}
+			}
+		</select>
+
+	</div>
+	<div class="inputsPuntuaciones">
+		<select class="input" name="resultadoCombatiente1">
+			@for (int i = 1; i <= 5; i++)
+			{
+				@if(Model.ResultadoCombatiente1 == i)
+				{
+					<option value="@i" selected>@i</option>
+
+				}
+				else
+				{
+					<option value="@i">@i</option>
+
+				}
+			}
+		</select>
+
+		<select class="input" name="resultadoCombatiente2">
+			@for (int i = 1; i <= 5; i++)
+			{
+				@if (Model.ResultadoCombatiente2 == i)
+				{
+					<option value="@i" selected>@i</option>
+
+				}
+				else
+				{
+					<option value="@i">@i</option>
+
+				}
+			}
+		</select>
+	</div>
+	<div class="divBotonSubmit">
+		<input type="submit" value="Guardar" class="botonSubmit" />
+
+	</div>
+</form>
+

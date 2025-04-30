@@ -1,0 +1,53 @@
+﻿@model IEnumerable<DTO.ClsHeroeVillanoConPuntos>
+
+@{
+	ViewData["Title"] = "TablaClasificacion";
+}
+<head>
+	<link href="~/css/estiloRanking.css" rel="stylesheet" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<h1>ASPRivals</h1>
+
+<a asp-action="PuntuarCombate" class="botonsin"> Puntúa un combate</a>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Puntitos)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.IdPersonaje)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Nombre)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Foto)
+			</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Puntitos)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.IdPersonaje)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Nombre)
+				</td>
+				<td>
+					<img width="100" height="100" src="@item.Foto" alt="Imagen del Heroe" />
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

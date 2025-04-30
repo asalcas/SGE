@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:vm="clr-namespace:MAUIRivals.VM"
+             
+             x:Class="MAUIRivals.Views.PuntuacionPage"
+             Title="PuntuacionPage">
+
+    <ContentPage.BindingContext>
+        <vm:ListadoHeroesVillanosConPuntosVM/>
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <Frame>
+                <Label
+                    Text="MAUIRivals"
+                    FontSize="70"
+                    FontFamily="Bebas Neue"
+                    HorizontalOptions="Center"
+                    Padding="40"
+                    TextColor="#d36256"
+                    >
+                    <Label.Shadow>
+                        <Shadow
+                        Brush="#d36256"
+                        >
+
+                        </Shadow>
+                    </Label.Shadow>
+                </Label>
+            </Frame>
+            
+            <Frame
+                BackgroundColor="#191919">
+                <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Spacing="300"
+                
+>
+                    <Label
+                    Text="Puntos"
+                    FontFamily="Bebas Neue"
+                    FontSize="30"
+                    TextColor="Orange"
+                    HorizontalOptions="Start">
+
+                    </Label>
+                    <Label
+                    Text="Nombre"
+                    FontFamily="Bebas Neue"
+                    FontSize="30"
+                    TextColor="Orange"
+                    HorizontalOptions="Center">
+
+                    </Label>
+                    <Label
+                    Text="Foto"
+                    FontFamily="Bebas Neue"
+                    FontSize="30"
+                    TextColor="Orange"
+                    HorizontalOptions="End">
+
+                    </Label>
+
+                </HorizontalStackLayout>
+            </Frame>
+
+            <Button 
+                Text="Actualiza la lista"
+                FontFamily="Bebas Neue"
+                FontSize="24"
+                Background="Orange"
+                Command="{Binding ActualizarLista}"
+                    ></Button>
+            <HorizontalStackLayout HorizontalOptions="Center"
+                                   Padding="40"
+                                   Margin="0,10,0,0"
+                                   >
+                <Frame HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       CornerRadius="30"
+                       BackgroundColor="#242424">
+                    <CollectionView
+                        WidthRequest="890"
+                        HorizontalOptions="Center"
+                   
+                        ItemsSource="{Binding ListaHeroesVillanosConPuntos}"
+                    >
+                    <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    
+                                    <StackLayout>
+                                        <BoxView Color="Gray" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="End" />
+
+                                    
+                            <Grid 
+                                Padding="10"
+                                ColumnDefinitions="100, *, 200"
+                                
+                                >
+
+                                    <Label
+                                    Text="{Binding Puntitos}"
+                                    FontFamily="Anton"
+                                    FontSize="30"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Start"
+                                    Grid.Column="0"
+                                    Margin="35"
+                                >
+                                </Label>
+                                <Label
+                                    Text="{Binding Nombre}"
+                                    VerticalOptions="Center"
+                                    FontSize="25"
+                                    HorizontalOptions="Center"
+                                    Grid.Column="1"
+                                    TranslationX="40"
+                                >
+                                </Label>
+                                <Image Source="{Binding Foto}"
+                                    VerticalOptions="Center"
+                                    MaximumHeightRequest="150"
+                                    HorizontalOptions="End"
+                                    Grid.Column="2"
+                                    
+                                    >
+                                    <Image.Shadow>
+                                        <Shadow
+                                        Offset="10,20">
+
+                                        </Shadow>
+                                    </Image.Shadow>
+
+                                </Image>
+                                
+                            </Grid>
+                                </StackLayout>
+                            </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+                </Frame>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+
+</ContentPage>

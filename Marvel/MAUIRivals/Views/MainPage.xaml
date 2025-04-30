@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUIRivals.Views.MainPage"
+             
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             
+             xmlns:vm ="clr-namespace:MAUIRivals.VM">
+
+    <ContentPage.BindingContext>
+        <vm:ClsCombateConListaHeroeVillanoVM/>
+    </ContentPage.BindingContext>
+
+    <Grid>
+        <!-- Imagen de fondo -->
+        <Image Source="vs.png"
+               Aspect="AspectFill"
+               Opacity="0.8"
+               ZIndex="0" />
+        <HorizontalStackLayout
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+
+        >
+
+
+            <VerticalStackLayout
+            Spacing="50"
+            ZIndex="0">
+                <Border
+                StrokeShape="RoundRectangle 25"
+                StrokeThickness="0">
+
+                    <!-- Esto es un atributo del VM -->
+
+                    <CollectionView 
+                        ItemsSource="{Binding ListaPersonaje}" 
+                        WidthRequest="400" 
+                        HeightRequest="400" 
+                        VerticalScrollBarVisibility="Never"
+                        SelectedItem="{Binding Combatiente1}"
+                        SelectionMode="Single"
+                >
+                        <!-- Y el OBJETO SELECCIONADO, es un objeto de ese binding si el objeto es de algo, el seleccionado es de ese tipo -->
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Image Source="{Binding Foto}">
+                                        <Image.Shadow>
+                                            <Shadow
+                                        Offset="10,20">
+
+                                            </Shadow>
+                                        </Image.Shadow>
+
+                                    </Image>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Border>
+                <Slider Value="{Binding PuntuacionCombatiente1}" 
+                    Maximum="{Binding PuntuacionMax}"
+                    Minimum="1"
+                    MinimumTrackColor="#d36256"
+                    x:Name="puntuacion1"
+                    ></Slider>
+
+                <Label FontFamily="Anton"
+                        FontSize="80"
+                        TranslationY="-60"
+                        FontAttributes="Bold"
+                        TextColor="Orange"
+                        x:Name="Puntuacion1"
+                        HorizontalOptions="Center"
+                        BindingContext="{x:Reference puntuacion1}" 
+                        Text="{Binding Value, StringFormat='{0:F0}'}" >
+                    <Label.Shadow>
+                        <Shadow
+                            Brush="Black"
+                            Offset="5,5"
+                            Radius="2"
+                            Opacity="0.8">
+
+                        </Shadow>
+                    </Label.Shadow>
+                </Label>
+
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="70" ZIndex="0" VerticalOptions="End">
+
+
+
+                <Button
+                    Margin="40"
+                    VerticalOptions="End"
+                    Command="{Binding Guardar_Actualizar}"
+                    Text="Guardar" 
+                    FontFamily="Bebas Neue"
+                    BackgroundColor= "Orange"
+                    FontAttributes="Bold"
+                    FontSize="40">
+                    
+                    <Button.Shadow>
+                        <Shadow Brush="Orange"
+                                Offset="0,0"
+                                >
+                            
+                        </Shadow>
+                    </Button.Shadow>
+                    </Button>
+                <!-- Aqui iria el command dentro del boton-->
+            </VerticalStackLayout>
+            <VerticalStackLayout 
+            Spacing="50"
+            ZIndex="0"
+            >
+                <Border
+                    StrokeShape="RoundRectangle 25"
+                    StrokeThickness="0"
+                    
+                    >
+                    <CollectionView ItemsSource="{Binding ListaPersonaje}" 
+                 WidthRequest="400" 
+                 HeightRequest="400" 
+                 ScaleX="-1" 
+                 VerticalScrollBarVisibility="Never"
+                 SelectedItem="{Binding Combatiente2}"
+                 SelectionMode="Single"
+
+                 >
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Image Source="{Binding Foto}">
+                                        <Image.Shadow>
+                                            <Shadow
+                                    Offset="10,20"
+                                    />
+                                        </Image.Shadow>
+                                    </Image>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Border>
+                <Slider Value="{Binding PuntuacionCombatiente2}" 
+                    Maximum="{Binding PuntuacionMax}"
+                    Minimum="1"
+                    MinimumTrackColor="#d36256"
+                    x:Name="puntuacion2"
+                        
+                    ></Slider>
+
+                <Label FontFamily="Anton"
+                        FontSize="80"         
+                        TranslationY="-60"
+                        FontAttributes="Bold"
+                        TextColor="Orange"
+                        x:Name="Puntuacion2"
+                        HorizontalOptions="Center"
+                        BindingContext="{x:Reference puntuacion2}" 
+                        Text="{Binding Value, StringFormat='{0:F0}'}" >
+                    <Label.Shadow>
+                        <Shadow
+                                    Brush="Black"
+                                    Offset="5,5"
+                                    Radius="3"
+                                    Opacity="0.8">
+
+                        </Shadow>
+                    </Label.Shadow>
+                </Label>
+
+
+            </VerticalStackLayout>
+
+
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>
