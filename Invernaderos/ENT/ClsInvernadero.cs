@@ -25,6 +25,12 @@
         {
             
         }
+        public ClsInvernadero(int id)
+        {
+
+            this.idInvernadero = id;
+        }
+
         public ClsInvernadero(int id, String nombreInvernadero)
         {
             this.idInvernadero = id;
