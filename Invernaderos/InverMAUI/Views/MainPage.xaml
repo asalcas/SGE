@@ -6,15 +6,18 @@
              
              x:Class="InverMAUI.MainPage">
 
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <vm:ListadoInvernaderoYFechaSelectedVM/>
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
     
 
     <ScrollView>
         <VerticalStackLayout HorizontalOptions="Center"
-                             VerticalOptions="Fill">
-            <VerticalStackLayout>
+                             VerticalOptions="Center"
+                             >
+            <VerticalStackLayout
+                Spacing="40"
+                >
                 <Picker ItemsSource="{Binding ListadoInvernaderosCompleto}"
                         SelectedItem="{Binding InvernaderoSelected}"
                         ItemDisplayBinding="{Binding Nombre}"
@@ -26,7 +29,8 @@
                     
                 </DatePicker>
                 <Button Text="Ver Temperaturas"
-                        Command="{Binding }"></Button>
+                        Command="{Binding NavegarConDatos}"></Button>
+                
             </VerticalStackLayout>
             
         </VerticalStackLayout>

@@ -27,5 +27,17 @@ namespace BL
         {
             return DAL.ListadosInvernaderosDAL.obtenerListadoCompletoInvernaderosDAL();
         }
+
+        /// <summary>
+        /// Función que retorna un objeto tipo ClsInvernadero de la Base de datos según su ID
+        /// PRE: El Id NO PUEDE SER NULL
+        /// POST: Devuelve un objeto tipo ClsInvernadero o lleno o vacío.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static ClsInvernadero obtenerInvernaderoPorID(int id)
+        {
+            return DAL.ListadosInvernaderosDAL.obtenerInvernaderoPorId(id);
+        }
     }
 }

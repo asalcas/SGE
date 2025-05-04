@@ -23,9 +23,17 @@ namespace BL
     
         }
 
+        /// <summary>
+        /// Función que se encarga de comprobar si la fecha existe o no
+        /// </summary>
+        /// <param name="fecha"></param>
+        /// <returns></returns>
+        public static Boolean comprobacionFecha(DateTime fecha)
+        {
+            return DAL.ListadosClsTemperaturasDAL.comprobarFecha(fecha);
+        }
 
-        // DEBERIA DESPUES POR AQUI, hacer un metodo que compruebe si existe o no la temperatura y si el ClsTemperatura está vacío entonces que 
-        // Devuelva un BOOLEAN que sea False, para mas adelante en la ui, mostrar Mensajes
+        
     }
 
 

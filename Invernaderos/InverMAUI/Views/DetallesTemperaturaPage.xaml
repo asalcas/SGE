@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+             x:Class="InverMAUI.Views.DetallesTemperaturaPage"  
+             xmlns:vm="clr-namespace:InverMAUI.VM">
+
+    <!--<ContentPage.BindingContext>
+        <vm:TemperaturasConNombreInvernaderoYFecha/>
+    </ContentPage.BindingContext>-->
+
+    <VerticalStackLayout Margin="30" Spacing="20">
+        <Label  
+           Text="{Binding NombreInvernadero}"  
+           HorizontalOptions="Center"  
+           VerticalOptions="Center"  
+           FontSize="36"  
+           FontAttributes="Bold" />
+
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
+            <Label Text="Fecha: " FontSize="24" VerticalOptions="Center" />
+            <Label Text="{Binding Temperatura.Fecha, StringFormat='{0:dd/MM/yyyy}'}" FontSize="32" FontAttributes="Bold" />
+        </HorizontalStackLayout>
+
+        <VerticalStackLayout>
+            <HorizontalStackLayout Margin="50" HorizontalOptions="Center" VerticalOptions="Center" Spacing="140">
+
+                <!-- TEMPERATURA 8.00 -->
+                <VerticalStackLayout 
+                    Spacing="20">
+                    <Label Text="Temperatura a las 8:00 am:" />
+                    <HorizontalStackLayout Spacing="10">
+                        <ProgressBar x:Name="temp1Bar"  
+                                     Progress="{Binding Temp1Bar}"
+                                     ProgressColor="{Binding Temp1Color}"
+                                     HeightRequest="10"
+                                     WidthRequest="130" />
+                        <Label Text="{Binding Temp1Texto}" />
+                    </HorizontalStackLayout>
+                    
+                <!-- HUMEDAD 8.00 -->
+                    <HorizontalStackLayout 
+                        Margin="0,80,0,0"
+                        HorizontalOptions="Center">
+                        <Label Text="Humedad a las 08.00 am:"></Label>
+                    </HorizontalStackLayout>
+                    
+                    <HorizontalStackLayout Spacing="10">
+                        <ProgressBar x:Name="hum1Bar"  
+                            Progress="{Binding Hum1Bar}"
+                            ProgressColor="Cyan"
+                            HeightRequest="10"
+                            WidthRequest="130" />
+                        <Label Text="{Binding Hum1Texto}" />
+                    </HorizontalStackLayout>
+                    
+                </VerticalStackLayout>
+
+                <!-- TEMPERATURA 16.00 -->
+                <VerticalStackLayout Spacing="20">
+                    <Label Text="Temperatura a las 16:00 pm:" />
+                    <HorizontalStackLayout Spacing="10">
+                        <ProgressBar x:Name="temp2Bar"  
+                                     Progress="{Binding Temp2Bar}"
+                                     ProgressColor="{Binding Temp2Color}"
+                                     HeightRequest="10"
+                                     WidthRequest="140">
+                            <ProgressBar.Triggers>
+                                <DataTrigger TargetType="ProgressBar" Binding="{Binding Temp2Bar}" Value="0.7">
+                                    <Setter Property="ProgressColor" Value="Red" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="ProgressBar" Binding="{Binding Temp2Bar}" Value="0.3">
+                                    <Setter Property="ProgressColor" Value="Blue" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="ProgressBar" Binding="{Binding Temp2Bar}" Value="0.5">
+                                    <Setter Property="ProgressColor" Value="Green" />
+                                </DataTrigger>
+                            </ProgressBar.Triggers>
+                        </ProgressBar>
+                        <Label Text="{Binding Temp2Texto}" />
+                    </HorizontalStackLayout>
+                    <!-- HUMEDAD 16.00 -->
+                    <HorizontalStackLayout 
+                             Margin="0,80,0,0"
+                             HorizontalOptions="Center">
+                        <Label Text="Humedad a las 16.00 am:"></Label>
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Spacing="10">
+                        <ProgressBar x:Name="hum2Bar"  
+                            Progress="{Binding Hum2Bar}"
+                            ProgressColor="Cyan"
+                            HeightRequest="10"
+                            WidthRequest="130" />
+                        <Label Text="{Binding Hum2Texto}" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <!-- TEMPERATURA 00.00 -->
+                <VerticalStackLayout Spacing="20">
+                    <Label Text="Temperatura a las 00:00 am:" />
+                    <HorizontalStackLayout Spacing="10">
+                        <ProgressBar x:Name="temp3Bar"  
+                                     Progress="{Binding Temp3Bar}"
+                                     ProgressColor="{Binding Temp3Color}"
+                                     HeightRequest="10"
+                                     WidthRequest="130">
+                            <ProgressBar.Triggers>
+                                <DataTrigger TargetType="ProgressBar" Binding="{Binding Temp3Bar}" Value="0.7">
+                                    <Setter Property="ProgressColor" Value="Red" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="ProgressBar" Binding="{Binding Temp3Bar}" Value="0.3">
+                                    <Setter Property="ProgressColor" Value="Blue" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="ProgressBar" Binding="{Binding Temp3Bar}" Value="0.5">
+                                    <Setter Property="ProgressColor" Value="Green" />
+                                </DataTrigger>
+                            </ProgressBar.Triggers>
+                        </ProgressBar>
+                        <Label Text="{Binding Temp3Texto}" />
+                    </HorizontalStackLayout>
+                    <!-- HUMEDAD 00.00 -->
+                    <HorizontalStackLayout 
+                            Margin="0,80,0,0"
+                            HorizontalOptions="Center">
+                        <Label Text="Humedad a las 16.00 am:"></Label>
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Spacing="10">
+                        <ProgressBar x:Name="hum3Bar"  
+                            Progress="{Binding Hum3Bar}"
+                            ProgressColor="Cyan"
+                            HeightRequest="10"
+                            WidthRequest="130" />
+                        <Label Text="{Binding Hum3Texto}" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

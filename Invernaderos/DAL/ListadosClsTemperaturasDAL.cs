@@ -56,27 +56,27 @@ namespace DAL
                         }
                         if (miLector["temp1"] != DBNull.Value)
                         {
-                            nuevaTemperatura.Temp1 = (double)miLector["temp1"];
+                            nuevaTemperatura.Temp1 = Convert.ToDouble(miLector["temp1"]);
                         }
                         if (miLector["temp2"] != DBNull.Value)
                         {
-                            nuevaTemperatura.Temp2 = (double)miLector["temp2"];
+                            nuevaTemperatura.Temp2 = Convert.ToDouble(miLector["temp2"]);
                         }
                         if (miLector["temp3"] != DBNull.Value)
                         {
-                            nuevaTemperatura.Temp3 = (double)miLector["temp3"];
+                            nuevaTemperatura.Temp3 = Convert.ToDouble(miLector["temp3"]);
                         }
                         if (miLector["humedad1"] != DBNull.Value)
                         {
-                            nuevaTemperatura.Humedad1 = (double)miLector["humedad1"];
+                            nuevaTemperatura.Humedad1 = Convert.ToDouble(miLector["humedad1"]);
                         }
                         if (miLector["humedad2"] != DBNull.Value)
                         {
-                            nuevaTemperatura.Humedad2 = (double)miLector["humedad2"];
+                            nuevaTemperatura.Humedad2 = Convert.ToDouble(miLector["humedad2"]);
                         }
                         if (miLector["humedad3"] != DBNull.Value)
                         {
-                            nuevaTemperatura.Humedad3 = (double)miLector["humedad3"];
+                            nuevaTemperatura.Humedad3 = Convert.ToDouble(miLector["humedad3"]);
                         }
 
                     }
@@ -91,5 +91,40 @@ namespace DAL
             }
             return nuevaTemperatura;
         }
+        /// <summary>
+        /// Función dedicada a la comprobación de una fecha antes de realizar una Búsqueda
+        /// </summary>
+        /// <param name="fecha"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static Boolean comprobarFecha(DateTime fecha)
+        {
+            Boolean encontrado = false;
+            SqlConnection miConexion;
+            SqlCommand miComando = new SqlCommand();
+            int numeroLineas = 0;
+            try
+            {
+                miConexion = ClsConexionDB.abrirConexionBD();
+                miComando.Connection = miConexion;
+                miComando.CommandText = "SELECT COUNT(*) FROM temperaturas WHERE fecha = @fecha";
+                miComando.Parameters.Add("@fecha", System.Data.SqlDbType.Date).Value = fecha;
+
+                numeroLineas = (int)miComando.ExecuteScalar();
+                
+            }catch(Exception ex)
+            {
+                throw new Exception("No se pudo acceder a la comprobación", ex);
+            }
+            ClsConexionDB.cerrarConexionDB(ref miConexion);
+            if (numeroLineas > 0)
+            {
+                encontrado = true;
+            }
+            return encontrado;
+                
+        }
     }
+
+    
 }
