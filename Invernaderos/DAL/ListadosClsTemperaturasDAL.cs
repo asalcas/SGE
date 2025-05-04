@@ -92,7 +92,9 @@ namespace DAL
             return nuevaTemperatura;
         }
         /// <summary>
-        /// Función dedicada a la comprobación de una fecha antes de realizar una Búsqueda
+        /// Función dedicada a la comprobación de una fecha antes de que busquemos para nada en la Base de datos
+        /// PRE: NONE
+        /// POST: Devolvemos un Booleano, true si hay registro false si no
         /// </summary>
         /// <param name="fecha"></param>
         /// <returns></returns>

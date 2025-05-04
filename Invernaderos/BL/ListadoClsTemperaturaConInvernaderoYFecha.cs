@@ -24,7 +24,9 @@ namespace BL
         }
 
         /// <summary>
-        /// Función que se encarga de comprobar si la fecha existe o no
+        /// Función que llama a la DAL para comprobar si la fecha existe o no
+        /// PRE: 'fecha' no puede ser NULL
+        /// POST: Retorna un BOOLEAN
         /// </summary>
         /// <param name="fecha"></param>
         /// <returns></returns>

@@ -187,12 +187,15 @@ namespace InverMAUI.VM
 
         #endregion
 
+        #region TERNARIOS PARA MENSAJES JUNTO A LOS PUTOS PROGRES
         public string Temp1Texto => Temperatura.Temp1 != null ? $"{Temperatura.Temp1} °C" : "?";
         public string Temp2Texto => Temperatura.Temp2 != null ? $"{Temperatura.Temp2} °C" : "?";
         public string Temp3Texto => Temperatura.Temp3 != null ? $"{Temperatura.Temp3} °C" : "?";
         public string Hum1Texto => Temperatura.Humedad1 != null ? $"{Temperatura.Humedad1} %" : "?";
         public string Hum2Texto => Temperatura.Humedad2 != null ? $"{Temperatura.Humedad2} %" : "?";
         public string Hum3Texto => Temperatura.Humedad3 != null ? $"{Temperatura.Humedad3} %" : "?";
+
+        #endregion
 
         public TemperaturasConNombreInvernaderoYFecha()
         {

@@ -77,6 +77,7 @@ namespace InverMAUI.VM
             this.FechaSelected = DateTime.Now;
         }
 
+        #region Commands
         public async void cambiarVistaCommand()
         {
             Boolean navegar = false;
@@ -126,7 +127,7 @@ namespace InverMAUI.VM
             }
             return ejecutable;
         }
-
+        #endregion
 
         #region INotifyPropertyChange
 
@@ -146,11 +147,12 @@ namespace InverMAUI.VM
 
         #endregion
 
-
+        #region Toast
         private async void muestraToast(string mensaje)
         {
             var toast = Toast.Make(mensaje, ToastDuration.Short, 14);
             await toast.Show();
         }
+        #endregion
     }
 }
