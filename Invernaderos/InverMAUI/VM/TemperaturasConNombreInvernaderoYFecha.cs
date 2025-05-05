@@ -23,6 +23,7 @@ namespace InverMAUI.VM
         private double temp2Bar;
         private double temp3Bar;
         private double hum1Bar;
+        private double hum2Bar;
 
         
 
