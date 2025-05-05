@@ -5,9 +5,9 @@ namespace InverMAUI.Views;
 
 public partial class DetallesTemperaturaPage : ContentPage
 {
-	public DetallesTemperaturaPage(ClsTemperaturasConNombreInvernaderoYFecha dto)
+	public DetallesTemperaturaPage(int id, DateTime fecha)
 	{
 		InitializeComponent();
-		this.BindingContext = new TemperaturasConNombreInvernaderoYFecha(dto);
+		this.BindingContext = new TemperaturasConNombreInvernaderoYFecha(id, fecha);
 	}
 }

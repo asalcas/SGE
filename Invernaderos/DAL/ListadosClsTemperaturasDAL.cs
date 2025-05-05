@@ -43,8 +43,6 @@ namespace DAL
                     while (miLector.Read())
                     {
 
-
-
                         // TODO: REVISAR TODOS LOS NOMBRES DE LA BASE DE DATOS PARA COMPROBAR QUE SON CORRECTOS CON LOS QUE LE ESTOY PONIENDO EN 
                         // ESTA FUNCION Y EN LA DE ListadoInvernaderos
 
@@ -57,6 +55,10 @@ namespace DAL
                         if (miLector["temp1"] != DBNull.Value)
                         {
                             nuevaTemperatura.Temp1 = Convert.ToDouble(miLector["temp1"]);
+                        }
+                        else
+                        {
+                            // si no, podriamos asignar un valor nulo (lo suyo es que sea ternario)
                         }
                         if (miLector["temp2"] != DBNull.Value)
                         {

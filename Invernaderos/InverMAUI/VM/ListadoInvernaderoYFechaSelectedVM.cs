@@ -68,19 +68,23 @@ namespace InverMAUI.VM
         public ListadoInvernaderoYFechaSelectedVM()
         {
             navegarConDatos = new DelegateCommand(cambiarVistaCommand, puedeEjecutar); // Alomejor debo meter aqui los parametros
-            this.listadoInvernaderosCompleto = BL.ListaClsInvernaderoBL.obtenerTodosLosInvernaderosBL();
+            listadoInvernaderosCompleto = BL.ListaClsInvernaderoBL.obtenerTodosLosInvernaderosBL();
             listadoInvernaderosCompleto.Insert(0, new ClsInvernadero(0, "-- Selecciona un invernadero --"));
             if (listadoInvernaderosCompleto.Count > 0)
             {
                 InvernaderoSelected = listadoInvernaderosCompleto[0];
             }
-            this.FechaSelected = DateTime.Now;
+            FechaSelected = DateTime.Now;
         }
 
         #region Commands
-        public async void cambiarVistaCommand()
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <exception cref="Exception"></exception>
+        private async void cambiarVistaCommand()
         {
-            Boolean navegar = false;
+            bool navegar = false;
 
             try
             {
@@ -97,11 +101,13 @@ namespace InverMAUI.VM
 
                     try
                     {
+                        // Esto se puede evitar aquie, NO HACER LLAMADA ANTES DE TIEMPO, mejor cuando estemos en la otra pagina
+                        /*
                         ClsTemperatura temperaturaPorFechaEID = BL.ListadoClsTemperaturaConInvernaderoYFecha.temperaturaPorInvernaderoYFecha(invernaderoSelected.IdInvernadero, FechaSelected); //
-                        ClsInvernadero invernaderoPorID = BL.ListaClsInvernaderoBL.obtenerInvernaderoPorID(invernaderoSelected.IdInvernadero);
-                        ClsTemperaturasConNombreInvernaderoYFecha dto = new ClsTemperaturasConNombreInvernaderoYFecha(invernaderoPorID, temperaturaPorFechaEID);
-
-                        await Navigation.PushAsync(new DetallesTemperaturaPage(dto));
+                        ClsTemperaturasConNombreInvernaderoYFecha dto = new ClsTemperaturasConNombreInvernaderoYFecha(InvernaderoSelected, temperaturaPorFechaEID);
+                        */
+                        //await Navigation.PushAsync(new DetallesTemperaturaPage(dto));
+                        await Navigation.PushAsync(new DetallesTemperaturaPage(InvernaderoSelected.IdInvernadero, FechaSelected));
 
                     }
                     catch (Exception ex)
@@ -116,10 +122,10 @@ namespace InverMAUI.VM
             }
             
         }
-        public Boolean puedeEjecutar()
+        public bool puedeEjecutar()
         {
-            Boolean ejecutable = false;
-            if (this.InvernaderoSelected.IdInvernadero != 0)
+            bool ejecutable = false;
+            if (InvernaderoSelected.IdInvernadero != 0)
             {
 
                 ejecutable = true;
@@ -137,7 +143,7 @@ namespace InverMAUI.VM
 
         //
 
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
 
         {
 

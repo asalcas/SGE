@@ -7,7 +7,7 @@ namespace DTOs
     {
         #region ATRIBUTOS
 
-        private ClsInvernadero invernadero;
+        private ClsInvernadero invernadero; // aqui lo suyo 100% deberia de traer el nombre solo, no el id
         private ClsTemperatura temperatura;
 
         #endregion

@@ -13,14 +13,18 @@ namespace InverMAUI.VM
     public class TemperaturasConNombreInvernaderoYFecha
     {
 
-        private String nombreInvernadero;
-        private ClsTemperatura temperatura;
+        private string nombreInvernadero;
+        private ClsTemperatura temperatura; // 
+        
+        
+        
         private double tempMAX;
         private double temp1Bar;
         private double temp2Bar;
         private double temp3Bar;
         private double hum1Bar;
 
+        
 
         public ClsTemperatura Temperatura
         {
@@ -32,7 +36,7 @@ namespace InverMAUI.VM
             get { return tempMAX; }
         }
 
-        public String NombreInvernadero
+        public string NombreInvernadero
         {
             get { return nombreInvernadero; }
             set { nombreInvernadero = value; }
@@ -48,7 +52,7 @@ namespace InverMAUI.VM
                 double? resultado = 0;
                 if(Temperatura != null)
                 {
-                    resultado = (Temperatura.Temp1 / 50);
+                    resultado = Temperatura.Temp1 / 50;
 
                 }
                 else
@@ -59,11 +63,11 @@ namespace InverMAUI.VM
             // pero si no lo multiplico ya recibo el porcentaje en 0,algo
         }
 
-        public String Temp1Color
+        public string Temp1Color
         {
             get
             {
-                String color = "";
+                string color = "";
 
                 if (Temp1Bar > 0.7)
                     color = "Red";
@@ -82,7 +86,7 @@ namespace InverMAUI.VM
                 double? resultado = 0;
                 if (Temperatura != null)
                 {
-                    resultado = (Temperatura.Temp2 / 50);
+                    resultado = Temperatura.Temp2 / 50;
                 }
                 else
                 {
@@ -92,11 +96,11 @@ namespace InverMAUI.VM
             }
         
         }
-        public String Temp2Color
+        public string Temp2Color
         {
             get
             {
-                String color = "";
+                string color = "";
 
                 if (Temp2Bar > 0.7)
                     color = "Red";
@@ -115,7 +119,7 @@ namespace InverMAUI.VM
                 double? resultado = 0;
                 if (Temperatura != null)
                 {
-                    resultado = (Temperatura.Temp3 / 50);
+                    resultado = Temperatura.Temp3 / 50;
                 }
                 else
                 {
@@ -124,11 +128,11 @@ namespace InverMAUI.VM
                 return resultado;
             }
         }
-        public String Temp3Color
+        public string Temp3Color
         {
             get
             {
-                String color = "";
+                string color = "";
 
                 if (Temp3Bar > 0.7)
                     color = "Red";
@@ -150,7 +154,7 @@ namespace InverMAUI.VM
                 double? resultado = 0;
                 if (Temperatura != null)
                 {
-                    resultado = (Temperatura.Humedad1 / 100);
+                    resultado = Temperatura.Humedad1 / 100;
 
                 }
                 
@@ -165,7 +169,7 @@ namespace InverMAUI.VM
                 if (Temperatura != null)
                 {
                     
-                    resultado = (Temperatura.Humedad2 / 100);
+                    resultado = Temperatura.Humedad2 / 100;
 
                 }
                     return resultado;
@@ -178,7 +182,7 @@ namespace InverMAUI.VM
                 double? resultado = 0;
                 if (Temperatura != null)
                 {
-                    resultado = (Temperatura.Humedad3 / 100);
+                    resultado = Temperatura.Humedad3 / 100;
 
                 }
                 return resultado;
@@ -187,7 +191,7 @@ namespace InverMAUI.VM
 
         #endregion
 
-        #region TERNARIOS PARA MENSAJES JUNTO A LOS PUTOS PROGRES
+        #region TERNARIOS PARA MENSAJES JUNTO A LOS PUTOS PROGRES BAR
         public string Temp1Texto => Temperatura.Temp1 != null ? $"{Temperatura.Temp1} °C" : "?";
         public string Temp2Texto => Temperatura.Temp2 != null ? $"{Temperatura.Temp2} °C" : "?";
         public string Temp3Texto => Temperatura.Temp3 != null ? $"{Temperatura.Temp3} °C" : "?";
@@ -201,11 +205,33 @@ namespace InverMAUI.VM
         {
 
         }
-        public TemperaturasConNombreInvernaderoYFecha(ClsTemperaturasConNombreInvernaderoYFecha dto)
+        /*public TemperaturasConNombreInvernaderoYFecha(ClsTemperaturasConNombreInvernaderoYFecha dto)
         {
-            this.NombreInvernadero = dto.Invernadero.Nombre;
-            this.Temperatura = dto.Temperatura;
-            this.tempMAX = 0.5;
+            NombreInvernadero = dto.Invernadero.Nombre;
+            Temperatura = dto.Temperatura;
+            tempMAX = 0.5;
+
+        }
+        */
+        public TemperaturasConNombreInvernaderoYFecha(int id, DateTime fecha)
+        {
+
+            try
+            {
+                ClsTemperatura temperaturaPorFechaEID = BL.ListadoClsTemperaturaConInvernaderoYFecha.temperaturaPorInvernaderoYFecha(id, fecha); //
+                ClsInvernadero invernadero = BL.ListaClsInvernaderoBL.obtenerInvernaderoPorID(id);
+                ClsTemperaturasConNombreInvernaderoYFecha dto = new ClsTemperaturasConNombreInvernaderoYFecha(invernadero, temperaturaPorFechaEID);
+                NombreInvernadero = dto.Invernadero.Nombre;
+                Temperatura = dto.Temperatura;
+                tempMAX = 0.5;
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al montar el VM", ex);
+            }
+           
         }
 
     }
