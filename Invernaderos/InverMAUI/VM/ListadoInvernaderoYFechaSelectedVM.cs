@@ -88,7 +88,7 @@ namespace InverMAUI.VM
 
             try
             {
-                navegar = BL.ListadoClsTemperaturaConInvernaderoYFecha.comprobacionFecha(FechaSelected);
+                navegar = BL.ListadoClsTemperaturaBL.comprobacionFecha(FechaSelected);
             }
             catch(Exception ex) 
             {

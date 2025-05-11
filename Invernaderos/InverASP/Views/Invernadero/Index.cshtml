@@ -1,0 +1,30 @@
+﻿@using ENT;
+@{
+
+}
+
+@model IEnumerable<ClsInvernadero>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="~/css/estiloSelectInvernadero.css" rel="stylesheet"/>
+</head>
+
+<body>
+    <form method="post" asp-action="DONDE IRAN LOS DATOS TODO">
+        <div>
+            <select class="select" name="idInvernadero">
+                <option value="" disabled selected hidden> Seleccione un invernadero </option>
+                @foreach (ClsInvernadero invernadero in Model)
+                {
+                    <option value="@invernadero.IdInvernadero" selected>@invernadero.Nombre</option>
+                }
+            </select>
+            </div>
+        </form>
+        
+
+
+    </body>
+
+</html>

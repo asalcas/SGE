@@ -18,12 +18,7 @@ namespace InverMAUI.VM
         
         
         
-        private double tempMAX;
-        private double temp1Bar;
-        private double temp2Bar;
-        private double temp3Bar;
-        private double hum1Bar;
-        private double hum2Bar;
+        private double tempMAX; 
 
         
 
@@ -206,6 +201,7 @@ namespace InverMAUI.VM
         {
 
         }
+
         /*public TemperaturasConNombreInvernaderoYFecha(ClsTemperaturasConNombreInvernaderoYFecha dto)
         {
             NombreInvernadero = dto.Invernadero.Nombre;
@@ -219,7 +215,7 @@ namespace InverMAUI.VM
 
             try
             {
-                ClsTemperatura temperaturaPorFechaEID = BL.ListadoClsTemperaturaConInvernaderoYFecha.temperaturaPorInvernaderoYFecha(id, fecha); //
+                ClsTemperatura temperaturaPorFechaEID = BL.ListadoClsTemperaturaBL.temperaturaPorInvernaderoYFecha(id, fecha); //
                 ClsInvernadero invernadero = BL.ListaClsInvernaderoBL.obtenerInvernaderoPorID(id);
                 ClsTemperaturasConNombreInvernaderoYFecha dto = new ClsTemperaturasConNombreInvernaderoYFecha(invernadero, temperaturaPorFechaEID);
                 NombreInvernadero = dto.Invernadero.Nombre;

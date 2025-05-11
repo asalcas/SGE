@@ -7,7 +7,7 @@ using ENT;
 
 namespace BL
 {
-    public class ListadoClsTemperaturaConInvernaderoYFecha
+    public class ListadoClsTemperaturaBL
     {
         /// <summary>
         /// Función que llama a la DAL para obtener un objeto tipo 'ClsTemperatura' según su 'id' y 'fecha'

@@ -1,0 +1,64 @@
+﻿
+.dateSelected {
+    background: #707070;
+    font-size: 20px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    color: #00000069;
+    
+}
+.mensaje-error {
+    margin-top: 1em;
+    color: #d46b6b;
+    background-color: #e54f4f4c;
+    padding: 20px;
+    border-radius: 40px;
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+    
+}
+
+.divSelect {
+    
+    margin-top: 200px;
+    gap: 30px;
+    background: #363537;
+    padding: 50px;
+    border-radius: 10px;
+}
+
+.buttonVerDatos{
+    background:#f6d8a8 ;
+    border-radius: 10px;
+    border:none;
+    padding: 10px;
+    font-weight:bold;
+    font-size: 18px;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: 0 auto;
+    
+}
+
+select {
+    color: #f6d8a8;
+    background: #707070;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 24px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    text-align: center;
+}
+
+body {
+    background: #2c2b2c
+}
+

@@ -1,0 +1,89 @@
+﻿@using DTOs;
+@{
+}
+@model ClsTemperaturasConNombreInvernaderoYFecha
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link href="~/css/estiloPaginaTemperaturas.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="divPrincipal">
+			<h1> @Model.Invernadero.Nombre </h1>
+			<h2> @Model.Temperatura.Fecha.ToString("dd/MM/yyyy")</h2>
+		</div>
+		<div class="tablaPrincipal">
+			<!-- TITULO TEMPERATURAS -->
+			<div class="medicionesTemp">
+
+				<h3>TEMPERATURAS</h3>
+				<div class="temp">
+					<p>
+						8.00 AM
+					</p>
+@* 				<progress max="55" value="@(Model.Temperatura.Temp1 != null ? Model.Temperatura.Temp1 : "0")"> </progress>
+ *@					<progress max="55" value="@(Model.Temperatura.Temp1 != null ? Model.Temperatura.Temp1 : "0")"> </progress>
+					<p>@(Model.Temperatura.Temp1 != null ? Model.Temperatura.Temp1 : "?") ºC</p>
+				</div>
+				<div class ="temp">
+					<p>
+						16.00 PM
+					</p>
+					<progress max="55" value="@(Model.Temperatura.Temp2 != null ? Model.Temperatura.Temp2 : "0")"> </progress>
+					<p>@(Model.Temperatura.Temp2 != null ? Model.Temperatura.Temp2 : "?") ºC</p>
+				</div>
+				<div class="temp">
+					<p>
+						0.00 PM
+					</p>
+				<progress max="55" value="@(Model.Temperatura.Temp3 != null ? Model.Temperatura.Temp3 : "0")"> </progress>
+					<p>@(Model.Temperatura.Temp3 != null ? Model.Temperatura.Temp3 : "?") ºC</p>
+				</div>
+
+			</div>
+			
+			<!-- Fechas para ver nulables y normal: 
+				Con valores nulos: 10-05-2025 (INVERNADERO CENTRAL)
+				Sin valores nulos: 05-05-2025 (INVERNADERO CENTRAL)
+			-->
+			<div class="medicionesHum">
+				<h3>HUMEDADES</h3>
+				<div class ="hum">
+					<p> 
+						8.00 AM
+					</p>
+					<!-- ToString(System.Globalization.CultureInfo.InvariantCulture) Sirve para formatear valores float a que tengan punto y no coma como sale en nuestro <p> PREGUNTADO A GPT-->
+				<progress min="0" max="100" value="@(Model.Temperatura.Humedad1 != null ? Model.Temperatura.Humedad1?.ToString(System.Globalization.CultureInfo.InvariantCulture) : "0")"> </progress>
+					<p>@(Model.Temperatura.Humedad1 != null ? Model.Temperatura.Humedad1.Value.ToString("0.##") : "?") %</p>
+
+				</div>
+				<div class="hum">
+					<p>
+						16.00 PM
+					</p>
+				<progress min="0" max="100" value="@(Model.Temperatura.Humedad2 != null ? Model.Temperatura.Humedad2?.ToString(System.Globalization.CultureInfo.InvariantCulture) : "0")"> </progress>
+					<p>@(Model.Temperatura.Humedad2 != null ? Model.Temperatura.Humedad2.Value.ToString("0.##") : "?") %</p>
+
+				</div>
+				<div class="hum">
+					<p>
+						0.00 PM
+					</p>
+				<progress min="0" max="100" value="@(Model.Temperatura.Humedad3 != null ? Model.Temperatura.Humedad3?.ToString(System.Globalization.CultureInfo.InvariantCulture) : "0")"> </progress>
+					<p>@(Model.Temperatura.Humedad3 != null ? Model.Temperatura.Humedad3.Value.ToString("0.##") : "?") %</p>	
+				
+				</div>
+
+			</div>
+		</div>
+
+		<div>
+			<!-- TITULO HUMEDAD -->
+
+			<div class="medicionesHum">
+			</div>
+		</div>
+
+	
+	</body>
+</html>

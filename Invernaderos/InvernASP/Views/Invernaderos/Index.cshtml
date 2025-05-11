@@ -1,0 +1,40 @@
+﻿@using ENT;
+
+
+@model IEnumerable<ClsInvernadero>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="~/css/estiloSelectInvernadero.css" rel="stylesheet" />
+</head>
+
+<body>
+    <form method="post" asp-action="Index"> 
+        <div class="divSelect">
+            <select class="select" name="idInvernadero">
+                <option value="" disabled selected hidden> ELIGE UNA OPCIÓN </option>
+                @foreach (ClsInvernadero invernadero in Model)
+                {
+                    <option value="@invernadero.IdInvernadero">@invernadero.Nombre</option>
+                }
+            </select>
+            <input class="dateSelected" type="date" name="fechaSelected" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+            <input class="buttonVerDatos" type="submit" value="VER RESULTADOS">
+            @if(ViewBag.mensaje != null)
+            {
+                var clase = "";
+
+                if(ViewBag.exito == "false")
+                {
+                    clase = "mensaje-error";
+                }
+                <div class="@clase"> @ViewBag.mensaje </div>
+            }
+            
+
+        </div>
+    </form>
+
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+﻿
+body {
+    
+    text-align: center;
+    background-color: #2c2b2c;
+}
+
+.divPrincipal {
+    margin-top: 200px;
+}
+
+h1 {
+    font-weight: bold;
+    color: #a8a8a8
+}
+h2 {
+    color: #f6d8a8;
+}
+h3 {
+    font-family: 'Segoe UI';
+    font-weight: bold;
+    margin-bottom: 50px;
+    color: #f6d8a8
+}
+.tablaPrincipal {
+    background: #363537;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    color: #00000069;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    padding: 50px;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.medicionesTemp {
+}
+p{
+    width: 100px; /* Para pode alinear las cosas antes de las barras*/
+    font-weight:400;
+    color:#828282
+}
+
+progress {
+    margin-top: 5px;
+    height: 20px;
+    background-color: #707070;
+    border-radius: 10px;
+    border: none;
+    
+}
+progress::-webkit-progress-value { /* Es un seudoelemento para Chrome. safari... */
+    background-color: #4caf50;
+    border-radius: 10px;
+}
+progress::-moz-progress-bar { /* Es un seudoelemento para Mozilla */
+    background-color: #f6d8a8;
+    border-radius: 10px;
+}
+
+.temp {
+display: flex;
+gap: 20px;
+}
+.hum {
+    display: flex;
+    gap: 20px;
+}
