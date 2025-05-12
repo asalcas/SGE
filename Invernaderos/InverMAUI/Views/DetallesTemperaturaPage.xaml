@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
-             x:Class="InverMAUI.Views.DetallesTemperaturaPage"  
+             x:Class="InverMAUI.Views.DetallesTemperaturaPage" 
+             xmlns:converter="clr-namespace:InverMAUI.Utils.Converters"
              xmlns:vm="clr-namespace:InverMAUI.VM">
 
     <!--<ContentPage.BindingContext>
         <vm:TemperaturasConNombreInvernaderoYFecha/>
     </ContentPage.BindingContext>-->
 
+    <ContentPage.Resources>
+        <converter:ConverterProgressBarHum x:Key="conversorHum"/>
+        <converter:ConverterProgressBarTemp x:Key="conversorTemp"/>
+    </ContentPage.Resources>
+    
     <VerticalStackLayout Margin="30" Spacing="20">
         <Label  
            Text="{Binding NombreInvernadero}"  
@@ -30,7 +36,7 @@
                     <Label Text="Temperatura a las 8:00 am:" />
                     <HorizontalStackLayout Spacing="10">
                         <ProgressBar x:Name="temp1Bar"  
-                                     Progress="{Binding Temp1Bar}"
+                                     Progress="{Binding DtoInvernadero.Temperatura.Temp1, Converter=conversorTemp, StringFormat=Empty'{0:F1} Cº'}"
                                      ProgressColor="{Binding Temp1Color}"
                                      HeightRequest="10"
                                      WidthRequest="130" />
@@ -46,7 +52,7 @@
                     
                     <HorizontalStackLayout Spacing="10">
                         <ProgressBar x:Name="hum1Bar"  
-                            Progress="{Binding Hum1Bar}"
+                            Progress="{Binding DtoInvernadero.Temperatura.Hum1, Converter=conversorHum, StringFormat='{0} %'}"
                             ProgressColor="Cyan"
                             HeightRequest="10"
                             WidthRequest="130" />

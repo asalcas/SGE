@@ -50,7 +50,7 @@ div {
 select {
     color: #f6d8a8;
     background: #707070;
-    font-family: 'FiraCode Nerd Font';
+    font-family:"Fira Code", monospace;
     font-size: 24px;
     border-radius: 10px;
     border: none;

@@ -1,4 +1,5 @@
 ﻿using ENT;
+using System.Reflection.Metadata;
 
 namespace DTOs
 {
@@ -7,7 +8,7 @@ namespace DTOs
     {
         #region ATRIBUTOS
 
-        private ClsInvernadero invernadero; // aqui lo suyo 100% deberia de traer el nombre solo, no el id
+        private ClsInvernadero invernadero; // aqui lo suyo 100% deberia de traer el nombre solo, no el objeto
         private ClsTemperatura temperatura;
 
         #endregion
@@ -30,6 +31,7 @@ namespace DTOs
         
         }
 
+        
         public ClsTemperaturasConNombreInvernaderoYFecha(ClsInvernadero invernaderoNuevo, ClsTemperatura temperaturaNueva) {
             this.Invernadero = invernaderoNuevo;
             this.Temperatura = temperaturaNueva;
