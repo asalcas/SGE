@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -18,18 +19,20 @@ namespace InverMAUI.Utils.Converters
         /// <param name="culture"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) // ------------------------------- HACER QUE FUNCIONEN LOS CONVERTERS
         {
-            float hum = 0;
-
-
+            double resultado = 0;
+            double numeroOperar = 0;
+            //Debug.WriteLine("El valor que tiene value es de: " + value);
             if (value != null)
             {
-                hum = (float)value/100;
+
+                numeroOperar = (double)value;
+                resultado = numeroOperar / 100;
                 
             }
 
-            return hum;
+            return resultado;
 
 
         }

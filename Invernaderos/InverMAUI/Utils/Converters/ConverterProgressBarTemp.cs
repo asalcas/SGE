@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -11,14 +12,32 @@ namespace InverMAUI.Utils.Converters
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            double temperatura;
+            double? temperatura = 0;
+            double minTemp = 10.0;
+            double maxTemp = 55.0;
 
-            if(value != null)
+            //Debug.WriteLine($"Ahora mismo value es {value}");
+
+            temperatura = (double?)value; // Error con (double) como puede ser nulable tiene que ser asi (double?) 
+
+            if (temperatura != null)
             {
-                // HACER EL CODIGO DEL CONVERTER AQUI temperatura = 
-            }
+                ;
+                if (temperatura >= minTemp && temperatura <= maxTemp)
+                {// si es mayor de los topes hacemos la operación
+                    temperatura = (temperatura - minTemp) / (maxTemp - minTemp);
+                }
+                else
+                {
+                    // Sino , si es menor que min temp lo asignamos a 0, por el contrario 1
+                    temperatura = temperatura < minTemp ? 0 : 1;
+                }
 
-            throw new NotImplementedException();
+            }
+            
+
+
+                return temperatura;
 
 
         }

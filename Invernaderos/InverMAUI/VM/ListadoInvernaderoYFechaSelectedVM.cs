@@ -102,12 +102,12 @@ namespace InverMAUI.VM
                     try
                     {
                         // Esto se puede evitar aquie, NO HACER LLAMADA ANTES DE TIEMPO, mejor cuando estemos en la otra pagina
-                        /*
-                        ClsTemperatura temperaturaPorFechaEID = BL.ListadoClsTemperaturaConInvernaderoYFecha.temperaturaPorInvernaderoYFecha(invernaderoSelected.IdInvernadero, FechaSelected); //
+                        
+                        ClsTemperatura temperaturaPorFechaEID = BL.ListadoClsTemperaturaBL.temperaturaPorInvernaderoYFecha(invernaderoSelected.IdInvernadero, FechaSelected); //
                         ClsTemperaturasConNombreInvernaderoYFecha dto = new ClsTemperaturasConNombreInvernaderoYFecha(InvernaderoSelected, temperaturaPorFechaEID);
-                        */
-                        //await Navigation.PushAsync(new DetallesTemperaturaPage(dto));
-                        await Navigation.PushAsync(new DetallesTemperaturaPage(InvernaderoSelected.IdInvernadero, FechaSelected));
+                        
+                        await Navigation.PushAsync(new DetallesTemperaturaPage(dto));
+                        //await Navigation.PushAsync(new DetallesTemperaturaPage(InvernaderoSelected.IdInvernadero, FechaSelected));
 
                     }
                     catch (Exception ex)

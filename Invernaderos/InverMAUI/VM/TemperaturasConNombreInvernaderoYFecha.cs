@@ -14,29 +14,56 @@ namespace InverMAUI.VM
     {
         private ClsTemperaturasConNombreInvernaderoYFecha dtoInvernadero;
 
-        private double tempMAX; 
+        private double tempMAX;
+        private string nombreInvernadero;
+        //borrado
+        private ClsTemperatura temperatura;
 
-       
+
+
         public ClsTemperaturasConNombreInvernaderoYFecha DtoInvernadero
         {
             get { return dtoInvernadero; }
         }
-            
-     
+
+        //borrado
+        public ClsTemperatura Temperatura
+        {
+            get { return temperatura; }
+            set { temperatura = value; }
+        }
+
+
+        public double TempMAX
+        {
+            get { return tempMAX; }
+        }
+
+
+        public string NombreInvernadero
+        {
+            get { return nombreInvernadero; }
+            set { nombreInvernadero = value; }
+
+        }
+
+
+
         public TemperaturasConNombreInvernaderoYFecha()
         {
 
         }
-
-        /*public TemperaturasConNombreInvernaderoYFecha(ClsTemperaturasConNombreInvernaderoYFecha dto)
+        
+        public TemperaturasConNombreInvernaderoYFecha(ClsTemperaturasConNombreInvernaderoYFecha dto)
         {
             NombreInvernadero = dto.Invernadero.Nombre;
             Temperatura = dto.Temperatura;
             tempMAX = 0.5;
 
         }
-        */
-        public TemperaturasConNombreInvernaderoYFecha(int id, DateTime fecha)
+        //CAMBIAR el constructor del DTO para hacer lo mismo justo debajo para cambiarlo del Codigo Behind de la vista  ----------------------------------------------------------------------
+
+        /*public TemperaturasConNombreInvernaderoYFecha(int id, DateTime fecha)
         {
 
             try
@@ -52,8 +79,8 @@ namespace InverMAUI.VM
             {
                 throw new Exception("Error al montar el VM", ex);
             }
-           
-        }
+
+        }*/
 
     }
 }

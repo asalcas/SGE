@@ -51,12 +51,21 @@ progress {
     background-color: #707070;
     border-radius: 10px;
     border: none;
-    
+
+
+    /* ESTO ES BUSCADO POR GPT por que no me funcionaba en Chrome */
+    appearance: none;
+    -webkit-appearance: none;
 }
-progress::-webkit-progress-value { /* Es un seudoelemento para Chrome. safari... */
-    background-color: #4caf50;
-    border-radius: 10px;
-}
+    progress::-webkit-progress-bar {
+        background-color: #707070;
+        border-radius: 10px;
+    }
+
+    progress::-webkit-progress-value {
+        background-color: #f6d8a8;
+        border-radius: 10px;
+    }
 progress::-moz-progress-bar { /* Es un seudoelemento para Mozilla */
     background-color: #f6d8a8;
     border-radius: 10px;

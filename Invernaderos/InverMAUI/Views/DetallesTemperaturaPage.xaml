@@ -12,6 +12,9 @@
     <ContentPage.Resources>
         <converter:ConverterProgressBarHum x:Key="conversorHum"/>
         <converter:ConverterProgressBarTemp x:Key="conversorTemp"/>
+        <converter:ConverterProgressBarTempColor x:Key="conversorTempColor"/>
+        <converter:ConverterProgressTextHum x:Key="conversorTextoHum"/>
+        <converter:ConverterProgressTextTemp x:Key="conversorTextoTemp"/>
     </ContentPage.Resources>
     
     <VerticalStackLayout Margin="30" Spacing="20">
@@ -35,12 +38,13 @@
                     Spacing="20">
                     <Label Text="Temperatura a las 8:00 am:" />
                     <HorizontalStackLayout Spacing="10">
+                                                                                <!--      TEMP Y HUM CON CONVERTERS                                    -->
                         <ProgressBar x:Name="temp1Bar"  
-                                     Progress="{Binding DtoInvernadero.Temperatura.Temp1, Converter=conversorTemp, StringFormat=Empty'{0:F1} Cº'}"
-                                     ProgressColor="{Binding Temp1Color}"
+                                     Progress="{Binding Temperatura.Temp1, Converter={StaticResource conversorTemp}}" 
+                                     ProgressColor="{Binding Temperatura.Temp1, Converter={StaticResource conversorTempColor}}"
                                      HeightRequest="10"
                                      WidthRequest="130" />
-                        <Label Text="{Binding Temp1Texto}" />
+                        <Label Text="{Binding Temperatura.Temp1, Converter={StaticResource conversorTextoTemp}}" />
                     </HorizontalStackLayout>
                     
                 <!-- HUMEDAD 8.00 -->
@@ -51,12 +55,14 @@
                     </HorizontalStackLayout>
                     
                     <HorizontalStackLayout Spacing="10">
+                                                                                <!--      TEMP Y HUM CON CONVERTERS                                    -->
+
                         <ProgressBar x:Name="hum1Bar"  
-                            Progress="{Binding DtoInvernadero.Temperatura.Hum1, Converter=conversorHum, StringFormat='{0} %'}"
+                            Progress="{Binding Temperatura.Humedad1, Converter={StaticResource conversorHum}}"
                             ProgressColor="Cyan"
                             HeightRequest="10"
                             WidthRequest="130" />
-                        <Label Text="{Binding Hum1Texto}" />
+                        <Label Text="{Binding Temperatura.Humedad3, Converter={StaticResource conversorTextoHum}}" />
                     </HorizontalStackLayout>
                     
                 </VerticalStackLayout>
@@ -65,24 +71,14 @@
                 <VerticalStackLayout Spacing="20">
                     <Label Text="Temperatura a las 16:00 pm:" />
                     <HorizontalStackLayout Spacing="10">
+                                                                                <!--      TEMP Y HUM CON CONVERTERS                                    -->
                         <ProgressBar x:Name="temp2Bar"  
-                                     Progress="{Binding Temp2Bar}"
-                                     ProgressColor="{Binding Temp2Color}"
+                                     Progress="{Binding Temperatura.Temp2, Converter={StaticResource conversorTemp}}"
+                                     ProgressColor="{Binding Temperatura.Temp2, Converter={StaticResource conversorTempColor}}"
                                      HeightRequest="10"
                                      WidthRequest="140">
-                            <ProgressBar.Triggers>
-                                <DataTrigger TargetType="ProgressBar" Binding="{Binding Temp2Bar}" Value="0.7">
-                                    <Setter Property="ProgressColor" Value="Red" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="ProgressBar" Binding="{Binding Temp2Bar}" Value="0.3">
-                                    <Setter Property="ProgressColor" Value="Blue" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="ProgressBar" Binding="{Binding Temp2Bar}" Value="0.5">
-                                    <Setter Property="ProgressColor" Value="Green" />
-                                </DataTrigger>
-                            </ProgressBar.Triggers>
                         </ProgressBar>
-                        <Label Text="{Binding Temp2Texto}" />
+                        <Label Text="{Binding Temperatura.Temp2, Converter={StaticResource conversorTextoTemp}}" />
                     </HorizontalStackLayout>
                     <!-- HUMEDAD 16.00 -->
                     <HorizontalStackLayout 
@@ -92,12 +88,13 @@
                     </HorizontalStackLayout>
 
                     <HorizontalStackLayout Spacing="10">
+                                                                                <!--      TEMP Y HUM CON CONVERTERS                                    -->
                         <ProgressBar x:Name="hum2Bar"  
-                            Progress="{Binding Hum2Bar}"
+                            Progress="{Binding Temperatura.Humedad2, Converter={StaticResource conversorHum}}"
                             ProgressColor="Cyan"
                             HeightRequest="10"
                             WidthRequest="130" />
-                        <Label Text="{Binding Hum2Texto}" />
+                        <Label Text="{Binding Temperatura.Humedad2, Converter={StaticResource conversorTextoHum}}" />
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
 
@@ -105,24 +102,15 @@
                 <VerticalStackLayout Spacing="20">
                     <Label Text="Temperatura a las 00:00 am:" />
                     <HorizontalStackLayout Spacing="10">
+                                                                                <!--      TEMP Y HUM CON CONVERTERS                                    -->
                         <ProgressBar x:Name="temp3Bar"  
-                                     Progress="{Binding Temp3Bar}"
-                                     ProgressColor="{Binding Temp3Color}"
+                                     Progress="{Binding Temperatura.Temp3, Converter={StaticResource conversorTemp}}"
+                                     ProgressColor="{Binding Temperatura.Temp3, Converter={StaticResource conversorTempColor}}"
                                      HeightRequest="10"
                                      WidthRequest="130">
-                            <ProgressBar.Triggers>
-                                <DataTrigger TargetType="ProgressBar" Binding="{Binding Temp3Bar}" Value="0.7">
-                                    <Setter Property="ProgressColor" Value="Red" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="ProgressBar" Binding="{Binding Temp3Bar}" Value="0.3">
-                                    <Setter Property="ProgressColor" Value="Blue" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="ProgressBar" Binding="{Binding Temp3Bar}" Value="0.5">
-                                    <Setter Property="ProgressColor" Value="Green" />
-                                </DataTrigger>
-                            </ProgressBar.Triggers>
+                            
                         </ProgressBar>
-                        <Label Text="{Binding Temp3Texto}" />
+                        <Label Text="{Binding Temperatura.Temp3, Converter={StaticResource conversorTextoTemp}}" />
                     </HorizontalStackLayout>
                     <!-- HUMEDAD 00.00 -->
                     <HorizontalStackLayout 
@@ -132,12 +120,13 @@
                     </HorizontalStackLayout>
 
                     <HorizontalStackLayout Spacing="10">
+                                                                                 <!--      TEMP Y HUM CON CONVERTERS                                    -->
                         <ProgressBar x:Name="hum3Bar"  
-                            Progress="{Binding Hum3Bar}"
+                            Progress="{Binding Temperatura.Humedad3, Converter={StaticResource conversorHum}}"
                             ProgressColor="Cyan"
                             HeightRequest="10"
                             WidthRequest="130" />
-                        <Label Text="{Binding Hum3Texto}" />
+                        <Label Text="{Binding Temperatura.Humedad3, Converter={StaticResource conversorTextoHum}}"/>
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
 
