@@ -104,9 +104,24 @@ namespace Actividad2ASP.Controllers.API
         {
             IActionResult salida;
             Boolean actualizado = false;
+            ClsPersona personaNueva = new ClsPersona(id);
             try
             {
-                actualizado = BL.ManejadoraPersonasBL.actualizarPersonaBL(persona);
+
+                // Peruanada, pero claro como no tengo SET en el ID de la entidad Persona, y no he querido ponerlo, he decidido crear otro objeto, que si lo tenga
+                personaNueva.Nombre = persona.Nombre;
+                personaNueva.Apellidos = persona.Apellidos;
+                personaNueva.FechaNacimiento = persona.FechaNacimiento;
+                personaNueva.IdDept = persona.IdDept;
+                personaNueva.Direccion = persona.Direccion;
+                personaNueva.Foto = persona.Foto;
+                personaNueva.Telefono = persona.Telefono;
+
+                
+                if(id == personaNueva.ID)
+                {
+                    actualizado = BL.ManejadoraPersonasBL.actualizarPersonaBL(personaNueva);
+                }
 
                 if (actualizado)
                 {

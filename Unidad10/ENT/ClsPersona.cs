@@ -8,7 +8,7 @@ namespace ENT
         #region Propiedades autoimplementadas
 
         [Display(Name ="Identificador")]
-        [JsonPropertyName = "id"]
+        [JsonPropertyName("id")]
         public int ID { get; }
         public String Nombre { get; set; }
         public String Apellidos { get; set; }
