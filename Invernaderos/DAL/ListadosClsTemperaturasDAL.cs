@@ -101,7 +101,7 @@ namespace DAL
         /// <param name="fecha"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static Boolean comprobarFecha(DateTime fecha)
+        public static Boolean comprobarFecha( DateTime fecha)
         {
             Boolean encontrado = false;
             SqlConnection miConexion;
@@ -111,8 +111,9 @@ namespace DAL
             {
                 miConexion = ClsConexionDB.abrirConexionBD();
                 miComando.Connection = miConexion;
-                miComando.CommandText = "SELECT COUNT(*) FROM temperaturas WHERE fecha = @fecha";
+                miComando.CommandText = "SELECT COUNT(*) FROM temperaturas WHERE fecha = @fecha";// AND idInvernadero = @idInvernadero";
                 miComando.Parameters.Add("@fecha", System.Data.SqlDbType.Date).Value = fecha;
+                //miComando.Parameters.Add("@idInvernadero", System.Data.SqlDbType.Int).Value = idInvernadero;
 
                 numeroLineas = (int)miComando.ExecuteScalar();
                 

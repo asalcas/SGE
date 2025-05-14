@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ENT
 {
@@ -7,6 +8,7 @@ namespace ENT
         #region Propiedades autoimplementadas
 
         [Display(Name ="Identificador")]
+        [JsonPropertyName = "id"]
         public int ID { get; }
         public String Nombre { get; set; }
         public String Apellidos { get; set; }

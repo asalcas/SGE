@@ -31,58 +31,72 @@ namespace InvernASP.Controllers
             Boolean existe = false;
             List<ClsInvernadero> listadoInvernadero = new List<ClsInvernadero>();
             ViewBag.exito = "false"; // Condicion para poder cambiar estilos en la clase del mensaje que meteremos en el HTML
+            ClsInvernadero invernaderoParam;
+            ClsTemperatura temperaturaParam;
+            ClsTemperaturasConNombreInvernaderoYFecha dto;
 
+            ActionResult vista = View();
 
-            try
+            if(idInvernadero != 0)
             {
-                existe = BL.ListadoClsTemperaturaBL.comprobacionFecha(fechaSelected);
-            }
-            catch (Exception ex)
-            {
-
-                return View("Error");
-            }
-            
-
-
-            if (existe)
-            {
-                // Crear el objeto DTO y llevarlo a la vista, no se como hacerlo sin meter otro return aquí
-                ClsTemperaturasConNombreInvernaderoYFecha dto = new ClsTemperaturasConNombreInvernaderoYFecha();
-                ClsInvernadero invernaderoParam;
-                ClsTemperatura temperaturaParam;
                 try
                 {
-                    invernaderoParam = BL.ListaClsInvernaderoBL.obtenerInvernaderoPorID(idInvernadero);
-                    temperaturaParam = BL.ListadoClsTemperaturaBL.temperaturaPorInvernaderoYFecha(idInvernadero, fechaSelected);
-
-                }catch(Exception ex)
+                    existe = BL.ListadoClsTemperaturaBL.comprobacionFecha(fechaSelected);
+                }
+                catch (Exception ex)
                 {
-                    throw new Exception("Error al obtener los datos para el DTO", ex);
+
+                    vista = View("Error");
                 }
 
-                if (invernaderoParam != null && temperaturaParam != null)
-                {
-                    dto.Invernadero = invernaderoParam;
-                    dto.Temperatura = temperaturaParam;
-                    return View("VerTemperaturasYHumedad", dto);
-                }
 
-            }
-            
-            ViewBag.mensaje = "Error: Has seleccionado un invernadero/fecha no existente en nuestros registros, intentelo de nuevo con otros datos.";
-            try
-            {
-                listadoInvernadero = BL.ListaClsInvernaderoBL.obtenerTodosLosInvernaderosBL();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Ocurrió un error al volver a rellenar la lista", ex);
+
+                if (existe)
+                {
+                    // Crear el objeto DTO y llevarlo a la vista, no se como hacerlo sin meter otro return aquí
+                    dto = new ClsTemperaturasConNombreInvernaderoYFecha();
+
+                    try
+                    {
+                        invernaderoParam = BL.ListaClsInvernaderoBL.obtenerInvernaderoPorID(idInvernadero);
+                        temperaturaParam = BL.ListadoClsTemperaturaBL.temperaturaPorInvernaderoYFecha(idInvernadero, fechaSelected);
+
+                        if (invernaderoParam != null && temperaturaParam != null)
+                        {
+                            dto.Invernadero = invernaderoParam;
+                            dto.Temperatura = temperaturaParam;
+                            vista = View("VerTemperaturasYHumedad", dto);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        vista = View("Error");
+                    }
+
+                }
                 
             }
-            
+            else
+            {
+                // Si continuamos sin irnos a la vista correspondiente salta este ViewBag
+                ViewBag.mensaje = "Error: Has seleccionado un invernadero/fecha no existente en nuestros registros, intentelo de nuevo con otros datos.";
+                try
+                {
+                    listadoInvernadero = BL.ListaClsInvernaderoBL.obtenerTodosLosInvernaderosBL();
+                }
+                catch (Exception ex)
+                {
+                    vista = View("Error");
 
-            return View(listadoInvernadero);
+                }
+
+
+                vista = View(listadoInvernadero);
+            }
+
+            return vista;
+
+            
         }
 
 

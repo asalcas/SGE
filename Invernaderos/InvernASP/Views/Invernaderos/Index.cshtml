@@ -15,7 +15,7 @@
     <form method="post" asp-action="Index"> 
         <div class="divSelect">
             <select class="select" name="idInvernadero">
-                <option value="" disabled selected hidden> ELIGE UNA OPCIÓN </option>
+                <option value="0" disabled selected hidden> ELIGE UNA OPCIÓN </option>
                 @foreach (ClsInvernadero invernadero in Model)
                 {
                     <option value="@invernadero.IdInvernadero">@invernadero.Nombre</option>
