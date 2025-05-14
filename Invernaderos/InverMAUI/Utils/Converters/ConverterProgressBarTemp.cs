@@ -10,6 +10,14 @@ namespace InverMAUI.Utils.Converters
 {
     public class ConverterProgressBarTemp : IValueConverter
     {
+        /// <summary>
+        /// Función que se encarga de pasar una temperatura entre 10 y 55 cº para crear un rango de entre 0 y 1
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             double? temperatura = 0;
