@@ -1,6 +1,6 @@
 ﻿namespace ENT
 {
-    public class ClsPersonas
+    public class ClsPersona
     {
 
     }
