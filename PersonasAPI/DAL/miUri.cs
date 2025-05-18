@@ -14,7 +14,7 @@ namespace DAL
         /// <returns> String uriBase </returns>
         public static String getUriBase()
         {
-            String uriBase = "personasapi-hwfxccdpewgectck.spaincentral-01.azurewebsites.net/api/";
+            String uriBase = "https://personasapi-hwfxccdpewgectck.spaincentral-01.azurewebsites.net/api/";
 
             return uriBase;
         }

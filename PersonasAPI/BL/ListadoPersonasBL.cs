@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using System.Collections.ObjectModel;
+using DAL;
 using ENT;
 
 namespace BL
@@ -9,9 +10,10 @@ namespace BL
         /// Función que llamara llama a 'getListadoPersonasCompletoDAL' para traer una lista de Objetos Tipo 'ClsPersona'
         /// </summary>
         /// <returns></returns>
-        public static async Task<List<ClsPersona>> obtenerListaCompletaPersonasBL()
+        public static async Task<ObservableCollection<ClsPersona>> obtenerListaCompletaPersonasBL()
         {
-            return await ListadoPersonasDAL.getListadoPersonasCompletoDAL();
+            List<ClsPersona> listaPersonas = await ListadoPersonasDAL.getListadoPersonasCompletoDAL();
+            return new ObservableCollection<ClsPersona>(listaPersonas);
         }
     }
 }
