@@ -12,10 +12,13 @@ namespace MAUI.Models.ViewModels
     public class ListadoPersonasVM : INotifyPropertyChanged
     {
         #region Atributos
+
         private ObservableCollection<ClsPersona> listadoPersonas;
+        private ObservableCollection<ClsPersona> listadoAuxiliar;
         private String textoFiltro;
 
         public DelegateCommand miCommand;
+
         #endregion
 
         #region Propiedades
@@ -28,6 +31,12 @@ namespace MAUI.Models.ViewModels
         {
             get {  return listadoPersonas; }
         }
+        public ObservableCollection<ClsPersona> ListadoAuxiliar
+        {
+            get { return listadoAuxiliar; }
+            set { listadoAuxiliar = value; }
+        }
+        
 
         public String TextoFiltro
         {
@@ -88,28 +97,18 @@ namespace MAUI.Models.ViewModels
                 }
 
 
-            }/*
+            }
             else
             {
-                try
-                {
-                    // No puedo hacer esto por que se me queda pillado en ejecución, por que al final comienza con la cadena vacia y entra en bucle infinito
-                    listadoPersonas = await BL.ListadoPersonasBL.obtenerListaCompletaPersonasBL();
-                    OnPropertyChanged(nameof(ListadoPersonas));
-                }
-                catch (Exception ex)
-                {
-                    mostrarMensaje("Error:", "No ha sido posible el filtrado", "Entendido");
-
-                }
-
+                listadoPersonas = ListadoAuxiliar;
+                OnPropertyChanged(nameof(ListadoPersonas));
 
 
 
             
 
             }
-            */
+            
         }
         #endregion
 
@@ -131,7 +130,9 @@ namespace MAUI.Models.ViewModels
             try
             {
                 ObservableCollection<ClsPersona> listadoAsincronoPersonas = await BL.ListadoPersonasBL.obtenerListaCompletaPersonasBL();
+                
                 listadoPersonas = listadoAsincronoPersonas;
+                listadoAuxiliar = listadoAsincronoPersonas;
                 OnPropertyChanged(nameof(ListadoPersonas));
 
             }catch(Exception ex)
