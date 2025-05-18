@@ -68,6 +68,10 @@ namespace MAUI.Models.ViewModels
 
         #endregion
         #region Funciones
+        /// <summary>
+        /// Función que realizara una búsqueda en la lista con .Where para devolvernos los casos que contenga lo que guarda la variable 'textoFiltro'
+        /// </summary>
+        /// <returns></returns>
         private async Task filtrarPorNombre()
         {
             if (textoFiltro != string.Empty)
@@ -84,13 +88,13 @@ namespace MAUI.Models.ViewModels
                 }
 
 
-            }
+            }/*
             else
             {
                 try
                 {
                     // No puedo hacer esto por que se me queda pillado en ejecución, por que al final comienza con la cadena vacia y entra en bucle infinito
-                    //listadoPersonas = await BL.ListadoPersonasBL.obtenerListaCompletaPersonasBL();
+                    listadoPersonas = await BL.ListadoPersonasBL.obtenerListaCompletaPersonasBL();
                     OnPropertyChanged(nameof(ListadoPersonas));
                 }
                 catch (Exception ex)
@@ -102,9 +106,10 @@ namespace MAUI.Models.ViewModels
 
 
 
-
+            
 
             }
+            */
         }
         #endregion
 
