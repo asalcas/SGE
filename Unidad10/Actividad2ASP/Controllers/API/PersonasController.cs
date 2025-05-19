@@ -125,7 +125,7 @@ namespace Actividad2ASP.Controllers.API
 
                 if (actualizado)
                 {
-                    salida = Ok();
+                    salida = Ok("Persona insertada correctamente");
                 }
                 else
                 {

@@ -13,6 +13,7 @@
             Padding="50"
             Spacing="25">
             <Entry Placeholder="Buscar por nombre" Text ="{Binding TextoFiltro}"></Entry>
+            <ActivityIndicator Color="Red" IsVisible="{Binding Cargando}" IsRunning="{Binding Cargando}"></ActivityIndicator>
             <CollectionView ItemsSource="{Binding ListadoPersonas}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

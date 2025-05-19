@@ -1,7 +1,6 @@
 ﻿
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Threading.Tasks;
 using ENT;
 using ViewModels.utils;
 
@@ -16,6 +15,7 @@ namespace MAUI.Models.ViewModels
         private ObservableCollection<ClsPersona> listadoPersonas;
         private ObservableCollection<ClsPersona> listadoAuxiliar;
         private String textoFiltro;
+        private Boolean cargando;
 
         public DelegateCommand miCommand;
 
@@ -31,11 +31,7 @@ namespace MAUI.Models.ViewModels
         {
             get {  return listadoPersonas; }
         }
-        public ObservableCollection<ClsPersona> ListadoAuxiliar
-        {
-            get { return listadoAuxiliar; }
-            set { listadoAuxiliar = value; }
-        }
+        
         
 
         public String TextoFiltro
@@ -50,6 +46,11 @@ namespace MAUI.Models.ViewModels
                 }
             }
         }
+        public Boolean Cargando
+        {
+            get { return cargando; }
+            
+        }
 
         public DelegateCommand MiCommand
         {
@@ -61,8 +62,6 @@ namespace MAUI.Models.ViewModels
        
         public ListadoPersonasVM()
         {
-            listadoPersonas = new ObservableCollection<ClsPersona>();
-
             // Lambda:
             // - (): Son los parametros que recibirá
             // - async: Lo dice el nombre, marca la funcion como Asincrona
@@ -76,6 +75,7 @@ namespace MAUI.Models.ViewModels
 
 
         #endregion
+
         #region Funciones
         /// <summary>
         /// Función que realizara una búsqueda en la lista con .Where para devolvernos los casos que contenga lo que guarda la variable 'textoFiltro'
@@ -95,26 +95,23 @@ namespace MAUI.Models.ViewModels
                 {
                     mostrarMensaje("Error:", "No ha sido posible el filtrado", "Entendido");
                 }
-
-
             }
             else
             {
-                listadoPersonas = ListadoAuxiliar;
+                listadoPersonas = listadoAuxiliar;
                 OnPropertyChanged(nameof(ListadoPersonas));
 
-
-
-            
-
-            }
-            
+            } 
         }
         #endregion
 
-
         #region DisplayAlert
-
+        /// <summary>
+        /// TODO:
+        /// </summary>
+        /// <param name="cabecera"></param>
+        /// <param name="mensaje"></param>
+        /// <param name="confirmacion"></param>
         public async void mostrarMensaje(String cabecera, String mensaje, String confirmacion)
         {
             await Shell.Current.DisplayAlert(cabecera, mensaje, confirmacion);
@@ -129,15 +126,28 @@ namespace MAUI.Models.ViewModels
 
             try
             {
-                ObservableCollection<ClsPersona> listadoAsincronoPersonas = await BL.ListadoPersonasBL.obtenerListaCompletaPersonasBL();
-                
-                listadoPersonas = listadoAsincronoPersonas;
-                listadoAuxiliar = listadoAsincronoPersonas;
-                OnPropertyChanged(nameof(ListadoPersonas));
+                cargando = true;
+                OnPropertyChanged(nameof(Cargando));
+                ObservableCollection <ClsPersona> listadoAsincronoPersonas = new ObservableCollection<ClsPersona>(await BL.ListadoPersonasBL.obtenerListaCompletaPersonasBL());
+                if(listadoAsincronoPersonas.Count != 0)// RESPUESTA if 200)
+                {
+                    listadoAuxiliar = listadoAsincronoPersonas;
+                    listadoPersonas = listadoAuxiliar;
+                    OnPropertyChanged(nameof(ListadoPersonas));
+                    cargando = false;
+                    OnPropertyChanged(nameof(Cargando));
+                }
+                else
+                {
+                    mostrarMensaje("Error:", "No se pudo rellenar el listado", "Entendido");
 
-            }catch(Exception ex)
+                }
+
+
+            }
+            catch(Exception ex)
             {
-                mostrarMensaje("Error:", "El execute falló a la hora de actualizar la lista", "Entendido");
+                mostrarMensaje("Error:", "La Lista ", "Entendido");
             }
 
             

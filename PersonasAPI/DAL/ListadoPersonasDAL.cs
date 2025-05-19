@@ -8,6 +8,7 @@ namespace DAL
     {
         /// <summary>
         /// Función que se encarga de recoger un Json de la API en cuestión, para mas tarde deserializarlo y obtener una lista de tipo 'ClsPersona'
+        /// POST: ES UN LISTADO COMPLETO, O VACÍO
         /// </summary>
         /// <returns> List<ClsPersona> listadoPersonas </returns>
         /// <exception cref="Exception"></exception>
@@ -19,7 +20,7 @@ namespace DAL
 
             Uri uriAPI = new Uri($"{miCadenaURL}Personas"); // Esta es la cadena URL que usaremos para hacer la consulta (el equivalente a 'miConexion')
 
-            HttpClient miHttpClient; // Esto servirá para hacer la consulta web (muy parecido al 'miComando' donde le cargamos el 'miConexion'
+            HttpClient miHttpClient; // Esto servirá para hacer la consulta web (muy parecido al 'miComando' donde le cargamos el 'miConexion')
             HttpResponseMessage miCodigoRespuesta; // Esto sirve para recibir el mensaje del servidor a la consulta en cuestion ([200 Ok], [404 Not Found]...)
 
             String jsonRespuesta; // Esto será lo que recogerá la consulta
@@ -37,6 +38,10 @@ namespace DAL
 
                     listadoPersonas = JsonConvert.DeserializeObject<List<ClsPersona>>(jsonRespuesta); // DESERIALIZAMOS el JSON y lo convertimos en una Lista de tipo 'ClsPersona'
                 }
+                else
+                {
+                    throw new Exception("404");
+                }
 
             }
             catch (Exception ex)
@@ -49,3 +54,4 @@ namespace DAL
         }
     }
 }
+
