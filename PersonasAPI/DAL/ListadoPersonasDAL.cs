@@ -38,14 +38,12 @@ namespace DAL
 
                     listadoPersonas = JsonConvert.DeserializeObject<List<ClsPersona>>(jsonRespuesta); // DESERIALIZAMOS el JSON y lo convertimos en una Lista de tipo 'ClsPersona'
                 }
-                else
-                {
-                    throw new Exception("404");
-                }
+                
 
             }
             catch (Exception ex)
             {
+                throw new Exception("404");
                 throw new Exception("Error al obtener el JSON en getListadoPersonasCompletoDAL", ex);
             }
 

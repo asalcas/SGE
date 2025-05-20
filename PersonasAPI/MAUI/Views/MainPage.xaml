@@ -14,6 +14,7 @@
             Spacing="25">
             <Entry Placeholder="Buscar por nombre" Text ="{Binding TextoFiltro}"></Entry>
             <ActivityIndicator Color="Red" IsVisible="{Binding Cargando}" IsRunning="{Binding Cargando}"></ActivityIndicator>
+            <Label Text="{Binding MensajeListaVacia}"></Label>
             <CollectionView ItemsSource="{Binding ListadoPersonas}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

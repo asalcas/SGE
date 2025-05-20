@@ -16,7 +16,7 @@ namespace MAUI.Models.ViewModels
         private ObservableCollection<ClsPersona> listadoAuxiliar;
         private String textoFiltro;
         private Boolean cargando;
-
+        private String mensajeListaVacia = "";
         public DelegateCommand miCommand;
 
         #endregion
@@ -32,7 +32,10 @@ namespace MAUI.Models.ViewModels
             get {  return listadoPersonas; }
         }
         
-        
+        public String MensajeListaVacia
+        {
+            get { return mensajeListaVacia; }
+        }
 
         public String TextoFiltro
         {
@@ -137,20 +140,27 @@ namespace MAUI.Models.ViewModels
                     cargando = false;
                     OnPropertyChanged(nameof(Cargando));
                 }
-                else
+                else 
                 {
-                    mostrarMensaje("Error:", "No se pudo rellenar el listado", "Entendido");
-
+                    cargando = false;
+                    OnPropertyChanged(nameof(Cargando));
+                    mensajeListaVacia = "La lista está vacía";
+                    OnPropertyChanged(nameof(MensajeListaVacia));
                 }
 
 
             }
             catch(Exception ex)
             {
-                mostrarMensaje("Error:", "La Lista ", "Entendido");
+                if (ex.Message.Contains("404"))
+                {
+                    mostrarMensaje("Error:", "No se pudo rellenar el listado", "Entendido");
+                    OnPropertyChanged(nameof(mostrarMensaje));
+
+                }
             }
 
-            
+
         }
 
         #endregion
