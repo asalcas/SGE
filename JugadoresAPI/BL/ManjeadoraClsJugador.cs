@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ENT;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,9 +15,30 @@ namespace BL
         /// <param name="nombreJugador"></param>
         /// <param name="puntuacionJugador"></param>
         /// <returns></returns>
-        public static int insertarJugadorBL(String nombreJugador, int puntuacionJugador)
+        public static int insertarJugadorBL(ClsJugador jugador)
         {
-            return DAL.ManejadoraClsJugador.insertarJugadorDAL(nombreJugador, puntuacionJugador);
+            return DAL.ManejadoraClsJugador.insertarJugadorDAL(jugador);
+        }
+
+        /// <summary>
+        /// Funcion que sirve de puente para aplicar las reglas de negocio a un Update SQL antes de llegar a la DAL.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="jugador"></param>
+        /// <returns></returns>
+        public static int updateJugadorBL(ClsJugador jugador)
+        {
+            return DAL.ManejadoraClsJugador.updateUsuario(jugador);
+        }
+
+        /// <summary>
+        /// Funcion que sirve de puente para aplicar las reglas de negocio a un Delete SQL antes de llegar a la DAL.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int borrarJugadorBL(int id)
+        {
+            return DAL.ManejadoraClsJugador.deletePersona(id);
         }
     }
 }

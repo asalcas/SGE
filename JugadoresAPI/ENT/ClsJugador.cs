@@ -20,23 +20,23 @@
         public int PuntuacionJugador
         {
             get { return puntuacionJugador; }
+            set { puntuacionJugador = value; }
         }
 
         public ClsJugador()
         {
             // --
         }
-        public ClsJugador(int idPlayer, int playerScore)
+        public ClsJugador(int idPlayer)
         {
             this.idJugador = idPlayer;
-            this.puntuacionJugador = playerScore;
         }
 
         public ClsJugador(int idPlayer, String namePlayer, int playerScore)
         {
             this.idJugador = idPlayer;
-            this.nombreJugador = namePlayer;
-            this.puntuacionJugador = playerScore;
+            this.NombreJugador = namePlayer;
+            this.PuntuacionJugador = playerScore;
         }
     }
 }

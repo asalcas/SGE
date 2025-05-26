@@ -37,12 +37,13 @@ namespace DAL
                         {
                             idJugador = (int)miLector["idJugador"];
                         }
-                        if (miLector["puntuacionJugador"] != DBNull.Value)
-                        {
-                            puntuacionJugador = (int)miLector["puntuacionJugador"];
-                        }
+                        
 
-                        ClsJugador instanciaJugador = new ClsJugador(idJugador, puntuacionJugador);
+                        ClsJugador instanciaJugador = new ClsJugador(idJugador);
+
+                        if (miLector["puntuacionJugador"] != DBNull.Value)
+                        {instanciaJugador.PuntuacionJugador = (int)miLector["puntuacionJugador"];
+                        }
 
                         if (miLector["nombreJugador"] != DBNull.Value)
                         {
@@ -76,6 +77,9 @@ namespace DAL
         /// <exception cref="Exception"></exception>
         public static ClsJugador obtenerJugadorPorIDDAL(int id)
         {
+
+            // ESTO LO ESTOY HACIENDO POR PRACTICAR
+
             SqlConnection miConexion = new SqlConnection();
             SqlCommand miComando = new SqlCommand();
             SqlDataReader miLector;
@@ -100,12 +104,13 @@ namespace DAL
                         {
                             idJugador = (int)miLector["idJugador"];
                         }
+                        
+                        jugadorObtenido = new ClsJugador(idJugador);
+
                         if (miLector["puntuacionJugador"] != DBNull.Value)
                         {
-                            puntuacion = (int)miLector["puntuacionJugador"];
+                            jugadorObtenido.PuntuacionJugador = (int)miLector["puntuacionJugador"];
                         }
-                        
-                        jugadorObtenido = new ClsJugador(idJugador, puntuacion);
 
                         if (miLector["nombreJugador"] != DBNull.Value)
                         {
