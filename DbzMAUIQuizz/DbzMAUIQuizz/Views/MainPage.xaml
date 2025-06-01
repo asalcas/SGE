@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:DbzMAUIQuizz.Models.VM"
+             x:Class="DbzMAUIQuizz.MainPage">
+
+    <ContentPage.BindingContext>
+        <vm:PartidaQuizzVM></vm:PartidaQuizzVM>
+    </ContentPage.BindingContext>
+
+
+        <Grid>
+            <Grid>
+                <Image Source="fondo.jpg"
+                       Aspect="Center"
+                       HorizontalOptions="Fill"
+                       VerticalOptions="Fill"
+                        ></Image>
+            </Grid>
+            <Grid>
+                <Grid x:Name="Juego" BackgroundColor="Transparent" IsVisible="{Binding MostrarJuego}">
+                    <VerticalStackLayout>
+                        <HorizontalStackLayout Padding="30"
+                                               Background="#424242"
+                                               Spacing="115"
+                                               MinimumWidthRequest="400"
+                                               MaximumWidthRequest="600">
+                            <Label Text="{Binding Partida.Segundos}"
+                                   FontSize="35"
+                                   FontFamily="Arcade"
+                                   HorizontalOptions="Start"></Label>
+                            
+                            <!-- AQUI TENGO QUE METER UN ELEMENTO PARA HACER EL BINDING CON LA RONDA, quiza un atributo que sirva como indice en el timer-->
+                            <Label Text="RONDA 1" 
+                                   FontSize="35"
+                                   FontFamily="Arcade"
+                                   HorizontalOptions="Center"></Label>
+                            <Label
+                                Text="{Binding Partida.PuntosPartida}"
+                                   FontSize="35"
+                                   FontFamily="Arcade"
+                                   HorizontalOptions="End"></Label>
+                        <HorizontalStackLayout.Shadow>
+                            <Shadow></Shadow>
+                        </HorizontalStackLayout.Shadow>
+                    </HorizontalStackLayout>
+                        <Grid MinimumWidthRequest="400"
+                              MaximumWidthRequest="400"
+                              HeightRequest="400"
+                              BackgroundColor="#1b1b1b"
+                              Opacity="1"
+                              TranslationY="50">
+                        
+                            <Image Source="{Binding PreguntaActual.PersonajePregunta.FotoPersonaje}"
+                                   HorizontalOptions="Center"
+                                   MaximumHeightRequest="350"
+                                   >
+                                <Image.Shadow>
+                                    <Shadow/>
+                                </Image.Shadow>
+                            </Image>
+                        <Grid.Shadow>
+                            <Shadow Offset="0,50"></Shadow>
+                        </Grid.Shadow>
+                           
+                        </Grid>
+                        <CollectionView ItemsSource="{Binding PreguntaActual.Opciones}" 
+                                        SelectionMode="Single"
+                                        SelectedItem="{Binding PersonajeSelected}"
+                                        MinimumWidthRequest="500"
+                                        MaximumWidthRequest="500"
+                                        TranslationY="80">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="2" HorizontalItemSpacing="2" Span="2"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    
+                                    <Frame Padding="8"
+                                           HeightRequest="100"
+                                           BackgroundColor="#c4542d"
+                                           >
+                                        
+                                       
+                                        <Label Text="{Binding NombrePersonaje}"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalTextAlignment="Center"
+                                               FontFamily="Arcade"
+                                               FontSize="30"
+                                               TextColor="#d3d3d3"
+                                               ></Label>
+                                    
+                                    </Frame>
+                                </DataTemplate>
+
+                            </CollectionView.ItemTemplate>
+                        <CollectionView.Shadow>
+                            <Shadow 
+                                Brush="#703620"
+                                Radius="10"
+                                Offset="0,80"></Shadow>
+                        </CollectionView.Shadow>
+                        </CollectionView>
+
+                    </VerticalStackLayout>
+
+
+                </Grid>
+            </Grid>
+
+
+            <Border Stroke="#3e4249" StrokeThickness="10" StrokeShape="RoundRectangle"
+                BackgroundColor="#3e4249"
+                WidthRequest="400"
+                HeightRequest= "400"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                IsVisible="{Binding ShowPantallaAntesJuego}"
+                TranslationY="0">
+
+                <Grid x:Name="PantallaInicio" BackgroundColor="#3e4249"
+                    Opacity="0.8"
+                    WidthRequest="360"
+                    HeightRequest="360"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding ShowPantallaAntesJuego}"
+                      
+                    >
+
+
+                    <Label HorizontalOptions="Center" 
+                           Padding="10"
+                           FontSize="40"
+                           FontFamily="StandardDBZ"
+                           Text="REGLAS"
+                           
+                           TextColor="Orange">
+                        <Label.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="1,1"
+                                    Radius="1"
+                                ></Shadow>
+
+                        </Label.Shadow>
+
+                    </Label>
+
+                    <Label FontFamily="SourceCode" 
+                           FontSize="18"
+                           Text="Tienes que seleccionar una opción de las cuatro que aparecen debajo de la imagen, debes intentar acertar el nombre del Personaje que aparecerá en la imagen."
+                           Padding="30"
+                           TranslationY="40"
+                           MaximumWidthRequest="400"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"/>
+
+                    <Button MaximumHeightRequest="75"
+                            MaximumWidthRequest="125"
+                            FontSize="30"
+                            Text="Jugar"
+                            FontFamily="IzquierdaDBZ"
+                            TextColor="#1c1d1e"
+                            FontAttributes="Bold"
+                            BackgroundColor="Orange"
+                            TranslationY="100"
+                            Command="{Binding MiCommand}"
+                            IsVisible="{Binding ShowPantallaAntesJuego}"/>
+
+                </Grid>
+            </Border>
+
+
+        </Grid>
+
+
+    
+
+</ContentPage>
