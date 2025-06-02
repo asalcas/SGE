@@ -11,6 +11,8 @@ namespace DTO
     {
         private ObservableCollection<ClsPersonajeDBZ> opciones;
         private ClsPersonajeDBZ personajePregunta;
+        private bool esCorrecto;
+        private ClsPersonajeDBZ personajeSeleccionado;
 
         public ObservableCollection<ClsPersonajeDBZ> Opciones 
         { 

@@ -22,8 +22,6 @@ namespace DTO
 
         // en la partida tengo que comprobar en el VM que la respuesta sea igual a pregunta.personajeCorrecto
         private ObservableCollection<ClsPregunta> listadoPreguntas; // monto las preguntas con la lista del total 
-        private int segundos;
-        private int puntosPartida; // calculado, funcion que actua sobre puntosPartida directamente
 
         #endregion
 
@@ -42,14 +40,7 @@ namespace DTO
         {
             get { return listadoPreguntas; }
         }
-        public int Segundos
-        {
-            get { return segundos; }
-        }
-        public int PuntosPartida
-        {
-            get { return puntosPartida; }
-        }
+      
 
         #endregion
 
@@ -71,23 +62,9 @@ namespace DTO
             // 2 creamos 20 preguntas
             await crearPreguntas(ListadoPersonajesAleatorios, ListadoPersonajesCorrectos);
 
-
-
-
         }
-        public void asignarSegundos(int segundos)
-        {
-            this.segundos = segundos;
-        }
-
-        #region Asignar Puntos
-
-        public void asignarPuntos(int puntuacionJugador)
-        {
-            puntosPartida += puntuacionJugador;
-        }
-
-        #endregion
+       
+        
 
         #region Crear lista de preguntas
         /// <summary>

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:DbzMAUIQuizz.Models.VM"
+             xmlns:vm="clr-namespace:DbzMAUIQuizz.VM"
              x:Class="DbzMAUIQuizz.MainPage">
 
     <ContentPage.BindingContext>
@@ -22,21 +22,21 @@
                     <VerticalStackLayout>
                         <HorizontalStackLayout Padding="30"
                                                Background="#424242"
-                                               Spacing="115"
+                                               Spacing="100"
                                                MinimumWidthRequest="400"
                                                MaximumWidthRequest="600">
-                            <Label Text="{Binding Partida.Segundos}"
+                            <Label Text="{Binding Segundos}"
                                    FontSize="35"
                                    FontFamily="Arcade"
                                    HorizontalOptions="Start"></Label>
                             
                             <!-- AQUI TENGO QUE METER UN ELEMENTO PARA HACER EL BINDING CON LA RONDA, quiza un atributo que sirva como indice en el timer-->
-                            <Label Text="RONDA 1" 
+                            <Label Text="{Binding RondaPartida, StringFormat='RONDA {0}' }"
                                    FontSize="35"
                                    FontFamily="Arcade"
                                    HorizontalOptions="Center"></Label>
                             <Label
-                                Text="{Binding Partida.PuntosPartida}"
+                                Text="{Binding Puntos}"
                                    FontSize="35"
                                    FontFamily="Arcade"
                                    HorizontalOptions="End"></Label>
@@ -60,7 +60,7 @@
                                 </Image.Shadow>
                             </Image>
                         <Grid.Shadow>
-                            <Shadow Offset="0,50"></Shadow>
+                            <Shadow Offset="0,10"></Shadow>
                         </Grid.Shadow>
                            
                         </Grid>
@@ -75,18 +75,18 @@
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    
-                                    <Frame Padding="8"
+
+                                <Frame Padding="8"
                                            HeightRequest="100"
-                                           BackgroundColor="#c4542d"
-                                           >
-                                        
+                                           BackgroundColor="#c4542d" 
+                                    >
+                                        <!-- TENGO QUE HACER UN BINDING A ANCESTOR Tipo PreguntaActual.esCorrecto y usando un converter para el true en verde y el false se quede igual -->
                                        
                                         <Label Text="{Binding NombrePersonaje}"
                                                HorizontalTextAlignment="Center"
                                                VerticalTextAlignment="Center"
                                                FontFamily="Arcade"
-                                               FontSize="30"
+                                               FontSize="22"
                                                TextColor="#d3d3d3"
                                                ></Label>
                                     
@@ -98,7 +98,7 @@
                             <Shadow 
                                 Brush="#703620"
                                 Radius="10"
-                                Offset="0,80"></Shadow>
+                                Offset="0,10"></Shadow>
                         </CollectionView.Shadow>
                         </CollectionView>
 

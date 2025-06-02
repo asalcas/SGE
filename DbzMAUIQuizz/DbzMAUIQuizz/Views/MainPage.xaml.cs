@@ -1,4 +1,4 @@
-﻿using DbzMAUIQuizz.Models.VM;
+﻿using DbzMAUIQuizz.VM;
 using Plugin.Maui.Audio;
 
 namespace DbzMAUIQuizz

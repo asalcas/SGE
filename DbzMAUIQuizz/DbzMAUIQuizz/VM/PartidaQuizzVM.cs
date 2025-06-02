@@ -8,23 +8,57 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DbzMAUIQuizz.Models.VM
+namespace DbzMAUIQuizz.VM
 {
     public class PartidaQuizzVM : INotifyPropertyChanged
     {
         private ClsPartida partida;
         private ClsPregunta preguntaActual;
         private ClsPersonajeDBZ personajeSelected;
-        private Boolean mostrarJuego;
-        private Boolean showPantallaAntesJuego;
+
+
+        private bool mostrarJuego;
+        private bool showPantallaAntesJuego;
+
+        private string color;
+        private int segundos;
+        private int puntos;
+        private int rondaPartida;
+
         private DelegateCommand miCommand;
-        private String color;
+        
+
+        public int RondaPartida
+        {
+            get { return rondaPartida; }
+        }
+
+        public int Puntos
+        {
+            get { return puntos; }
+            set
+            {
+                puntos = value;
+                OnPropertyChanged(nameof(Puntos));
+            }
+        }
+        public int Segundos
+        {
+            get { return segundos; }
+            private set
+            {
+                segundos = value;
+                OnPropertyChanged(nameof(Segundos));
+            }
+        }
 
 
-        public String Color
+        public string Color
         {
             get { return color; }
-            set { color = value; }
+            set { color = value;
+                OnPropertyChanged(nameof(Color));
+            }
         }
 
         private IDispatcher dispatcher;
@@ -34,7 +68,7 @@ namespace DbzMAUIQuizz.Models.VM
             get { return dispatcher; }
             set { dispatcher = value; }
         }
-        
+
 
 
 
@@ -48,26 +82,35 @@ namespace DbzMAUIQuizz.Models.VM
         public ClsPregunta PreguntaActual
         {
             get { return preguntaActual; }
-            set { preguntaActual = value; }
+            set
+            {
+                preguntaActual = value;
+                OnPropertyChanged(nameof(PreguntaActual));
+
+            }
         }
-        
+
         public ClsPersonajeDBZ PersonajeSelected
         {
             get { return personajeSelected; }
             set { personajeSelected = value; }
         }
 
-        public Boolean ShowPantallaAntesJuego
+        public bool ShowPantallaAntesJuego
         {
             get { return showPantallaAntesJuego; }
-            set { showPantallaAntesJuego = value;
+            set
+            {
+                showPantallaAntesJuego = value;
                 OnPropertyChanged(nameof(ShowPantallaAntesJuego));
             }
         }
-        public Boolean MostrarJuego
+        public bool MostrarJuego
         {
             get { return mostrarJuego; }
-            set { mostrarJuego = value;
+            set
+            {
+                mostrarJuego = value;
                 OnPropertyChanged(nameof(MostrarJuego));
             }
         }
@@ -76,7 +119,7 @@ namespace DbzMAUIQuizz.Models.VM
             get { return miCommand; }
         }
 
-        
+
 
         public PartidaQuizzVM()
         {
@@ -84,14 +127,14 @@ namespace DbzMAUIQuizz.Models.VM
             MostrarJuego = false;
 
             partida = new ClsPartida();
-          
+
             miCommand = new DelegateCommand(() => empezarPartida());
             // meter el temporizador de 5 segundos
 
         }
-        
 
-        
+
+
 
         public async Task montarPartidita()
         {
@@ -103,10 +146,15 @@ namespace DbzMAUIQuizz.Models.VM
             int indicePregunta = 0;
             bool seguir = true;
             bool preguntaRespondida = false;
-            int segundos = 5;
+            Segundos = 5;
+            rondaPartida = 1;
+            Color = "#c4542d"; // mame
+            
 
+            OnPropertyChanged(nameof(RondaPartida));
             MostrarJuego = true;
             await montarPartidita();
+
 
             ShowPantallaAntesJuego = !ShowPantallaAntesJuego;
 
@@ -115,10 +163,13 @@ namespace DbzMAUIQuizz.Models.VM
                 MostrarJuego = true;
             }
 
-
-            Dispatcher.StartTimer(TimeSpan.FromSeconds(1), () =>
+            if (partida.ListadoPreguntas.Any())
             {
-                
+                PreguntaActual = partida.ListadoPreguntas[indicePregunta];
+            }
+
+            Dispatcher.StartTimer(TimeSpan.FromSeconds(1.5), () =>
+            {
                 if (indicePregunta >= partida.ListadoPreguntas.Count())
                 {
                     seguir = false;
@@ -126,15 +177,22 @@ namespace DbzMAUIQuizz.Models.VM
                 }
                 else
                 {
-                    
-                    if (PersonajeSelected != null && (!preguntaRespondida && PersonajeSelected == PreguntaActual.PersonajePregunta))
+
+                    if (PersonajeSelected != null && !preguntaRespondida && PersonajeSelected == PreguntaActual.PersonajePregunta)
                     {
-                        partida.asignarPuntos(segundos);
+
+                        puntos += Segundos;
+                        OnPropertyChanged(nameof(Puntos));
+                        Color = "#249344";
                         preguntaRespondida = true;
+
                     }
-                    if (segundos == 0 || preguntaRespondida)
+                    
+                    if (Segundos == 0 || preguntaRespondida)
                     {
                         indicePregunta++;
+                        rondaPartida++;
+                        OnPropertyChanged(nameof(RondaPartida));
 
                         if (indicePregunta >= partida.ListadoPreguntas.Count())
                         {
@@ -146,25 +204,23 @@ namespace DbzMAUIQuizz.Models.VM
                             OnPropertyChanged(nameof(PreguntaActual));
                         }
 
-                            
 
-                        segundos = 5;
-                        OnPropertyChanged(nameof(Partida.Segundos));
+                        Color = "#c4542d";
+                        Segundos = 5;
                         preguntaRespondida = false;
 
                     }
                     else
                     {
-                        segundos--;
-                        OnPropertyChanged(nameof(Partida.Segundos));
+                        Segundos--;
                     }
 
-                    partida.asignarSegundos(segundos);
+
                 }
 
                 return seguir;
             });
-          
+
         }
         #region Notify
         private void OnPropertyChanged(string propertyName)
