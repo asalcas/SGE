@@ -25,7 +25,7 @@ namespace DbzMAUIQuizz.VM
         private int rondaPartida;
 
         private DelegateCommand miCommand;
-        
+        private DelegateCommand insertarJugadoreConPuntuacion;
 
         public int RondaPartida
         {
@@ -151,6 +151,7 @@ namespace DbzMAUIQuizz.VM
             if (partida.ListadoPreguntas.Any())
             {
                 preguntaActual = partida.ListadoPreguntas[indicePregunta];
+                OnPropertyChanged(nameof(PreguntaActual));
             }
 
             Dispatcher.StartTimer(TimeSpan.FromSeconds(1.5), () =>
@@ -213,15 +214,7 @@ namespace DbzMAUIQuizz.VM
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void Start()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Stop()
-        {
-            throw new NotImplementedException();
-        }
+        
         #endregion
     }
 }

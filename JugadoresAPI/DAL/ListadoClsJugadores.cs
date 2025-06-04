@@ -8,7 +8,7 @@ namespace DAL
         /// <summary>
         /// Función que traerá una lista completa de objetos tipo 'ClsJugador' con todos los datos que tengamos en la Base de Datos
         /// PRE: None
-        /// POST: Si no hay datos la lista será VACÍA. Posibles estados: Llena/Vacía pero nunca Null
+        /// POST: Si no hay datos la lista será VACÍA. Posibles estados: Llena/Vacía pero nunca Null ORDENADA De forma Descendente
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
@@ -24,7 +24,7 @@ namespace DAL
             try
             {
                 miConexion = ClsConexion.abrirConexion();
-                miComando.CommandText = "SELECT * FROM Jugador;";
+                miComando.CommandText = "SELECT * FROM Jugador ORDER BY puntuacionJugador DESC;";
                 miComando.Connection = miConexion;
 
                 miLector = miComando.ExecuteReader();
