@@ -14,6 +14,11 @@ namespace DTO
         private bool esCorrecto;
         private ClsPersonajeDBZ personajeSeleccionado;
 
+        public ClsPersonajeDBZ PersonajeSeleccionado
+        {
+            get { return personajeSeleccionado; }
+            set { personajeSeleccionado = value; }
+        }
         public ObservableCollection<ClsPersonajeDBZ> Opciones 
         { 
             get { return opciones; } 

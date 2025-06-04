@@ -14,7 +14,6 @@ namespace DbzMAUIQuizz.VM
     {
         private ClsPartida partida;
         private ClsPregunta preguntaActual;
-        private ClsPersonajeDBZ personajeSelected;
 
 
         private bool mostrarJuego;
@@ -69,9 +68,6 @@ namespace DbzMAUIQuizz.VM
             set { dispatcher = value; }
         }
 
-
-
-
         public event PropertyChangedEventHandler? PropertyChanged;
         public event EventHandler Tick;
 
@@ -82,18 +78,7 @@ namespace DbzMAUIQuizz.VM
         public ClsPregunta PreguntaActual
         {
             get { return preguntaActual; }
-            set
-            {
-                preguntaActual = value;
-                OnPropertyChanged(nameof(PreguntaActual));
-
-            }
-        }
-
-        public ClsPersonajeDBZ PersonajeSelected
-        {
-            get { return personajeSelected; }
-            set { personajeSelected = value; }
+            
         }
 
         public bool ShowPantallaAntesJuego
@@ -165,7 +150,7 @@ namespace DbzMAUIQuizz.VM
 
             if (partida.ListadoPreguntas.Any())
             {
-                PreguntaActual = partida.ListadoPreguntas[indicePregunta];
+                preguntaActual = partida.ListadoPreguntas[indicePregunta];
             }
 
             Dispatcher.StartTimer(TimeSpan.FromSeconds(1.5), () =>
@@ -178,7 +163,7 @@ namespace DbzMAUIQuizz.VM
                 else
                 {
 
-                    if (PersonajeSelected != null && !preguntaRespondida && PersonajeSelected == PreguntaActual.PersonajePregunta)
+                    if (preguntaActual.PersonajeSeleccionado != null && !preguntaRespondida && preguntaActual.PersonajeSeleccionado == PreguntaActual.PersonajePregunta)
                     {
 
                         puntos += Segundos;
@@ -200,7 +185,7 @@ namespace DbzMAUIQuizz.VM
                         }
                         else
                         {
-                            PreguntaActual = partida.ListadoPreguntas[indicePregunta];
+                            preguntaActual = partida.ListadoPreguntas[indicePregunta];
                             OnPropertyChanged(nameof(PreguntaActual));
                         }
 
