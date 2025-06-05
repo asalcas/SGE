@@ -63,11 +63,7 @@ namespace DbzMAUIQuizz.VM
         public int Segundos
         {
             get { return PreguntaActual.Segundos; }
-            private set
-            {
-                PreguntaActual.Segundos = value;
-                OnPropertyChanged(nameof(Segundos));
-            }
+            
         }
 
 
@@ -178,7 +174,7 @@ namespace DbzMAUIQuizz.VM
                 OnPropertyChanged(nameof(PreguntaActual));
             }
 
-            Dispatcher.StartTimer(TimeSpan.FromSeconds(1.5), () =>
+            Dispatcher.StartTimer(TimeSpan.FromSeconds(1.5), () => // HACER POR TIMER NORMAL TODO ESTO
             {
                 if (indicePregunta >= partida.ListadoPreguntas.Count())
                 {
