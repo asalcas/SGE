@@ -16,10 +16,14 @@
         <div class="divSelect">
             <select class="select" name="idInvernadero">
                 <option value="0" disabled selected hidden> ELIGE UNA OPCIÓN </option>
-                @foreach (ClsInvernadero invernadero in Model)
+                @if (Model!= null)
                 {
-                    <option value="@invernadero.IdInvernadero">@invernadero.Nombre</option>
+                    @foreach (ClsInvernadero invernadero in Model)
+                    {
+                        <option value="@invernadero.IdInvernadero">@invernadero.Nombre</option>
+                    }
                 }
+                
             </select>
             <input class="dateSelected" type="date" name="fechaSelected" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
             <input class="buttonVerDatos" type="submit" value="VER RESULTADOS">

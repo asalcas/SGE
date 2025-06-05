@@ -9,11 +9,14 @@ namespace DTO
 {
     public class ClsPregunta
     {
+        #region Atributos
+
         private ObservableCollection<ClsPersonajeDBZ> opciones;
         private ClsPersonajeDBZ personajePregunta;
         private bool esCorrecto;
         private ClsPersonajeDBZ personajeSeleccionado;
 
+        #endregion
         public ClsPersonajeDBZ PersonajeSeleccionado
         {
             get { return personajeSeleccionado; }
@@ -40,6 +43,14 @@ namespace DTO
         {
             this.opciones = opciones;
             this.PersonajePregunta = personaje;
+        }
+
+        public bool comprobarEsCorrecto(ClsPersonajeDBZ personajeSeleccionado, ClsPersonajeDBZ personajePregunta)
+        {
+            Boolean esCorrecto;
+            esCorrecto = personajeSeleccionado == personajePregunta ?  true : false;
+            return esCorrecto;
+
         }
 
     }

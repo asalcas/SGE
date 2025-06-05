@@ -37,27 +37,17 @@ namespace InvernASP.Controllers
 
             ActionResult vista = View();
 
-            if(idInvernadero != 0)
+            if (idInvernadero != 0)
             {
                 try
                 {
                     existe = BL.ListadoClsTemperaturaBL.comprobacionFecha(fechaSelected);
-                }
-                catch (Exception ex)
-                {
-
-                    vista = View("Error");
-                }
-
-
-
-                if (existe)
-                {
-                    // Crear el objeto DTO y llevarlo a la vista, no se como hacerlo sin meter otro return aquí
-                    dto = new ClsTemperaturasConNombreInvernaderoYFecha();
-
-                    try
+                    if (existe)
                     {
+                        // Crear el objeto DTO y llevarlo a la vista, no se como hacerlo sin meter otro return aquí
+                        dto = new ClsTemperaturasConNombreInvernaderoYFecha();
+
+
                         invernaderoParam = BL.ListaClsInvernaderoBL.obtenerInvernaderoPorID(idInvernadero);
                         temperaturaParam = BL.ListadoClsTemperaturaBL.temperaturaPorInvernaderoYFecha(idInvernadero, fechaSelected);
 
@@ -68,42 +58,37 @@ namespace InvernASP.Controllers
                             vista = View("VerTemperaturasYHumedad", dto);
                         }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        vista = View("Error");
-                    }
+                        // Si continuamos sin irnos a la vista correspondiente salta este ViewBag
+                        ViewBag.mensaje = "Error: Has seleccionado un invernadero/fecha no existente en nuestros registros, intentelo de nuevo con otros datos.";
 
-                }
-                
-            }
-            else
-            {
-                // Si continuamos sin irnos a la vista correspondiente salta este ViewBag
-                ViewBag.mensaje = "Error: Has seleccionado un invernadero/fecha no existente en nuestros registros, intentelo de nuevo con otros datos.";
-                try
-                {
-                    listadoInvernadero = BL.ListaClsInvernaderoBL.obtenerTodosLosInvernaderosBL();
+                        listadoInvernadero = BL.ListaClsInvernaderoBL.obtenerTodosLosInvernaderosBL();
+
+
+                        // EN VEZ DE REPETIR EL MISMO CODIGO QUE EL INDEX REDIRECCIONO AL ACTION IN
+                        vista = View(listadoInvernadero);
+                    }
                 }
                 catch (Exception ex)
                 {
-                    vista = View("Error");
 
+                    vista = View("Error");
                 }
 
 
-                vista = View(listadoInvernadero);
+
+            }
+            else
+            {
+                ViewBag.mensaje = "Error: Has seleccionado un invernadero/fecha no existente en nuestros registros, intentelo de nuevo con otros datos.";
+                idInvernadero = 0;
             }
 
-            return vista;
+                return vista;
 
-            
         }
 
 
-        public ActionResult VerTemperaturasYHumedad( ClsTemperaturasConNombreInvernaderoYFecha dto)
-        {
-            return View(dto);
-        }
-        
     }
 }
