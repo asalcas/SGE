@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DbzMAUIQuizz.VM.RankingPage"
+             xmlns:vm ="clr-namespace:DbzMAUIQuizz.VM"
+             Title="RankingPage">
+    <ContentPage.BindingContext>
+        <vm:RankingJugadoresPageVM/>
+    </ContentPage.BindingContext>
+    
+    <VerticalStackLayout>
+        <CollectionView ItemsSource="{Binding Jugadores}" >
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame>
+                        <HorizontalStackLayout>
+
+                            <Label Text="{Binding NombreJugador}"></Label>
+                            <Label Text="{Binding PuntuacionJugador}"></Label>
+                            
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

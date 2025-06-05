@@ -32,6 +32,8 @@ namespace DAL
                     textoJsonRespuesta = await miNavegador.GetStringAsync(miEnlace);
                     JObject objetoJson = JObject.Parse(textoJsonRespuesta);
 
+                    miNavegador.Dispose();
+
                     listadoPersonajesDBZ = objetoJson["items"].ToObject<List<ClsPersonajeDBZ>>();
                     // TENGO UN ERROR AL DESERIALIZAR DESDE LA API, por que no son objetos, es un array de objetos
                 }

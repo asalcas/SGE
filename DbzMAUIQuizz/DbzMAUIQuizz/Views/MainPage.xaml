@@ -156,9 +156,8 @@
                            HorizontalTextAlignment="Center"/>
 
                     <Button MaximumHeightRequest="75"
-                            MaximumWidthRequest="125"
+                            MaximumWidthRequest="100"
                             FontSize="30"
-                            Padding="15"
                             Text="Jugar"
                             FontFamily="IzquierdaDBZ"
                             TextColor="#1c1d1e"
@@ -168,11 +167,106 @@
                             Command="{Binding MiCommand}"
                             IsVisible="{Binding ShowPantallaAntesJuego}"/>
 
-                </Grid>
-            </Border>
+                <Button MaximumHeightRequest="75"
+                        MaximumWidthRequest="100"
+                        FontSize="30"
+                        Text="Jugar"
+                        FontFamily="IzquierdaDBZ"
+                        TextColor="#1c1d1e"
+                        FontAttributes="Bold"
+                        BackgroundColor="Purple"
+                        TranslationY="100"
+                        TranslationX="100"
+                        Command="{Binding VerRanking}"
+                        IsVisible="{Binding ShowPantallaAntesJuego}"/>
 
+            </Grid>
+            
+            </Border>
+            
+            
+            
+            
+        <Grid x:Name="NuevaPuntuacion"
+        BackgroundColor="#3e4249"
+        Opacity="0.8"
+        WidthRequest="360"
+        HeightRequest="360"
+        VerticalOptions="Center"
+        HorizontalOptions="Center"
+        IsVisible="{Binding FinalGame}">
+            <Label HorizontalOptions="Center" 
+           Padding="10"
+           FontSize="40"
+           FontFamily="StandardDBZ"
+           Text="¿GUARDAS TU PUNTUACION?" 
+           
+           TextColor="Orange">
+                <Label.Shadow>
+                    <Shadow Brush="Black"
+                    Offset="1,1"
+                    Radius="1"
+    ></Shadow>
+
+                </Label.Shadow>
+
+            </Label>
+
+            <Entry 
+                Text="{Binding NombreJugador}"
+                FontFamily="Arcade"
+                MaximumHeightRequest="50"
+                MaximumWidthRequest="110"
+                MaxLength="3"
+                FontSize="30"
+                TranslationX="-100"
+                TranslationY="-20"
+                IsVisible="{Binding FinalGame}">
+            </Entry>
+
+
+            <Label
+                Text="{Binding Puntos, StringFormat='{0} ptos.'}"
+                FontSize="30"
+                TranslationX="160"
+                TranslationY="145"
+                
+                FontFamily="Arcade"
+                IsVisible="{Binding FinalGame}"/>
+            
+            
+            
+            
+            <Button MaximumHeightRequest="75"
+            MaximumWidthRequest="100"
+            FontSize="30"
+            Text="Sí"
+            FontFamily="IzquierdaDBZ"
+            TextColor="#1c1d1e"
+            FontAttributes="Bold"
+            BackgroundColor="LightSeaGreen"
+            TranslationY="100"
+                    TranslationX="-60"
+            Command="{Binding MiCommand}"
+            IsVisible="{Binding FinalGame}"/>
+
+            <Button MaximumHeightRequest="75"
+            MaximumWidthRequest="100"
+            FontSize="30"
+            Text="No"
+            FontFamily="IzquierdaDBZ"
+            TextColor="#1c1d1e"
+            FontAttributes="Bold"
+            BackgroundColor="IndianRed"
+            TranslationY="100"
+            TranslationX="70"
+            Command="{Binding VerRanking}"
+            IsVisible="{Binding FinalGame}"/>
 
         </Grid>
+
+
+    </Grid>
 
 
     

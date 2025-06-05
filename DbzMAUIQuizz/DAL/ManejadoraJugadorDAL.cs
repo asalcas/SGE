@@ -11,13 +11,19 @@ namespace DAL
 {
     public class ManejadoraJugadorDAL
     {
-        public async Task<HttpStatusCode> insertarPuntuacionJugadorDAL(ClsJugador jugador)
+        /// <summary>
+        /// Función que se encargará de hacer un POST en la base de datos a través de una API para introducir nuevos registros de Puntuaciones 
+        /// </summary>
+        /// <param name="jugador"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static async Task<HttpStatusCode> insertarPuntuacionJugadorDAL(ClsJugador jugador)
         {
             HttpClient miNavegador = new HttpClient();
             string datosIntroducir;
             HttpContent contenido;
 
-            String miCadenaUri = ClsUris.uriInsercionJugadores();
+            String miCadenaUri = ClsUris.uriJugadores();
             Uri miUri = new Uri(miCadenaUri);
 
             HttpResponseMessage respuestaObtenida = new HttpResponseMessage();
