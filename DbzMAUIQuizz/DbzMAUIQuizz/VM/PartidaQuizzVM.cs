@@ -62,30 +62,18 @@ namespace DbzMAUIQuizz.VM
         }
         public int Segundos
         {
-            get { return segundos; }
+            get { return PreguntaActual.Segundos; }
             private set
             {
-                segundos = value;
+                PreguntaActual.Segundos = value;
                 OnPropertyChanged(nameof(Segundos));
             }
         }
 
 
-        public string Color
-        {
-            get { return color; }
-            set { color = value;
-                OnPropertyChanged(nameof(Color));
-            }
-        }
+        
 
-        private IDispatcher dispatcher;
-
-        public IDispatcher Dispatcher
-        {
-            get { return dispatcher; }
-            set { dispatcher = value; }
-        }
+        
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public event EventHandler Tick;
@@ -104,9 +92,9 @@ namespace DbzMAUIQuizz.VM
         {
             get { return finalGame; }
             // Segun GPT si no hago un Setter no puede funcionar, preguntar a Fernando
-            set { finalGame = value;
-                OnPropertyChanged(nameof(FinalGame));
-            }
+            //set { finalGame = value;
+                //OnPropertyChanged(nameof(FinalGame));
+            //}
             
         }
         public bool ShowPantallaAntesJuego
@@ -127,6 +115,8 @@ namespace DbzMAUIQuizz.VM
                 OnPropertyChanged(nameof(MostrarJuego));
             }
         }
+
+        #region Propiedades Commands
         public DelegateCommand MiCommand
         {
             get { return miCommand; }
@@ -140,7 +130,9 @@ namespace DbzMAUIQuizz.VM
         {
             get { return insertarJugadoreConPuntuacion; }
         }
+        #endregion
 
+        #region Constructor
         public PartidaQuizzVM()
         {
             ShowPantallaAntesJuego = true;
@@ -155,23 +147,17 @@ namespace DbzMAUIQuizz.VM
             insertarJugadoreConPuntuacion = new DelegateCommand(() => insertarJugador(Jugador));
 
         }
+        #endregion
 
-
-
-
-        public async Task montarPartidita()
-        {
-            await partida.montarPartida();
-        }
 
         private async Task empezarPartida()
         {
             int indicePregunta = 0;
             bool seguir = true;
             bool preguntaRespondida = false;
-            Segundos = 5;
+            segundos = 5;
             rondaPartida = 1;
-            Color = "#c4542d"; // mame
+            //Color = "#c4542d"; // mame
             
 
             OnPropertyChanged(nameof(RondaPartida));
@@ -213,12 +199,12 @@ namespace DbzMAUIQuizz.VM
 
                         puntos += Segundos;
                         OnPropertyChanged(nameof(Puntos));
-                        Color = "#249344";
+                        //Color = "#249344";
                         preguntaRespondida = true;
 
                     }
                     
-                    if (Segundos == 0 || preguntaRespondida)
+                    if (segundos == 0 || preguntaRespondida)
                     {
                         indicePregunta++;
                         rondaPartida++;
@@ -236,7 +222,7 @@ namespace DbzMAUIQuizz.VM
 
 
                         Color = "#c4542d";
-                        Segundos = 5;
+                        segundos = 5;
                         preguntaRespondida = false;
 
                     }
@@ -255,6 +241,12 @@ namespace DbzMAUIQuizz.VM
             
         }
 
+        #region Task 
+        public async Task montarPartidita()
+        {
+            await partida.montarPartida();
+        }
+
 
         private async Task insertarJugador(ClsJugador jugador)
         {
@@ -267,6 +259,8 @@ namespace DbzMAUIQuizz.VM
         {
             await Application.Current.MainPage.Navigation.PushAsync(new RankingPage());
         }
+
+        #endregion
 
         #region Notify
         private void OnPropertyChanged(string propertyName)

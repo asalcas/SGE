@@ -10,10 +10,7 @@ namespace DbzMAUIQuizz
         public MainPage()
         {
             InitializeComponent();
-            if(this.BindingContext is PartidaQuizzVM vm)
-            {
-                vm.Dispatcher = this.Dispatcher;
-            }
+           
         }
 
     }

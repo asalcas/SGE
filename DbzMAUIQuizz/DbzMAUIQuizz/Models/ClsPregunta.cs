@@ -15,6 +15,7 @@ namespace DTO
         private ClsPersonajeDBZ personajePregunta;
         private bool esCorrecto;
         private ClsPersonajeDBZ personajeSeleccionado;
+        private int segundos;
 
         #endregion
         public ClsPersonajeDBZ PersonajeSeleccionado
@@ -34,6 +35,11 @@ namespace DTO
             set {  personajePregunta = value; }
         }
 
+        public int Segundos
+        {
+            get { return segundos; }
+        }
+
         public ClsPregunta()
         {
             
@@ -43,15 +49,21 @@ namespace DTO
         {
             this.opciones = opciones;
             this.PersonajePregunta = personaje;
+            this.segundos = 5;
         }
 
+        /// <summary>
+        /// Función que comprobará si los objetos pasados a la función son iguales
+        /// </summary>
+        /// <param name="personajeSeleccionado"></param>
+        /// <param name="personajePregunta"></param>
+        /// <returns></returns>
         public bool comprobarEsCorrecto(ClsPersonajeDBZ personajeSeleccionado, ClsPersonajeDBZ personajePregunta)
         {
             Boolean esCorrecto;
-            esCorrecto = personajeSeleccionado == personajePregunta ?  true : false;
+            esCorrecto = personajeSeleccionado == personajePregunta ? true : false;
             return esCorrecto;
 
         }
-
     }
 }
