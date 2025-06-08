@@ -12,22 +12,36 @@ namespace DbzMAUIQuizz.VM
 {
     public class RankingJugadoresPageVM : INotifyPropertyChanged
     {
+        #region Atributos
 
         ObservableCollection<ClsJugador> jugadores;
 
-        DelegateCommand jugar;
+        private DelegateCommand actualizarListado;
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        #endregion
 
+        #region Propiedades
         public ObservableCollection<ClsJugador> Jugadores
         {
             get { return jugadores; }
         }
 
+        public DelegateCommand ActualizarListado
+        {
+            get { return actualizarListado; }
+        }
+
+        #endregion
+
+        #region Constructores
         public RankingJugadoresPageVM()
         {
             rellenarJugadoresListado();
+
+            actualizarListado = new DelegateCommand(rellenarJugadoresListado);
         }
+
+        #endregion
 
         #region Funciones del VM
         /// <summary>
@@ -38,6 +52,13 @@ namespace DbzMAUIQuizz.VM
             jugadores = new ObservableCollection<ClsJugador>(await BL.ListadoRankingJugadoresBL.obtenerListadoOrdenadoJugadoresBL());
             OnPropertyChanged(nameof(Jugadores));
         }
+
+
+        #endregion
+
+        #region Notify
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
         {

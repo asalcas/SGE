@@ -12,110 +12,82 @@ namespace DbzMAUIQuizz.VM
 {
     public class PartidaQuizzVM : INotifyPropertyChanged
     {
+
+        #region Atributos
+
         private ClsPartida partida;
-        private ClsPregunta preguntaActual;
-
-
-        private bool mostrarJuego;
-        private bool showPantallaAntesJuego;
-        private bool finalGame;
-
-        private string color;
-        private String nombreJugador = "";
-        private int segundos;
-        private int puntos;
-        private int rondaPartida;
-
-        private DelegateCommand miCommand;
-        private DelegateCommand verRanking;
-        private DelegateCommand insertarJugadoreConPuntuacion;
 
         private ClsJugador jugador;
 
-        public ClsJugador Jugador
+        private DelegateCommand comenzar;
+
+        private DelegateCommand verRanking;
+
+        private DelegateCommand insertarJugadoreConPuntuacion;
+
+        private DelegateCommand inicio;
+
+        private String nombreJugador;
+
+        #region Atributos/Propiedades para mostrar cosas en la UI
+
+        private String mensaje;
+
+        private Boolean verMensaje;
+
+        private Boolean verPantallaInicio;
+
+        private Boolean verJuego;
+
+        private Boolean verEndGame;
+
+        public String Mensaje
+        {
+            get { return mensaje; }
+        }
+        public Boolean VerMensaje
+        {
+            get { return verMensaje; }
+        }
+        public Boolean VerPantallaInicio
+        {
+            get { return verPantallaInicio; }
+        }
+        public Boolean VerJuego
+        {
+            get { return verJuego; }
+        }
+        public Boolean VerEndGame
+        {
+            get { return verEndGame; }
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Propiedades
+
+        public ClsPartida Partida
+        {
+            get {  return partida; }
+        }
+
+        public ClsJugador Jugador 
         {
             get { return jugador; }
-            set { jugador = value; }
         }
 
         public String NombreJugador
         {
             get { return nombreJugador; }
-            set { nombreJugador = value;
-                OnPropertyChanged(nameof(NombreJugador));
-            }
-        }
-
-        public int RondaPartida
-        {
-            get { return rondaPartida; }
-        }
-
-        public int Puntos
-        {
-            get { return puntos; }
-            private set
-            {
-                puntos = value;
-                OnPropertyChanged(nameof(Puntos));
-            }
-        }
-        public int Segundos
-        {
-            get { return PreguntaActual.Segundos; }
-            
-        }
-
-
-        
-
-        
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public event EventHandler Tick;
-
-        public ClsPartida Partida
-        {
-            get { return partida; }
-        }
-        public ClsPregunta PreguntaActual
-        {
-            get { return preguntaActual; }
-            
-        }
-
-        public bool FinalGame
-        {
-            get { return finalGame; }
-            // Segun GPT si no hago un Setter no puede funcionar, preguntar a Fernando
-            //set { finalGame = value;
-                //OnPropertyChanged(nameof(FinalGame));
-            //}
-            
-        }
-        public bool ShowPantallaAntesJuego
-        {
-            get { return showPantallaAntesJuego; }
-            set
-            {
-                showPantallaAntesJuego = value;
-                OnPropertyChanged(nameof(ShowPantallaAntesJuego));
-            }
-        }
-        public bool MostrarJuego
-        {
-            get { return mostrarJuego; }
-            set
-            {
-                mostrarJuego = value;
-                OnPropertyChanged(nameof(MostrarJuego));
-            }
+            set { nombreJugador = value; }
         }
 
         #region Propiedades Commands
-        public DelegateCommand MiCommand
+        public DelegateCommand Comenzar
         {
-            get { return miCommand; }
+            get { return comenzar; }
         }
         public DelegateCommand VerRanking
         {
@@ -126,145 +98,135 @@ namespace DbzMAUIQuizz.VM
         {
             get { return insertarJugadoreConPuntuacion; }
         }
+
+        public DelegateCommand Inicio
+        {
+            get { return inicio; }
+        }
+        
         #endregion
 
-        #region Constructor
+        #endregion
+
+        #region Constructores
+
         public PartidaQuizzVM()
         {
-            ShowPantallaAntesJuego = true;
-            MostrarJuego = false;
-            finalGame = false;
+            // Valores por defecto para VER en la UI
 
-            partida = new ClsPartida();
+            verPantallaInicio = true;
+            verJuego = false;
+            verEndGame = false;
+
+            // -----------------------------------
+
             jugador = new ClsJugador();
-
-            miCommand = new DelegateCommand(() => empezarPartida());
-            verRanking = new DelegateCommand(() => navegarRanking());
-            insertarJugadoreConPuntuacion = new DelegateCommand(() => insertarJugador(Jugador));
+            partida = new ClsPartida();
+            comenzar = new DelegateCommand(jugar);
+            verRanking = new DelegateCommand(navegacionRank);
+            insertarJugadoreConPuntuacion = new DelegateCommand(insertarUsuario);
+            inicio = new DelegateCommand(navegarJuego);
 
         }
+
         #endregion
 
+        #region UI
 
-        private async Task empezarPartida()
+        #region Commands
+
+        /// <summary>
+        /// Va a ser lo que haga nuestro boton JUGAR en la UI
+        /// </summary>
+        private async void jugar()
         {
-            int indicePregunta = 0;
-            bool seguir = true;
-            bool preguntaRespondida = false;
-            segundos = 5;
-            rondaPartida = 1;
-            //Color = "#c4542d"; // mame
-            
+            verPantallaInicio = false;
+            OnPropertyChanged(nameof(VerPantallaInicio));
 
-            OnPropertyChanged(nameof(RondaPartida));
-            MostrarJuego = true;
-            await montarPartidita();
+            verJuego = true;
+            OnPropertyChanged(nameof(VerJuego));
 
-
-            ShowPantallaAntesJuego = !ShowPantallaAntesJuego;
-
-            if (!ShowPantallaAntesJuego)
-            {
-                MostrarJuego = true;
-            }
-
-            if (partida.ListadoPreguntas.Any())
-            {
-                preguntaActual = partida.ListadoPreguntas[indicePregunta];
-                OnPropertyChanged(nameof(PreguntaActual));
-            }
-
-            Dispatcher.StartTimer(TimeSpan.FromSeconds(1.5), () => // HACER POR TIMER NORMAL TODO ESTO
-            {
-                if (indicePregunta >= partida.ListadoPreguntas.Count())
-                {
-                    seguir = false;
-
-                    if (!FinalGame)
-                    {
-                        finalGame = true;
-                        MostrarJuego = false;
-                    }
-
-                }
-                else
-                {
-
-                    if (preguntaActual.PersonajeSeleccionado != null && !preguntaRespondida && preguntaActual.PersonajeSeleccionado == PreguntaActual.PersonajePregunta)
-                    {
-
-                        puntos += Segundos;
-                        OnPropertyChanged(nameof(Puntos));
-                        //Color = "#249344";
-                        preguntaRespondida = true;
-
-                    }
-                    
-                    if (segundos == 0 || preguntaRespondida)
-                    {
-                        indicePregunta++;
-                        rondaPartida++;
-                        OnPropertyChanged(nameof(RondaPartida));
-
-                        if (indicePregunta >= partida.ListadoPreguntas.Count())
-                        {
-                            seguir = false;
-                        }
-                        else
-                        {
-                            preguntaActual = partida.ListadoPreguntas[indicePregunta];
-                            OnPropertyChanged(nameof(PreguntaActual));
-                        }
-
-
-                        Color = "#c4542d";
-                        segundos = 5;
-                        preguntaRespondida = false;
-
-                    }
-                    else
-                    {
-                        Segundos--;
-                    }
-
-
-                }
-
-                return seguir;
-            });
-            jugador.NombreJugador = NombreJugador;
-            jugador.PuntuacionJugador = puntos;
-            
+            await preparaPartida();
         }
 
-        #region Task 
-        public async Task montarPartidita()
-        {
-            await partida.montarPartida();
-        }
-
-
-        private async Task insertarJugador(ClsJugador jugador)
-        {
-
-            //await BL.ManejadoraJugadorBL.insertarPuntuacionJugadorBL(jugador);
-
-        }
-            
-        private async Task navegarRanking()
+        /// <summary>
+        /// Va a ser lo que haga nuestro boton RANKING en la UI
+        /// </summary>
+        private async void navegacionRank()
         {
             await Application.Current.MainPage.Navigation.PushAsync(new RankingPage());
         }
 
+        /// <summary>
+        /// Va a ser lo que haga nuestro boton GUARDAR PUNTUACION en la UI (EndGame)
+        /// </summary>
+        private async void insertarUsuario()
+        {
+            
+            if(!string.IsNullOrWhiteSpace(NombreJugador)) // Mirado en Internet, para que no me deje un nombre asi: ""
+            {
+                jugador.PuntuacionJugador = partida.PuntosTotales;
+                jugador.NombreJugador = NombreJugador;
+
+                await BL.ManejadoraJugadorBL.insertarPuntuacionJugadorBL(jugador);
+
+                mensaje = "Usuario añadido con éxito";
+                OnPropertyChanged(nameof(Mensaje));
+                verMensaje = true;
+            }
+            else
+            {
+                mensaje = "Debes introducir correctamente tu NICK o iniciales.";
+                OnPropertyChanged(nameof(Mensaje));
+                verMensaje = true;
+
+            }
+
+        }
+
+        private async void navegarJuego()
+        {
+            verPantallaInicio = true;
+            OnPropertyChanged(nameof(VerPantallaInicio));
+
+            verJuego = false;
+            OnPropertyChanged(nameof(VerJuego));
+
+            verMensaje = false;
+            OnPropertyChanged(nameof(VerMensaje));
+
+            jugador = new ClsJugador();
+            OnPropertyChanged(nameof(Jugador));
+
+            partida = new ClsPartida();
+            OnPropertyChanged(nameof(Partida));
+
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Funciones para que la partida funcione
+
+        private async Task preparaPartida()
+        {
+            await partida.montarPartida();
+            await partida.empezarPartida();
+        }
+
+
         #endregion
 
         #region Notify
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        
         #endregion
     }
 }

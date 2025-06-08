@@ -2,13 +2,22 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:DbzMAUIQuizz.VM"
+             xmlns:converter="clr-namespace:DbzMAUIQuizz.Models.Converters"
+             xmlns:animations="clr-namespace:AlohaKit.Animations;assembly=AlohaKit.Animations"
              x:Class="DbzMAUIQuizz.MainPage">
 
     <ContentPage.BindingContext>
         <vm:PartidaQuizzVM></vm:PartidaQuizzVM>
     </ContentPage.BindingContext>
 
-
+    <ContentPage.Resources>
+        <converter:ConverterSeleccionado x:Key="ConversorSeleccion"></converter:ConverterSeleccionado>
+        <converter:ConverterRondas x:Key="ConversorRondas"></converter:ConverterRondas>
+        <animations:ShakeAnimation x:Key="ShakeOnPointsChange"
+                           Duration="500"
+                           Easing="SinInOut" />
+    </ContentPage.Resources>
+    
         <Grid>
             <Grid>
                 <Image Source="fondo.jpg"
@@ -18,25 +27,28 @@
                         ></Image>
             </Grid>
             <Grid>
-                <Grid x:Name="Juego" BackgroundColor="Transparent" IsVisible="{Binding MostrarJuego}">
+                <Grid x:Name="Juego" BackgroundColor="Transparent" IsVisible="{Binding VerJuego}">
                     <VerticalStackLayout>
                         <HorizontalStackLayout Padding="30"
                                                Background="#424242"
                                                Spacing="95"
                                                MinimumWidthRequest="400"
                                                MaximumWidthRequest="600">
-                            <Label Text="{Binding Segundos}"
+                            <Label Text="{Binding Partida.SegundosPorPregunta}"
                                    FontSize="35"
                                    FontFamily="Arcade"
-                                   HorizontalOptions="Start"></Label>
+                                   HorizontalOptions="Start"
+                                   ></Label>
                             
                             <!-- AQUI TENGO QUE METER UN ELEMENTO PARA HACER EL BINDING CON LA RONDA, quiza un atributo que sirva como indice en el timer-->
-                            <Label Text="{Binding RondaPartida, StringFormat='RONDA {0}' }"
+                            <Label Text="{Binding Partida.IndicePregunta, Converter={StaticResource ConversorRondas}, StringFormat='RONDA {0}'}"
                                    FontSize="35"
                                    FontFamily="Arcade"
                                    HorizontalOptions="Center"></Label>
+
+                        <!-- {Binding Partida, StringFormat='RONDA {0}' } -->
                             <Label
-                                Text="{Binding Puntos}"
+                                Text="{Binding Partida.PuntosTotales}"
                                    FontSize="35"
                                    FontFamily="Arcade"
                                    HorizontalOptions="End"></Label>
@@ -51,7 +63,7 @@
                               Opacity="1"
                               TranslationY="50">
                         
-                            <Image Source="{Binding PreguntaActual.PersonajePregunta.FotoPersonaje}"
+                            <Image Source="{Binding Partida.PreguntaActual.PersonajePregunta.FotoPersonaje}"
                                    HorizontalOptions="Center"
                                    MaximumHeightRequest="350"
                                    >
@@ -64,9 +76,9 @@
                         </Grid.Shadow>
                            
                         </Grid>
-                        <CollectionView ItemsSource="{Binding PreguntaActual.Opciones}" 
+                        <CollectionView ItemsSource="{Binding Partida.PreguntaActual.Opciones}" 
                                         SelectionMode="Single"
-                                        SelectedItem="{Binding PreguntaActual.PersonajeSeleccionado}"
+                                        SelectedItem="{Binding Partida.PreguntaActual.PersonajeSeleccionado}"
                                         MinimumWidthRequest="500"
                                         MaximumWidthRequest="500"
                                         TranslationY="80">
@@ -78,7 +90,9 @@
 
                                 <Frame Padding="8"
                                            HeightRequest="100"
-                                           BackgroundColor="#c4542d" 
+                                           BackgroundColor="{Binding Path=BindingContext.Partida.PreguntaActual.EsCorrecto,
+                                    Source={RelativeSource AncestorType={x:Type CollectionView}},
+                                    Converter={StaticResource ConversorSeleccion}}" 
                                     >
                                         <!-- TENGO QUE HACER UN BINDING A ANCESTOR Tipo PreguntaActual.esCorrecto y usando un converter para el true en verde y el false se quede igual -->
                                        
@@ -96,7 +110,7 @@
                             </CollectionView.ItemTemplate>
                         <CollectionView.Shadow>
                             <Shadow 
-                                Brush="#703620"
+                                Brush="{Binding Partida.PreguntaActual.EsCorrecto, Converter={StaticResource ConversorSeleccion}}"
                                 Radius="10"
                                 Offset="0,10"></Shadow>
                         </CollectionView.Shadow>
@@ -115,7 +129,7 @@
                 HeightRequest= "400"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
-                IsVisible="{Binding ShowPantallaAntesJuego}"
+                IsVisible="{Binding VerPantallaInicio}"
                 TranslationY="0">
 
                 <Grid x:Name="PantallaInicio" BackgroundColor="#3e4249"
@@ -124,7 +138,7 @@
                     HeightRequest="360"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
-                    IsVisible="{Binding ShowPantallaAntesJuego}"
+                    IsVisible="{Binding VerPantallaInicio}"
                       
                     >
 
@@ -150,7 +164,7 @@
                            FontSize="18"
                            Text="Tienes que seleccionar una opción de las cuatro que aparecen debajo de la imagen, debes intentar acertar el nombre del Personaje que aparecerá en la imagen."
                            Padding="30"
-                           TranslationY="40"
+                           TranslationY="30"
                            MaximumWidthRequest="400"
                            HorizontalOptions="Center"
                            HorizontalTextAlignment="Center"/>
@@ -164,21 +178,22 @@
                             FontAttributes="Bold"
                             BackgroundColor="Orange"
                             TranslationY="100"
-                            Command="{Binding MiCommand}"
-                            IsVisible="{Binding ShowPantallaAntesJuego}"/>
+                            TranslationX="-75"
+                            Command="{Binding Comenzar}"
+                            IsVisible="{Binding VerPantallaInicio}"/>
 
                 <Button MaximumHeightRequest="75"
                         MaximumWidthRequest="100"
                         FontSize="30"
-                        Text="Jugar"
+                        Text="RANK"
                         FontFamily="IzquierdaDBZ"
                         TextColor="#1c1d1e"
                         FontAttributes="Bold"
-                        BackgroundColor="Purple"
+                        BackgroundColor="MediumPurple"
                         TranslationY="100"
-                        TranslationX="100"
+                        TranslationX="75"
                         Command="{Binding VerRanking}"
-                        IsVisible="{Binding ShowPantallaAntesJuego}"/>
+                        IsVisible="{Binding VerPantallaInicio}"/>
 
             </Grid>
             
@@ -188,80 +203,101 @@
             
             
         <Grid x:Name="NuevaPuntuacion"
-        BackgroundColor="#3e4249"
-        Opacity="0.8"
-        WidthRequest="360"
-        HeightRequest="360"
-        VerticalOptions="Center"
-        HorizontalOptions="Center"
-        IsVisible="{Binding FinalGame}">
-            <Label HorizontalOptions="Center" 
-           Padding="10"
-           FontSize="40"
-           FontFamily="StandardDBZ"
-           Text="¿GUARDAS TU PUNTUACION?" 
-           
-           TextColor="Orange">
+              BackgroundColor="#3e4249"
+              Opacity="1"
+              MinimumWidthRequest="490"
+              MaximumWidthRequest="490"
+              MinimumHeightRequest="460"
+              MaximumHeightRequest="460"
+              VerticalOptions="Center"
+              HorizontalOptions="Center"
+              IsVisible="{Binding Partida.PartidaAcabada}">
+            <Label HorizontalTextAlignment="Center"
+                   MaximumWidthRequest="400"
+                   TranslationX="100"
+                   Padding="40"
+                   FontSize="40"
+                   FontFamily="StandardDBZ"
+                   Text="¿GUARDAS TU PUNTUACION?" 
+                   TextColor="Orange">
+                
                 <Label.Shadow>
                     <Shadow Brush="Black"
                     Offset="1,1"
                     Radius="1"
-    ></Shadow>
+                    ></Shadow>
 
                 </Label.Shadow>
 
             </Label>
 
+            <Label
+                Text="Escribe tu NICK"
+                FontSize="20"
+                MaximumWidthRequest="200"
+                MaximumHeightRequest="50"
+                FontFamily="SourceCode"
+                FontAttributes="Bold"
+                TranslationX="125"
+                TranslationY="110"
+                >
+                
+            </Label>
+            
             <Entry 
                 Text="{Binding NombreJugador}"
                 FontFamily="Arcade"
+                Placeholder="AAA"
                 MaximumHeightRequest="50"
                 MaximumWidthRequest="110"
                 MaxLength="3"
                 FontSize="30"
-                TranslationX="-100"
-                TranslationY="-20"
-                IsVisible="{Binding FinalGame}">
+                TranslationY="150"
+                IsVisible="{Binding Partida.PartidaAcabada}">
             </Entry>
 
 
             <Label
-                Text="{Binding Puntos, StringFormat='{0} ptos.'}"
+                Text="{Binding Partida.PuntosTotales, StringFormat='{0} ptos.'}"
                 FontSize="30"
-                TranslationX="160"
-                TranslationY="145"
+                TranslationX="220"
+                TranslationY="215"
                 
                 FontFamily="Arcade"
-                IsVisible="{Binding FinalGame}"/>
-            
-            
-            
-            
-            <Button MaximumHeightRequest="75"
-            MaximumWidthRequest="100"
-            FontSize="30"
-            Text="Sí"
-            FontFamily="IzquierdaDBZ"
-            TextColor="#1c1d1e"
-            FontAttributes="Bold"
-            BackgroundColor="LightSeaGreen"
-            TranslationY="100"
-                    TranslationX="-60"
-            Command="{Binding MiCommand}"
-            IsVisible="{Binding FinalGame}"/>
+                IsVisible="{Binding Partida.PartidaAcabada}"/>
 
-            <Button MaximumHeightRequest="75"
-            MaximumWidthRequest="100"
-            FontSize="30"
-            Text="No"
-            FontFamily="IzquierdaDBZ"
-            TextColor="#1c1d1e"
-            FontAttributes="Bold"
-            BackgroundColor="IndianRed"
-            TranslationY="100"
-            TranslationX="70"
-            Command="{Binding VerRanking}"
-            IsVisible="{Binding FinalGame}"/>
+
+
+
+            <Button MinimumHeightRequest="80"
+                    MinimumWidthRequest="80"
+                    MaximumHeightRequest="80"
+                    MaximumWidthRequest="200"
+                    FontSize="30"
+                    Text="Sí"
+                    FontFamily="IzquierdaDBZ"
+                    TextColor="#1c1d1e"
+                    FontAttributes="Bold"
+                    BackgroundColor="Orange"
+                    TranslationY="250"
+                    TranslationX="0"
+                    Command="{Binding InsertarJugadoreConPuntuacion}"
+                    IsVisible="{Binding Partida.PartidaAcabada}"/>
+
+            <Button MinimumHeightRequest="80"
+                    MinimumWidthRequest="80"
+                    MaximumHeightRequest="80"
+                    MaximumWidthRequest="200"
+                    FontSize="30"
+                    Text="No"
+                    FontFamily="IzquierdaDBZ"
+                    TextColor="#1c1d1e"
+                    FontAttributes="Bold"
+                    BackgroundColor="MediumPurple"
+                    TranslationY="250"
+                    TranslationX="220"
+                    Command="{Binding Inicio}"
+                    IsVisible="{Binding Partida.PartidaAcabada}"/>
 
         </Grid>
 

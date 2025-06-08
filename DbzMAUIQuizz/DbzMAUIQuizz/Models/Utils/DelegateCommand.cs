@@ -13,6 +13,7 @@ namespace DbzMAUIQuizz.Models.Utils
 
 
         private readonly Func<bool> _canExecute;
+        private object v;
 
         /// <summary>
         /// Initializes a new instance of the RelayCommand class that 
@@ -41,6 +42,11 @@ namespace DbzMAUIQuizz.Models.Utils
 
             _execute = execute;
             _canExecute = canExecute;
+        }
+
+        public DelegateCommand(object v)
+        {
+            this.v = v;
         }
 
         /// <summary>
