@@ -10,6 +10,8 @@ namespace DTO
 {
     public class ClsPersonajeDBZ
     {
+        #region Atributos
+
         [JsonProperty("id")]
         private int idPersonaje;
 
@@ -19,21 +21,29 @@ namespace DTO
         [JsonProperty("image")]
         private String fotoPersonaje;
 
+        #endregion
+
+        #region Propiedades
         public int IdPersonaje
         {
             get { return idPersonaje; }
         }
+
         public String NombrePersonaje
         {
             get { return nombrePersonaje; }
             set { nombrePersonaje = value; }
         }
+
         public String FotoPersonaje
         {
             get { return fotoPersonaje; }
             set { fotoPersonaje = value; }
         }
 
+        #endregion
+
+        #region Constructores
         public ClsPersonajeDBZ() 
         { 
         
@@ -51,6 +61,6 @@ namespace DTO
             this.nombrePersonaje = nombre;
             this.fotoPersonaje = foto;
         }
-
+        #endregion
     }
 }

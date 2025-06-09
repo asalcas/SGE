@@ -1,16 +1,23 @@
 ﻿namespace DTO
 {
-    // ENVIAR DATOS A LA API
     public class ClsJugador
     {
+        #region Atributos
+
         private int idJugador;
+
         private String nombreJugador;
+
         private int puntuacionJugador;
 
+        #endregion
+
+        #region Propiedades
         public int IdJugador
         {
             get { return idJugador; }
         }
+
         public String NombreJugador
         {
             get { return nombreJugador; }
@@ -21,6 +28,10 @@
             get { return puntuacionJugador; }
             set { puntuacionJugador = value; }
         }
+
+        #endregion
+
+        #region Constructores
         public ClsJugador()
         {
 
@@ -29,11 +40,14 @@
         {
             this.idJugador = id;
         }
+
         public ClsJugador(int id, String nombre, int puntuacion)
         {
             this.idJugador = id;
             this.NombreJugador = nombre;
             this.PuntuacionJugador = puntuacion;
         }
+
+        #endregion
     }
 }

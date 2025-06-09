@@ -23,10 +23,7 @@ namespace DbzMAUIQuizz.Models.Converters
                     {
                         color = Color.FromArgb("#98c379");
                     }
-                    
-                    
                 }
-                
             }
             return color;
         }

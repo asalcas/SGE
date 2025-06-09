@@ -26,9 +26,9 @@ namespace DTO
 
         #region Propiedades
 
-        public ObservableCollection<ClsPersonajeDBZ> Opciones 
-        { 
-            get { return opciones; } 
+        public ObservableCollection<ClsPersonajeDBZ> Opciones
+        {
+            get { return opciones; }
         }
 
         public ClsPersonajeDBZ PersonajePregunta
@@ -38,12 +38,19 @@ namespace DTO
         public ClsPersonajeDBZ PersonajeSeleccionado
         {
             get { return personajeSeleccionado; }
-            set { personajeSeleccionado = value; 
+            set
+            {
+                personajeSeleccionado = value;
+                comprobarEsCorrecto();
+                OnPropertyChanged(nameof(EsCorrecto));
             }
         }
         public bool EsCorrecto
         {
-            get { return esCorrecto; }
+            get
+            {
+                return esCorrecto;
+            }
         }
 
         #endregion
@@ -51,9 +58,9 @@ namespace DTO
         #region Constructores
         public ClsPregunta()
         {
-            
+
         }
-        
+
         public ClsPregunta(ObservableCollection<ClsPersonajeDBZ> opciones, ClsPersonajeDBZ personaje)
         {
             this.opciones = opciones;
@@ -70,11 +77,9 @@ namespace DTO
         /// <param name="personajeSeleccionado"></param>
         /// <param name="personajePregunta"></param>
         /// <returns></returns>
-        public bool comprobarEsCorrecto()
+        private void comprobarEsCorrecto()
         {
             esCorrecto = personajeSeleccionado == personajePregunta ? true : false;
-            OnPropertyChanged(nameof(EsCorrecto));
-            return esCorrecto;
         }
         #endregion
 

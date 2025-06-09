@@ -54,8 +54,10 @@
             <CollectionView ItemsSource="{Binding Jugadores}" 
                             TranslationY="20"
                             MinimumHeightRequest="10"
+                            MaximumHeightRequest="470"
                             MinimumWidthRequest="450"
-                            HorizontalOptions="Center">
+                            HorizontalOptions="Center"
+                            VerticalScrollBarVisibility="Never">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"/>
                 </CollectionView.ItemsLayout>

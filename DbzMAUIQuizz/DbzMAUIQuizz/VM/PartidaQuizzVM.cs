@@ -173,6 +173,8 @@ namespace DbzMAUIQuizz.VM
                 mensaje = "Usuario añadido con éxito";
                 OnPropertyChanged(nameof(Mensaje));
                 verMensaje = true;
+
+                navegarJuego();
             }
             else
             {

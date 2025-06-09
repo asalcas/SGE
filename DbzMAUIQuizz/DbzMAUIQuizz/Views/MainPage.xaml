@@ -13,9 +13,11 @@
     <ContentPage.Resources>
         <converter:ConverterSeleccionado x:Key="ConversorSeleccion"></converter:ConverterSeleccionado>
         <converter:ConverterRondas x:Key="ConversorRondas"></converter:ConverterRondas>
-        <animations:ShakeAnimation x:Key="ShakeOnPointsChange"
-                           Duration="500"
-                           Easing="SinInOut" />
+        <converter:ConverterColorTiempo x:Key="ConversorTimerColor"></converter:ConverterColorTiempo>
+        <animations:ShakeAnimation 
+            x:Key="CambiarTiempo"
+            Duration="1000"
+            Easing="SinInOut" />
     </ContentPage.Resources>
     
         <Grid>
@@ -32,26 +34,47 @@
                         <HorizontalStackLayout Padding="30"
                                                Background="#424242"
                                                Spacing="95"
-                                               MinimumWidthRequest="400"
+                                               MinimumWidthRequest="420"
                                                MaximumWidthRequest="600">
                             <Label Text="{Binding Partida.SegundosPorPregunta}"
-                                   FontSize="35"
+                                   FontSize="45"
                                    FontFamily="Arcade"
                                    HorizontalOptions="Start"
-                                   ></Label>
+                                   TextColor="{Binding Partida.SegundosPorPregunta, Converter={StaticResource ConversorTimerColor}}"
+                                   
+                                   >
+                                
+                            <Label.Shadow>
+                                <Shadow>
+                                    
+                                </Shadow>
+                            </Label.Shadow>
+                            </Label>
                             
                             <!-- AQUI TENGO QUE METER UN ELEMENTO PARA HACER EL BINDING CON LA RONDA, quiza un atributo que sirva como indice en el timer-->
                             <Label Text="{Binding Partida.IndicePregunta, Converter={StaticResource ConversorRondas}, StringFormat='RONDA {0}'}"
                                    FontSize="35"
                                    FontFamily="Arcade"
-                                   HorizontalOptions="Center"></Label>
+                                   HorizontalOptions="Center">
+                            <Label.Shadow>
+                                <Shadow>
+
+                                </Shadow>
+                            </Label.Shadow>
+                        </Label>
 
                         <!-- {Binding Partida, StringFormat='RONDA {0}' } -->
                             <Label
                                 Text="{Binding Partida.PuntosTotales}"
-                                   FontSize="35"
+                                   FontSize="45"
                                    FontFamily="Arcade"
-                                   HorizontalOptions="End"></Label>
+                                   HorizontalOptions="End">
+                            <Label.Shadow>
+                                <Shadow>
+
+                                </Shadow>
+                            </Label.Shadow>
+                        </Label>
                         <HorizontalStackLayout.Shadow>
                             <Shadow></Shadow>
                         </HorizontalStackLayout.Shadow>

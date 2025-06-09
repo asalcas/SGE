@@ -20,9 +20,9 @@ namespace DTO
     {
         #region Atributos
 
-        private ObservableCollection<ClsPersonajeDBZ> listadoPersonajesCorrectos; // (58)? viene de totales 
+        private ObservableCollection<ClsPersonajeDBZ> listadoPersonajesCorrectos; // (20)? viene de totales 
 
-        private ObservableCollection<ClsPersonajeDBZ> listadoPersonajesAleatorios;  // (20)? viene de totales
+        private ObservableCollection<ClsPersonajeDBZ> listadoPersonajesAleatorios;  // (58)? viene de totales
 
         private ObservableCollection<ClsPregunta> listadoPreguntas; // Montado con 1 objeto 'ClsPersonajeDBZ' y una 'List<ClsPersonajeDBZ> opciones'
 
@@ -56,6 +56,7 @@ namespace DTO
          *  No me gusta tratar los segundos desde pregunta, por que dentro de una partida no vamos a tener ninguna pregunta con tiempos desiguales,
          *  si tuvieramos que cambiar algun tiempo, sería un ajuste de la partida, llamemoslo 'Dificultad', 'Nivel' o como sea, según mi punto de vista lo veo
          *  totalmente dependiente a la partida, y no a la pregunta, quizá por eso no me entra tanto en la pregunta.
+         *  
          * - PUNTUACION:
          *  Me pasa lo mismo que con el tiempo, una pregunta aislada no tiene una puntuación para mi, al final lo que tarda es su puntuación, por lo que para que darle
          *  puntuación individual, si ya podriamos coger la puntuación sumada?
@@ -74,10 +75,6 @@ namespace DTO
         {
             get { return listadoPersonajesCorrectos; }
 
-        }
-        public ObservableCollection<ClsPregunta> ListadoPreguntas
-        {
-            get { return listadoPreguntas; }
         }
 
         public ClsPregunta PreguntaActual
@@ -166,7 +163,6 @@ namespace DTO
         private void restarTiempoYComprobarRespuesta(object sender, EventArgs e)
         {
 
-            bool acierto = false;
 
             if (respondido)
             {
@@ -178,9 +174,8 @@ namespace DTO
                 if (preguntaActual.PersonajeSeleccionado != null) // Si el valor del 'preguntaActual.PersonajeSeleccionado' cambia
                 {
                     respondido = true; // El usuario ha respondido
-                    acierto = preguntaActual.comprobarEsCorrecto(); // Comprobamos que ha acertado o no
 
-                    if (acierto) // Si lo hace
+                    if (preguntaActual.EsCorrecto) // Si es correcto
                     {
                         puntosTotales += segundosPorPregunta;
                         OnPropertyChanged(nameof(PuntosTotales)); // Sumamos puntos y notificamos a la Vista
