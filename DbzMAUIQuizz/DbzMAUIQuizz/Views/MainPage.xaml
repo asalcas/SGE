@@ -5,10 +5,12 @@
              xmlns:converter="clr-namespace:DbzMAUIQuizz.Models.Converters"
              xmlns:animations="clr-namespace:AlohaKit.Animations;assembly=AlohaKit.Animations"
              x:Class="DbzMAUIQuizz.MainPage">
-
+<!--
     <ContentPage.BindingContext>
-        <vm:PartidaQuizzVM></vm:PartidaQuizzVM>
+    <vm:PartidaQuizzVM></vm:PartidaQuizzVM>
     </ContentPage.BindingContext>
+    -->
+    
 
     <ContentPage.Resources>
         <converter:ConverterSeleccionado x:Key="ConversorSeleccion"></converter:ConverterSeleccionado>
@@ -35,7 +37,7 @@
                                                Background="#424242"
                                                Spacing="95"
                                                MinimumWidthRequest="420"
-                                               MaximumWidthRequest="600">
+                                               MaximumWidthRequest="650">
                             <Label Text="{Binding Partida.SegundosPorPregunta}"
                                    FontSize="45"
                                    FontFamily="Arcade"
@@ -52,7 +54,7 @@
                             </Label>
                             
                             <!-- AQUI TENGO QUE METER UN ELEMENTO PARA HACER EL BINDING CON LA RONDA, quiza un atributo que sirva como indice en el timer-->
-                            <Label Text="{Binding Partida.IndicePregunta, Converter={StaticResource ConversorRondas}, StringFormat='RONDA {0}'}"
+                            <Label Text="{Binding Partida.IndicePregunta, Converter={StaticResource ConversorRondas}, StringFormat='RONDA{0}'}"
                                    FontSize="35"
                                    FontFamily="Arcade"
                                    HorizontalOptions="Center">

@@ -1,5 +1,4 @@
 ﻿using DbzMAUIQuizz.VM;
-using Plugin.Maui.Audio;
 
 namespace DbzMAUIQuizz
 {
@@ -7,10 +6,11 @@ namespace DbzMAUIQuizz
     {
 
 
-        public MainPage()
+        public MainPage(PartidaQuizzVM vm)
         {
             InitializeComponent();
-           
+            BindingContext = vm;
+
         }
 
     }
