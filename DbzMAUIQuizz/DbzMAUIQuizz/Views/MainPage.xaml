@@ -5,11 +5,11 @@
              xmlns:converter="clr-namespace:DbzMAUIQuizz.Models.Converters"
              xmlns:animations="clr-namespace:AlohaKit.Animations;assembly=AlohaKit.Animations"
              x:Class="DbzMAUIQuizz.MainPage">
-<!--
+
     <ContentPage.BindingContext>
     <vm:PartidaQuizzVM></vm:PartidaQuizzVM>
     </ContentPage.BindingContext>
-    -->
+    
     
 
     <ContentPage.Resources>
@@ -35,15 +35,15 @@
                     <VerticalStackLayout>
                         <HorizontalStackLayout Padding="30"
                                                Background="#424242"
-                                               Spacing="95"
+                                               Spacing="120"
                                                MinimumWidthRequest="420"
-                                               MaximumWidthRequest="650">
+                                               MaximumWidthRequest="600">
                             <Label Text="{Binding Partida.SegundosPorPregunta}"
                                    FontSize="45"
                                    FontFamily="Arcade"
                                    HorizontalOptions="Start"
                                    TextColor="{Binding Partida.SegundosPorPregunta, Converter={StaticResource ConversorTimerColor}}"
-                                   
+                                  
                                    >
                                 
                             <Label.Shadow>
@@ -54,10 +54,12 @@
                             </Label>
                             
                             <!-- AQUI TENGO QUE METER UN ELEMENTO PARA HACER EL BINDING CON LA RONDA, quiza un atributo que sirva como indice en el timer-->
-                            <Label Text="{Binding Partida.IndicePregunta, Converter={StaticResource ConversorRondas}, StringFormat='RONDA{0}'}"
+                        <Label Text="{Binding Partida.IndicePregunta, Converter={StaticResource ConversorRondas}, StringFormat='RONDA {0}'}"
                                    FontSize="35"
                                    FontFamily="Arcade"
-                                   HorizontalOptions="Center">
+                                   HorizontalOptions="Center"
+                                   MaximumWidthRequest="230"
+                                   HorizontalTextAlignment="Center">
                             <Label.Shadow>
                                 <Shadow>
 
@@ -70,7 +72,8 @@
                                 Text="{Binding Partida.PuntosTotales}"
                                    FontSize="45"
                                    FontFamily="Arcade"
-                                   HorizontalOptions="End">
+                                   HorizontalOptions="End"
+                                CharacterSpacing="-1">
                             <Label.Shadow>
                                 <Shadow>
 

@@ -6,10 +6,10 @@ namespace DbzMAUIQuizz
     {
 
 
-        public MainPage(PartidaQuizzVM vm)
+        public MainPage()
         {
             InitializeComponent();
-            BindingContext = vm;
+            
 
         }
 
