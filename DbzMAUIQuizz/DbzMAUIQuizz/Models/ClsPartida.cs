@@ -38,8 +38,6 @@ namespace DTO
 
         private int puntosTotales;
 
-        private Boolean colorear;
-
         private Boolean partidaAcabada;
 
         // --------------------------------
@@ -96,10 +94,6 @@ namespace DTO
             get { return indicePregunta; }
         }
 
-        public Boolean Colorear
-        {
-            get { return PreguntaActual.EsCorrecto; }
-        }
 
         public Boolean PartidaAcabada
         {
@@ -112,8 +106,21 @@ namespace DTO
             set
             {
 
-                PreguntaActual.PersonajeSeleccionado = value;
-                asignarPuntuacion();
+                PreguntaActual.PersonajeSeleccionado = value; // Asignamos el PersonajeSeleccionado.
+
+                if (PersonajeSeleccionado != null) // Si hemos elegido un personaje
+                {
+                    PersonajeSeleccionado.EsElCorrecto = PreguntaActual.EsCorrecto; // Vemos si es correcto o no
+                    OnPropertyChanged(nameof(PersonajeSeleccionado.EsElCorrecto)); // Notificamos
+                }
+
+                if(value != null) // Si el value es distinto de NULL entonces asignamos valor, así cuando entramos al juego por SEGUNDA VEZ (que es null)
+                                  // No asignará puntuación y no accedera al metodo PasarPregunta()
+                {
+                    asignarPuntuacion();
+                }
+
+
             }
         }
 
@@ -198,6 +205,7 @@ namespace DTO
         {
                 if (preguntaActual.EsCorrecto) // Si es correcto
                 {
+                    
                     puntosTotales += segundosPorPregunta;
                     OnPropertyChanged(nameof(PuntosTotales)); // Sumamos puntos y notificamos a la Vista
                 }
@@ -212,10 +220,22 @@ namespace DTO
         {
 
             await Task.Delay(2000); // Lo estoy metiendo por que quiero mostrar el color de la Respuesta
-                                    // Podría hacer una propiedad espera que cuando finalice sea = 2, y cuando este dentro que por cada segundo haga un --, y cuando sea 0 paramos la
-                                    // ejecución
+                                    // Podría hacer una propiedad espera que cuando finalice sea = 2, y cuando este dentro que por cada segundo haga un --,
+                                    // y cuando sea 0 paramos la ejecución
+
+
+            
+            
+
             indicePregunta++;
             OnPropertyChanged(nameof(IndicePregunta));
+
+            if (PersonajeSeleccionado != null) // Comprobamos si ha seleccionado algun personaje en la ronda anterior
+            {
+                PersonajeSeleccionado.EsElCorrecto = null; // Si ha elegido uno sea CORRECTO o INCORRECTO, reiniciamos el valor de EsElCorrecto a nulo, para tener
+                                                           // el color predefinido naranja
+                OnPropertyChanged(nameof(PersonajeSeleccionado.EsElCorrecto));
+            }
 
             if (indicePregunta < listadoPreguntas.Count())
             {
@@ -332,10 +352,10 @@ namespace DTO
                         listadoPersonajesCorrectos.Add(listadoPersonajesAleatorios[indice]); // Lo guardamos
                     }
                 }
-                foreach (ClsPersonajeDBZComprobado personaje in listadoPersonajesCorrectos)
+                /*foreach (ClsPersonajeDBZComprobado personaje in listadoPersonajesCorrectos)
                 {
                     personaje.EsElCorrecto = true;
-                }
+                }*/
 
 
 

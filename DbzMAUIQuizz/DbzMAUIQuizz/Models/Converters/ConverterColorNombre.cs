@@ -7,19 +7,27 @@ using System.Threading.Tasks;
 
 namespace DbzMAUIQuizz.Models.Converters
 {
-    public class ConverterNombres : IValueConverter
+    public class ConverterColorNombre : IValueConverter
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            String aConvertir = "";
-            String aRetornar = "";
-            if(value != null)
+            Color colorDelTexto = Color.FromArgb("#d3d3d3");
+            Boolean esCorrecto;
+
+            if (value != null)
             {
-                aConvertir = (String)value;
-                
-                aRetornar = aConvertir.Length > 3 ? aConvertir.Substring(0, 3) : aConvertir; // Si el tamaño del nombre es mayor de 3, hacemos un substring de 3 
+                esCorrecto = (Boolean)value;
+                if (esCorrecto)
+                {
+                    colorDelTexto = Color.FromArgb("#016000");
+                }
+                else
+                {
+                    colorDelTexto = Color.FromArgb("#c51d40");
+                }
             }
-            return aRetornar.Trim();
+            
+                return colorDelTexto;
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

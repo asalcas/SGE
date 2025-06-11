@@ -16,6 +16,7 @@
         <converter:ConverterSeleccionado x:Key="ConversorSeleccion"></converter:ConverterSeleccionado>
         <converter:ConverterRondas x:Key="ConversorRondas"></converter:ConverterRondas>
         <converter:ConverterColorTiempo x:Key="ConversorTimerColor"></converter:ConverterColorTiempo>
+        <converter:ConverterColorNombre x:Key="ConversorNombreColor"></converter:ConverterColorNombre>
         <animations:ShakeAnimation 
             x:Key="CambiarTiempo"
             Duration="1000"
@@ -118,10 +119,7 @@
 
                                 <Frame Padding="8"
                                            HeightRequest="100"
-                                           BackgroundColor="{Binding Path=BindingContext.Partida.PreguntaActual.PersonajeSeleccionado.EsElCorrecto,
-                                    Source={RelativeSource AncestorType={x:Type CollectionView}},
-                                    Converter={StaticResource ConversorSeleccion}}" 
-                                    >
+                                           BackgroundColor="{Binding EsElCorrecto, Converter={StaticResource ConversorSeleccion}}">
                                         <!-- TENGO QUE HACER UN BINDING A ANCESTOR Tipo PreguntaActual.esCorrecto y usando un converter para el true en verde y el false se quede igual -->
                                        
                                         <Label Text="{Binding NombrePersonaje}"
@@ -129,19 +127,15 @@
                                                VerticalTextAlignment="Center"
                                                FontFamily="Arcade"
                                                FontSize="22"
-                                               TextColor="#d3d3d3"
+                                               TextColor="{Binding EsElCorrecto, Converter={StaticResource ConversorNombreColor}}"
                                                ></Label>
                                     
                                     </Frame>
+                                    
                                 </DataTemplate>
 
                             </CollectionView.ItemTemplate>
-                        <CollectionView.Shadow>
-                            <Shadow 
-                                Brush="{Binding Partida.PreguntaActual.EsCorrecto, Converter={StaticResource ConversorSeleccion}}"
-                                Radius="10"
-                                Offset="0,10"></Shadow>
-                        </CollectionView.Shadow>
+                        
                         </CollectionView>
 
                     </VerticalStackLayout>

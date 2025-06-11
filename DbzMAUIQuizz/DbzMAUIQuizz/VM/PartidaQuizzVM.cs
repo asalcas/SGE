@@ -152,6 +152,7 @@ namespace DbzMAUIQuizz.VM
             await preparaPartida();
         }
 
+
         /// <summary>
         /// Va a ser lo que haga nuestro boton RANKING en la UI
         /// </summary>
@@ -159,6 +160,7 @@ namespace DbzMAUIQuizz.VM
         {
             await Application.Current.MainPage.Navigation.PushAsync(new RankingPage());
         }
+
 
         /// <summary>
         /// Va a ser lo que haga nuestro boton GUARDAR PUNTUACION en la UI (EndGame)
@@ -169,7 +171,7 @@ namespace DbzMAUIQuizz.VM
             if(!string.IsNullOrWhiteSpace(NombreJugador)) // Mirado en Internet, para que no me deje un nombre asi: ""
             {
                 jugador.PuntuacionJugador = partida.PuntosTotales;
-                jugador.NombreJugador = NombreJugador;
+                jugador.NombreJugador = NombreJugador.ToUpper();
 
                 await BL.ManejadoraJugadorBL.insertarPuntuacionJugadorBL(jugador);
 

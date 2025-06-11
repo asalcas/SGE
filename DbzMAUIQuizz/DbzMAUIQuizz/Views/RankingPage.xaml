@@ -66,25 +66,33 @@
                         <Frame BackgroundColor="#424242" 
                                MinimumWidthRequest="400"
                                MaximumWidthRequest="400"
+                               
                                >
                             <HorizontalStackLayout Spacing="100"
                                                    HorizontalOptions="Center">
 
 
-                                <VerticalStackLayout MinimumWidthRequest="10"
-                                                     TranslationX="-50">
+                                <VerticalStackLayout 
+                                                     TranslationX="-50"
+                                    >
                                     <Label Text="{Binding NombreJugador, Converter={converter:ConverterNombres}}"
-                                           HorizontalOptions="Center"
                                            FontFamily="Arcade"
+                                           MaximumWidthRequest="100"
+                                           
                                            FontSize="20"
                                            TextColor="MediumPurple"></Label>
 
                                 </VerticalStackLayout>
-                                <VerticalStackLayout>
+                                
+                                <VerticalStackLayout 
+                                    TranslationX="20"
+                                    >
                                     <Label Text="{Binding PuntuacionJugador}"
                                            FontFamily="Arcade"
                                            FontSize="20"
                                            TranslationX="10"
+                                           HorizontalOptions="Center"
+                                           MinimumWidthRequest="100"
                                            TextColor="Yellow">
                                         <Label.Shadow>
                                             <Shadow Brush="Yellow"

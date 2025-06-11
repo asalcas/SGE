@@ -13,7 +13,8 @@ namespace DbzMAUIQuizz.Models.Converters
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            Color color = Color.FromArgb("#c4542d");
+
+            Color color = new Color();
 
             if (value != null)
             {
@@ -23,7 +24,17 @@ namespace DbzMAUIQuizz.Models.Converters
                     {
                         color = Color.FromArgb("#98c379");
                     }
+                    else
+                    {
+                        color = Color.FromArgb("#df6158");
+                    }
                 }
+                
+
+            }
+            else
+            {
+                color = Color.FromArgb("#c4542d");
             }
             return color;
         }
