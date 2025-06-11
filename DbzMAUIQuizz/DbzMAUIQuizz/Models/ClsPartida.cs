@@ -8,7 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-
+using DbzMAUIQuizz.Models;
 namespace DTO
 {
     #region Que es mi ClsPartida?
@@ -20,9 +20,9 @@ namespace DTO
     {
         #region Atributos
 
-        private ObservableCollection<ClsPersonajeDBZ> listadoPersonajesCorrectos; // (20)? viene de totales 
+        private ObservableCollection<ClsPersonajeDBZComprobado> listadoPersonajesCorrectos; // (20)? viene de totales 
 
-        private ObservableCollection<ClsPersonajeDBZ> listadoPersonajesAleatorios;  // (58)? viene de totales
+        private ObservableCollection<ClsPersonajeDBZComprobado> listadoPersonajesAleatorios;  // (58)? viene de totales
 
         private ObservableCollection<ClsPregunta> listadoPreguntas; // Montado con 1 objeto 'ClsPersonajeDBZ' y una 'List<ClsPersonajeDBZ> opciones'
 
@@ -66,12 +66,12 @@ namespace DTO
         #endregion
 
         #region Propiedades
-        public ObservableCollection<ClsPersonajeDBZ> ListadoPersonajesAleatorios
+        public ObservableCollection<ClsPersonajeDBZComprobado> ListadoPersonajesAleatorios
         {
             get { return listadoPersonajesAleatorios; }
 
         }
-        public ObservableCollection<ClsPersonajeDBZ> ListadoPersonajesCorrectos
+        public ObservableCollection<ClsPersonajeDBZComprobado> ListadoPersonajesCorrectos
         {
             get { return listadoPersonajesCorrectos; }
 
@@ -106,13 +106,26 @@ namespace DTO
             get { return partidaAcabada; }
         }
 
+        public ClsPersonajeDBZComprobado PersonajeSeleccionado
+        {
+            get { return PreguntaActual.PersonajeSeleccionado; }
+            set
+            {
+
+                PreguntaActual.PersonajeSeleccionado = value;
+                asignarPuntuacion();
+            }
+        }
+
+
+
         #endregion
 
         #region Constructores
         public ClsPartida()
         {
-            listadoPersonajesAleatorios = new ObservableCollection<ClsPersonajeDBZ>();
-            listadoPersonajesCorrectos = new ObservableCollection<ClsPersonajeDBZ>();
+            listadoPersonajesAleatorios = new ObservableCollection<ClsPersonajeDBZComprobado>();
+            listadoPersonajesCorrectos = new ObservableCollection<ClsPersonajeDBZComprobado>();
             listadoPreguntas = new ObservableCollection<ClsPregunta>();
             preguntaActual = new ClsPregunta();
             segundosPorPregunta = 5;
@@ -122,9 +135,10 @@ namespace DTO
             // Timer para restar -1 a segundosPorPregunta y comprueba la interacción del usuario
             cuentaAtras = Application.Current.Dispatcher.CreateTimer();
             cuentaAtras.Interval = TimeSpan.FromSeconds(1.25);
-            cuentaAtras.Tick += restarTiempoYComprobarRespuesta;
+            cuentaAtras.Tick += restarTiempo;
 
-          
+            
+
 
         }
 
@@ -156,47 +170,50 @@ namespace DTO
         }
 
         /// <summary>
-        /// Función que se encargará de hacer una cuenta atrás de 'N' numero de segundos a 0 y de comprobar la respuesta del usuario.
+        /// Función que se encargará de hacer una cuenta atrás de 'N' numero de segundos a 0
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void restarTiempoYComprobarRespuesta(object sender, EventArgs e)
+        private void restarTiempo(object sender, EventArgs e)
         {
 
 
-            if (respondido)
+            if (SegundosPorPregunta == 0)
             {
                 cuentaAtras.Stop();
                 pasarPregunta();
             }
             else
             {
-                if (preguntaActual.PersonajeSeleccionado != null) // Si el valor del 'preguntaActual.PersonajeSeleccionado' cambia
-                {
-                    respondido = true; // El usuario ha respondido
-
-                    if (preguntaActual.EsCorrecto) // Si es correcto
-                    {
-                        puntosTotales += segundosPorPregunta;
-                        OnPropertyChanged(nameof(PuntosTotales)); // Sumamos puntos y notificamos a la Vista
-                    }
-                    
-                }
-
-                if (segundosPorPregunta > 0) // Mientras que no responda y 'segundos' sean > que 0 
-                {
-                    segundosPorPregunta--;
-                    OnPropertyChanged(nameof(SegundosPorPregunta)); // Restamos la variable de segundos y notificamos
-                }
-                else
-                {
-                    respondido = true; // Si se le pasa el tiempo, osea 'segundos' = 0, paramos el timer de 1 segundo
-                }
+                segundosPorPregunta--;
+                OnPropertyChanged(nameof(SegundosPorPregunta)); // Restamos la variable de segundos y notificamos
             }
         }
 
-        private void pasarPregunta()
+
+        /// <summary>
+        /// Función que comprobará si personajeSeleccionado es la respuesta correcta en la ClsPartida
+        /// </summary>
+        private void asignarPuntuacion()
         {
+                if (preguntaActual.EsCorrecto) // Si es correcto
+                {
+                    puntosTotales += segundosPorPregunta;
+                    OnPropertyChanged(nameof(PuntosTotales)); // Sumamos puntos y notificamos a la Vista
+                }
+            pasarPregunta();
+
+        }
+
+        /// <summary>
+        /// Función encargada de pasar a la Siguiente pregunta Y COMENZAR LA CUENTA ATRÁS DE NUEBO
+        /// </summary>
+        private async Task pasarPregunta()
+        {
+
+            await Task.Delay(2000); // Lo estoy metiendo por que quiero mostrar el color de la Respuesta
+                                    // Podría hacer una propiedad espera que cuando finalice sea = 2, y cuando este dentro que por cada segundo haga un --, y cuando sea 0 paramos la
+                                    // ejecución
             indicePregunta++;
             OnPropertyChanged(nameof(IndicePregunta));
 
@@ -205,7 +222,7 @@ namespace DTO
                 preguntaActual = listadoPreguntas[indicePregunta];
                 OnPropertyChanged(nameof(PreguntaActual));
 
-                
+
                 segundosPorPregunta = 5;
                 OnPropertyChanged(nameof(SegundosPorPregunta));
                 cuentaAtras.Start();
@@ -213,11 +230,11 @@ namespace DTO
             }
             else
             {
-                
+
                 partidaAcabada = true;
                 OnPropertyChanged(nameof(PartidaAcabada));
             }
-            
+
 
         }
 
@@ -230,12 +247,14 @@ namespace DTO
         {
             bool acabado = false;
 
-            if(indicePregunta == listadoPreguntas.Count())
+            if (indicePregunta == listadoPreguntas.Count())
             {
                 acabado = true;
             }
             return acabado;
         }
+
+        
         #endregion
 
         #region MontarPartida
@@ -263,16 +282,16 @@ namespace DTO
         /// <param name="listadoAleatorio"> listadoAleatorio </param>
         /// <param name="listadoCorrecto"> listadoCorrecto </param>
         /// <returns></returns>
-        private async Task crearPreguntas(ObservableCollection<ClsPersonajeDBZ> listadoAleatorio, ObservableCollection<ClsPersonajeDBZ> listadoCorrecto)
+        private async Task crearPreguntas(ObservableCollection<ClsPersonajeDBZComprobado> listadoAleatorio, ObservableCollection<ClsPersonajeDBZComprobado> listadoCorrecto)
         {
             Random rnd = new Random();
             int indice = 0;
             ClsPregunta nuevaPregunta;
 
-            foreach (ClsPersonajeDBZ personajeCorrecto in listadoCorrecto)
+            foreach (ClsPersonajeDBZComprobado personajeCorrecto in listadoCorrecto)
             {
                 // Como funciona el Where: De la lista cuando el personaje es distinto de personajeCorrecto coje 3
-                nuevaPregunta = new ClsPregunta(new ObservableCollection<ClsPersonajeDBZ>(listadoAleatorio.Where(personajePregunta => personajePregunta != personajeCorrecto).Take(3)), personajeCorrecto);
+                nuevaPregunta = new ClsPregunta(new ObservableCollection<ClsPersonajeDBZComprobado>(listadoAleatorio.Where(personajePregunta => personajePregunta != personajeCorrecto).Take(3)), personajeCorrecto);
                 nuevaPregunta.Opciones.Add(personajeCorrecto);
 
 
@@ -313,6 +332,10 @@ namespace DTO
                         listadoPersonajesCorrectos.Add(listadoPersonajesAleatorios[indice]); // Lo guardamos
                     }
                 }
+                foreach (ClsPersonajeDBZComprobado personaje in listadoPersonajesCorrectos)
+                {
+                    personaje.EsElCorrecto = true;
+                }
 
 
 
@@ -329,23 +352,30 @@ namespace DTO
         /// Funcion que literalmente llama a la BL para aplicar reglas de negocio sobre la DAL para recibir la lista de personajesCompleta de la API
         /// </summary>
         /// <returns></returns>
-        public static async Task<ObservableCollection<ClsPersonajeDBZ>> rellenarListado()
+        public static async Task<ObservableCollection<ClsPersonajeDBZComprobado>> rellenarListado()
         {
             ObservableCollection<ClsPersonajeDBZ> listadoPersonajes = new ObservableCollection<ClsPersonajeDBZ>(await BL.ListadoPersonajesBL.getAllPersonajesBL());
 
-            return listadoPersonajes;
+            ObservableCollection<ClsPersonajeDBZComprobado> listadoConBooleano = new ObservableCollection<ClsPersonajeDBZComprobado>();
+            foreach (ClsPersonajeDBZ personaje in listadoPersonajes)
+            {
+                ClsPersonajeDBZComprobado nuevoPJConBool = new ClsPersonajeDBZComprobado(personaje.IdPersonaje, personaje.NombrePersonaje, personaje.FotoPersonaje);
+                listadoConBooleano.Add(nuevoPJConBool);
+            }
+
+            return listadoConBooleano;
 
         }
 
         #endregion
 
         #region Función para mezclar listas
-        private void mezclarLista(ObservableCollection<ClsPersonajeDBZ> listaParaMezclar)
+        private void mezclarLista(ObservableCollection<ClsPersonajeDBZComprobado> listaParaMezclar)
         {
             Random rnd = new Random();
             int indice = listaParaMezclar.Count();
             int posicionMezcla;
-            ClsPersonajeDBZ personajeApoyo;
+            ClsPersonajeDBZComprobado personajeApoyo;
 
             while (indice > 1)
             {

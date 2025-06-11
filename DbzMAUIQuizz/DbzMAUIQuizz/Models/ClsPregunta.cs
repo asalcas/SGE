@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DbzMAUIQuizz.Models;
 
 namespace DTO
 {
@@ -12,11 +13,11 @@ namespace DTO
     {
         #region Atributos
 
-        private ObservableCollection<ClsPersonajeDBZ> opciones;
+        private ObservableCollection<ClsPersonajeDBZComprobado> opciones;
 
         private ClsPersonajeDBZ personajePregunta;
 
-        private ClsPersonajeDBZ personajeSeleccionado;
+        private ClsPersonajeDBZComprobado personajeSeleccionado;
 
         private bool esCorrecto;
 
@@ -26,7 +27,7 @@ namespace DTO
 
         #region Propiedades
 
-        public ObservableCollection<ClsPersonajeDBZ> Opciones
+        public ObservableCollection<ClsPersonajeDBZComprobado> Opciones
         {
             get { return opciones; }
         }
@@ -35,7 +36,7 @@ namespace DTO
         {
             get { return personajePregunta; }
         }
-        public ClsPersonajeDBZ PersonajeSeleccionado
+        public ClsPersonajeDBZComprobado PersonajeSeleccionado
         {
             get { return personajeSeleccionado; }
             set
@@ -61,7 +62,7 @@ namespace DTO
 
         }
 
-        public ClsPregunta(ObservableCollection<ClsPersonajeDBZ> opciones, ClsPersonajeDBZ personaje)
+        public ClsPregunta(ObservableCollection<ClsPersonajeDBZComprobado> opciones, ClsPersonajeDBZComprobado personaje)
         {
             this.opciones = opciones;
             this.personajePregunta = personaje;

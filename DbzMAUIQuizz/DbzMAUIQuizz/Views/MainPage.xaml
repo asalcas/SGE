@@ -106,7 +106,7 @@
                         </Grid>
                         <CollectionView ItemsSource="{Binding Partida.PreguntaActual.Opciones}" 
                                         SelectionMode="Single"
-                                        SelectedItem="{Binding Partida.PreguntaActual.PersonajeSeleccionado}"
+                                        SelectedItem="{Binding Partida.PersonajeSeleccionado}"
                                         MinimumWidthRequest="500"
                                         MaximumWidthRequest="500"
                                         TranslationY="80">
@@ -118,7 +118,7 @@
 
                                 <Frame Padding="8"
                                            HeightRequest="100"
-                                           BackgroundColor="{Binding Path=BindingContext.Partida.PreguntaActual.EsCorrecto,
+                                           BackgroundColor="{Binding Path=BindingContext.Partida.PreguntaActual.PersonajeSeleccionado.EsElCorrecto,
                                     Source={RelativeSource AncestorType={x:Type CollectionView}},
                                     Converter={StaticResource ConversorSeleccion}}" 
                                     >

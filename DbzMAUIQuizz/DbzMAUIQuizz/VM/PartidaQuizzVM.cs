@@ -1,4 +1,5 @@
 ﻿using DbzMAUIQuizz.Models.Utils;
+using DbzMAUIQuizz.Models;
 using DTO;
 using Plugin.Maui.Audio;
 using System;
@@ -83,6 +84,8 @@ namespace DbzMAUIQuizz.VM
             get { return nombreJugador; }
             set { nombreJugador = value; }
         }
+
+        
 
         #region Propiedades Commands
         public DelegateCommand Comenzar
@@ -216,7 +219,7 @@ namespace DbzMAUIQuizz.VM
             await partida.montarPartida();
             await partida.empezarPartida();
         }
-
+       
 
         #endregion
 
