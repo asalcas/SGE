@@ -37,10 +37,18 @@ namespace DAL
                     listadoPersonajesDBZ = objetoJson["items"].ToObject<List<ClsPersonajeDBZ>>();
                     // TENGO UN ERROR AL DESERIALIZAR DESDE LA API, por que no son objetos, es un array de objetos
                 }
+                else if (miCodigoRespuesta.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    throw new Exception("404");
+                }
+                else if(miCodigoRespuesta.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    throw new Exception("400");
+                }
             }
             catch (Exception ex)
             {
-                throw new Exception("No se pudo obtener la lista de Personajes");
+                throw new Exception("Error al solicitar las lista de personajes. Codigo de Error: " + ex.Message);
             }
             return listadoPersonajesDBZ;
         }

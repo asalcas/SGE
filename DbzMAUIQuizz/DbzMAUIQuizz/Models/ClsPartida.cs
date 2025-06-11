@@ -219,13 +219,9 @@ namespace DTO
         private async Task pasarPregunta()
         {
 
-            await Task.Delay(2000); // Lo estoy metiendo por que quiero mostrar el color de la Respuesta
+            await Task.Delay(3000); // Lo estoy metiendo por que quiero mostrar el color de la Respuesta
                                     // Podría hacer una propiedad espera que cuando finalice sea = 2, y cuando este dentro que por cada segundo haga un --,
                                     // y cuando sea 0 paramos la ejecución
-
-
-            
-            
 
             indicePregunta++;
             OnPropertyChanged(nameof(IndicePregunta));
@@ -343,7 +339,7 @@ namespace DTO
             {
                 listadoPersonajesAleatorios = await rellenarListado(); // Listado con 58 valores
 
-                while (listadoPersonajesCorrectos.Count() < 20)
+                while (listadoPersonajesCorrectos.Count() < 20 && listadoPersonajesCorrectos != null)
                 {
                     indice = rnd.Next(0, listadoPersonajesAleatorios.Count());
 
@@ -362,7 +358,7 @@ namespace DTO
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al rellenar las listas");
+                 // throw new Exception("Error al rellenar las listas. Codigo de Error: " + ex.Message); Preguntar a Fernando, por que no funciona aqui
             }
         }
         #endregion
@@ -374,14 +370,39 @@ namespace DTO
         /// <returns></returns>
         public static async Task<ObservableCollection<ClsPersonajeDBZComprobado>> rellenarListado()
         {
-            ObservableCollection<ClsPersonajeDBZ> listadoPersonajes = new ObservableCollection<ClsPersonajeDBZ>(await BL.ListadoPersonajesBL.getAllPersonajesBL());
-
+            ObservableCollection<ClsPersonajeDBZ> listadoPersonajes = new ObservableCollection<ClsPersonajeDBZ>();
             ObservableCollection<ClsPersonajeDBZComprobado> listadoConBooleano = new ObservableCollection<ClsPersonajeDBZComprobado>();
-            foreach (ClsPersonajeDBZ personaje in listadoPersonajes)
+
+            try
             {
-                ClsPersonajeDBZComprobado nuevoPJConBool = new ClsPersonajeDBZComprobado(personaje.IdPersonaje, personaje.NombrePersonaje, personaje.FotoPersonaje);
-                listadoConBooleano.Add(nuevoPJConBool);
+                 listadoPersonajes = new ObservableCollection<ClsPersonajeDBZ>(await BL.ListadoPersonajesBL.getAllPersonajesBL());
+
+                foreach (ClsPersonajeDBZ personaje in listadoPersonajes)
+                {
+                    ClsPersonajeDBZComprobado nuevoPJConBool = new ClsPersonajeDBZComprobado(personaje.IdPersonaje, personaje.NombrePersonaje, personaje.FotoPersonaje);
+                    listadoConBooleano.Add(nuevoPJConBool);
+                }
             }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("404"))
+                {
+                    Application.Current.MainPage.DisplayAlert("Error:", "No se ha encontrado registros", "Entendido");
+
+                }
+                else if (ex.Message.Contains("400"))
+                {
+                    Application.Current.MainPage.DisplayAlert("Error:", "Hemos tenido un BadRequest", "Entendido");
+
+                }
+                else 
+                {
+                    Application.Current.MainPage.DisplayAlert("Error:", "Ha ocurrido un error inesperado", "Entendido");
+
+                }
+            }
+
+            
 
             return listadoConBooleano;
 

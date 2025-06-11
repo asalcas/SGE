@@ -30,6 +30,8 @@ namespace DbzMAUIQuizz.VM
 
         private String nombreJugador;
 
+        private ActivityIndicator ruediniBombini;
+
         #region Atributos/Propiedades para mostrar cosas en la UI
 
         private String mensaje;
@@ -85,7 +87,11 @@ namespace DbzMAUIQuizz.VM
             set { nombreJugador = value; }
         }
 
-        
+        public ActivityIndicator RuediniBombini
+        {
+            get { return ruediniBombini; }
+            set { ruediniBombini = value; }
+        }
 
         #region Propiedades Commands
         public DelegateCommand Comenzar

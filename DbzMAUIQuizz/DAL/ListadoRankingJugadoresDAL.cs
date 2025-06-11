@@ -43,7 +43,7 @@ namespace DAL
             }
             catch (Exception ex) 
             {
-                throw new Exception("No se pudo acceder al listado ordenado de jugadores", ex);
+                throw new Exception("No se pudo acceder al listado ordenado de jugadores. Codigo de Error: " + ex.Message);
             }
             return listadoOrdenadoJugadores;
         }

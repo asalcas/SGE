@@ -14,8 +14,6 @@ namespace DbzMAUIQuizz.Models
 
         private Boolean? esElCorrecto;
 
-       
-
         #endregion
 
         #region Propiedades
