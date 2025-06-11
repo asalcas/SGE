@@ -51,6 +51,15 @@
                        FontFamily="Arcade"></Label>
                 
             </HorizontalStackLayout>
+            <ActivityIndicator 
+                            IsRunning="{Binding RuediniBombini}" 
+                            IsVisible="{Binding RuediniBombini}" 
+                            Color="Orange" 
+                            WidthRequest="70"
+                            HeightRequest="70"
+                            HorizontalOptions="Center" 
+                            VerticalOptions="Center"/>
+            
             <CollectionView ItemsSource="{Binding Jugadores}" 
                             TranslationY="20"
                             MinimumHeightRequest="10"

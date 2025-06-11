@@ -1,4 +1,5 @@
-﻿using DbzMAUIQuizz.Models.Utils;
+﻿using BL;
+using DbzMAUIQuizz.Models.Utils;
 using DTO;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace DbzMAUIQuizz.VM
 
         private DelegateCommand actualizarListado;
 
+        private Boolean ruediniBombini;
+
         #endregion
 
         #region Propiedades
@@ -31,6 +34,10 @@ namespace DbzMAUIQuizz.VM
             get { return actualizarListado; }
         }
 
+        public Boolean RuediniBombini
+        {
+            get { return ruediniBombini; }
+        }
         #endregion
 
         #region Constructores
@@ -49,7 +56,35 @@ namespace DbzMAUIQuizz.VM
         /// </summary>
         private async void rellenarJugadoresListado()
         {
-            jugadores = new ObservableCollection<ClsJugador>(await BL.ListadoRankingJugadoresBL.obtenerListadoOrdenadoJugadoresBL());
+            try
+            {
+                ruediniBombini = true;
+                OnPropertyChanged(nameof(RuediniBombini));
+                jugadores = new ObservableCollection<ClsJugador>(await BL.ListadoRankingJugadoresBL.obtenerListadoOrdenadoJugadoresBL());
+                ruediniBombini = false;
+                OnPropertyChanged(nameof(RuediniBombini));
+
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("404"))
+                {
+                    Application.Current.MainPage.DisplayAlert("Error:", "No se ha encontrado registros", "Entendido");
+
+                }
+                else if (ex.Message.Contains("400"))
+                {
+                    Application.Current.MainPage.DisplayAlert("Error:", "Hemos tenido un BadRequest", "Entendido");
+
+                }
+                else
+                {
+                    Application.Current.MainPage.DisplayAlert("Error:", "Ha ocurrido un error inesperado", "Entendido");
+
+                }
+            }
+            
+            
             OnPropertyChanged(nameof(Jugadores));
         }
 
